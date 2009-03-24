@@ -1,5 +1,6 @@
 .svn
 Build
+build
 TemporaryItems
 *.xcodeproj/*.mode2v3
 *.xcodeproj/*.pbxuser
