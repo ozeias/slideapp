@@ -6,13 +6,15 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0BonjourBeamingPeer.h"
+#import "L0BonjourPeer.h"
 
 static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	return CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 }
 
-@implementation L0BonjourBeamingPeer
+@implementation L0BonjourPeer
+
+@synthesize service = _service;
 
 - (id) initWithNetService:(NSNetService*) service;
 {
@@ -43,6 +45,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 		return NO;
 	
 	BLIPConnection* connection = [[BLIPConnection alloc] initToNetService:_service];
+	[connection open];
 	
 	CFDictionarySetValue(_itemsBeingSentByConnection, connection, item);
 	
@@ -67,12 +70,26 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 
 - (void) connectionDidClose: (TCPConnection*)connection;
 {
+	L0Log(@"%@", connection);
 	CFDictionaryRemoveValue(_itemsBeingSentByConnection, connection);
 }
 
 - (void) connection: (TCPConnection*)connection failedToOpen: (NSError*)error;
 {
+	L0Log(@"%@, %@", connection, error);
 	CFDictionaryRemoveValue(_itemsBeingSentByConnection, connection);	
+}
+
+- (BOOL) connectionReceivedCloseRequest: (BLIPConnection*)connection;
+{
+	L0Log(@"%@", connection);
+	return YES;
+}
+
+- (void) connection: (BLIPConnection*)connection closeRequestFailedWithError: (NSError*)error;
+{
+	L0Log(@"%@, %@", connection, error);
+	[connection close];
 }
 
 @end

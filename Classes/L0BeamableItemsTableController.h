@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "L0BeamableItem.h"
+#import "L0BeamingPeer.h"
 #import "L0DraggableView.h"
 
 enum {
@@ -56,7 +57,13 @@ typedef NSUInteger L0BeamableItemsTableRemoveAnimation;
 @property(assign) IBOutlet UILabel* eastLabel;
 @property(assign) IBOutlet UILabel* westLabel;
 
+- (BOOL) addPeerIfSpaceAllows:(L0BeamingPeer*) peer;
+- (void) removePeer:(L0BeamingPeer*) peer;
+
+- (void) addItem:(L0BeamableItem*) item comingFromPeer:(L0BeamingPeer*) peer;
 - (void) addItem:(L0BeamableItem*) item animation:(L0BeamableItemsTableAddAnimation) animation;
 - (void) removeItem:(L0BeamableItem*) item /* animation: ... */;
+
+- (void) returnItemToTableAfterSend:(L0BeamableItem*) item;
 
 @end

@@ -11,11 +11,13 @@
 #import "L0BeamableItem.h"
 #import "BLIP.h"
 
-@interface L0BonjourBeamingPeer : L0BeamingPeer <BLIPConnectionDelegate> {
+@interface L0BonjourPeer : L0BeamingPeer <BLIPConnectionDelegate> {
 	NSNetService* _service;
 	CFMutableDictionaryRef _itemsBeingSentByConnection;
 }
 
 - (id) initWithNetService:(NSNetService*) service;
+
+@property(readonly) NSNetService* service;
 
 @end

@@ -156,4 +156,23 @@ static CGFloat L0RandomSlideRotation() {
 	CFDictionaryRemoveValue(itemsToViews, item);
 }
 
+// TODO
+- (BOOL) addPeerIfSpaceAllows:(L0BeamingPeer*) peer;
+{
+	return NO;
+}
+- (void) removePeer:(L0BeamingPeer*) peer;
+{
+}
+
+- (void) addItem:(L0BeamableItem*) item comingFromPeer:(L0BeamingPeer*) peer;
+{
+	// TODO right direction
+	[self addItem:item animation:kL0BeamableItemsTableAddFromSouth];
+}
+
+- (void) returnItemToTableAfterSend:(L0BeamableItem*) item;
+{	
+}
+
 @end
