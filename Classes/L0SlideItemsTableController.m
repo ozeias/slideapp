@@ -142,8 +142,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 		case kL0SlideItemsTableAddByDropping: {
 			CGSize selfSize = self.view.bounds.size;
 			CGRect itemViewFrame = view.frame;
-			selfSize.width -= itemViewFrame.size.width / 2 - 10;
-			selfSize.height -= itemViewFrame.size.height / 2 - 10;
+			selfSize.width -= itemViewFrame.size.width / 2 + 10;
+			selfSize.height -= itemViewFrame.size.height / 2 + 10;
 			
 			CGPoint newCenter = CGPointMake(
 				(int) selfSize.width % random(),
