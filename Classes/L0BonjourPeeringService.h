@@ -25,8 +25,8 @@
 
 + sharedFinder;
 
-- (void) beginPeering;
-- (void) stopPeering;
+- (void) start;
+- (void) stop;
 
 @property(assign) id <L0PeerDiscoveryDelegate> delegate;
 
