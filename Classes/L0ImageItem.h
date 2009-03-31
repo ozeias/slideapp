@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "L0BeamableItem.h"
+#import "L0SlideItem.h"
 
-@interface L0BeamableImage : L0BeamableItem {
+@interface L0ImageItem : L0SlideItem {
 	UIImage* image;
 }
 

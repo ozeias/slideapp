@@ -6,9 +6,9 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0BeamableItem.h"
+#import "L0SlideItem.h"
 
-@implementation L0BeamableItem
+@implementation L0SlideItem
 
 + (void) registerClass;
 {
@@ -63,7 +63,7 @@ static NSMutableDictionary* classes = nil;
 
 @end
 
-@implementation L0BeamableItem (L0BLIPBeaming)
+@implementation L0SlideItem (L0BLIPBeaming)
 
 - (BLIPRequest*) networkBLIPRequest;
 {

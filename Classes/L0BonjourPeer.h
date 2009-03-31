@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "L0BeamingPeer.h"
-#import "L0BeamableItem.h"
+#import "L0SlidePeer.h"
+#import "L0SlideItem.h"
 #import "BLIP.h"
 
-@interface L0BonjourPeer : L0BeamingPeer <BLIPConnectionDelegate> {
+@interface L0BonjourPeer : L0SlidePeer <BLIPConnectionDelegate> {
 	NSNetService* _service;
 	CFMutableDictionaryRef _itemsBeingSentByConnection;
 }

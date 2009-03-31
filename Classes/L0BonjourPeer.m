@@ -39,7 +39,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	return [_service name];
 }
 
-- (BOOL) beginBeamingItem:(L0BeamableItem*) item;
+- (BOOL) beginBeamingItem:(L0SlideItem*) item;
 {
 	if (CFDictionaryContainsValue(_itemsBeingSentByConnection, item))
 		return NO;
@@ -60,7 +60,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 
 - (void) connection: (BLIPConnection*)connection receivedResponse: (BLIPResponse*)response;
 {
-	L0BeamableItem* i = (L0BeamableItem*) CFDictionaryGetValue(_itemsBeingSentByConnection,connection);
+	L0SlideItem* i = (L0SlideItem*) CFDictionaryGetValue(_itemsBeingSentByConnection,connection);
 	if (i)
 		[delegate beamingPeer:self didSendItem:i];
 	

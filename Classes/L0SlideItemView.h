@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "L0DraggableView.h"
-#import "L0BeamableItem.h"
+#import "L0SlideItem.h"
 
-@interface L0BeamableItemView : L0DraggableView {
+@interface L0SlideItemView : L0DraggableView {
 	UIView* contentView;
 	
 	UILabel* label;
@@ -21,6 +21,6 @@
 @property(assign) IBOutlet UILabel* label;
 @property(assign) IBOutlet UIImageView* imageView;
 
-- (void) displayWithContentsOfItem:(L0BeamableItem*) item;
+- (void) displayWithContentsOfItem:(L0SlideItem*) item;
 
 @end

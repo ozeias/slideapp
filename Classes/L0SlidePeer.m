@@ -6,14 +6,14 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0BeamingPeer.h"
+#import "L0SlidePeer.h"
 
 
-@implementation L0BeamingPeer
+@implementation L0SlidePeer
 
 @synthesize delegate;
 
-- (BOOL) beginBeamingItem:(L0BeamableItem*) item;
+- (BOOL) beginBeamingItem:(L0SlideItem*) item;
 {
 	NSAssert(NO, @"Abstract method. Subclasses must override it.");
 	return NO;

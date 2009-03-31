@@ -6,10 +6,10 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0BeamableImage.h"
+#import "L0ImageItem.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@implementation L0BeamableImage
+@implementation L0ImageItem
 
 + (NSArray*) supportedTypes;
 {

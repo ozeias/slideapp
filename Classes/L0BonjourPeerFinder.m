@@ -170,7 +170,7 @@
 
 - (void) connection: (BLIPConnection*)connection receivedRequest: (BLIPRequest*)request;
 {
-	L0BeamableItem* item = [L0BeamableItem beamableItemWithNetworkBLIPRequest:request];
+	L0SlideItem* item = [L0SlideItem beamableItemWithNetworkBLIPRequest:request];
 	if (!item) {
 		[connection close];
 		[_pendingConnections removeObject:connection];

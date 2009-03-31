@@ -6,10 +6,10 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0BeamableItemView.h"
+#import "L0SlideItemView.h"
 
 
-@implementation L0BeamableItemView
+@implementation L0SlideItemView
 
 @synthesize contentView, label, imageView;
 
@@ -44,7 +44,7 @@
 	[super dealloc];
 }
 
-- (void) displayWithContentsOfItem:(L0BeamableItem*) item;
+- (void) displayWithContentsOfItem:(L0SlideItem*) item;
 {
 	self.label.text = item.title;
 	self.imageView.image = item.representingImage;
