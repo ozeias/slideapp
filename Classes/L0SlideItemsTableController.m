@@ -33,7 +33,9 @@ static CGFloat L0RandomSlideRotation() {
 
 static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableController* self, UIView* view, CGPoint comingFrom, CGPoint goingTo) {
 	view.center = comingFrom;
-	[self.view addSubview:view];
+	
+	if (!view.superview)
+		[self.view addSubview:view];
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
@@ -138,6 +140,11 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	[view displayWithContentsOfItem:item];
 	CFDictionarySetValue(itemsToViews, item, view);
 
+	
+}
+
+- (void) _animateItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableAddAnimation) a;
+{
 	switch (a) {
 		case kL0SlideItemsTableAddByDropping: {
 			CGSize selfSize = self.view.bounds.size;
@@ -146,9 +153,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 			selfSize.height -= itemViewFrame.size.height / 2 + 10;
 			
 			CGPoint newCenter = CGPointMake(
-				(int) selfSize.width % random(),
-				(int) selfSize.height % random()
-			);
+											(int) selfSize.width % random(),
+											(int) selfSize.height % random()
+											);
 			
 			view.center = newCenter;
 			view.alpha = 0;
@@ -156,7 +163,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 			view.transform = CGAffineTransformScale(currentTransform, 1.3, 1.3);
 			view.userInteractionEnabled = NO;
 			
-			[self.view addSubview:view];
+			if (!view.superview)
+				[self.view addSubview:view];
 			
 			[UIView beginAnimations:nil context:[view retain]];
 			[UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
@@ -229,12 +237,11 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 			
 		case kL0SlideItemsTableNoAddAnimation:
 		default: {
-			[self.view addSubview:view];
+			if (!view.superview)
+				[self.view addSubview:view];
 			break;
 		}
 	}
-	
-	
 }
 
 - (void) _addByDroppingAnimation:(NSString*) ani didFinish:(BOOL) finished forRetainedView:(UIView*) retainedView;
@@ -337,7 +344,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	[self _setPeer:p withArrow:self.westArrowView label:self.westLabel];
 }
 
-- (void) addItem:(L0SlideItem*) item comingFromPeer:(L0SlidePeer*) peer;
+- (L0SlideItemsTableAddAnimation) _animationForPeer:(L0SlidePeer*) peer;
 {
 	L0SlideItemsTableAddAnimation animation = kL0SlideItemsTableAddByDropping;
 	if (peer) {
@@ -348,14 +355,21 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 		else if ([peer isEqual:self.westPeer])
 			animation = kL0SlideItemsTableAddFromWest;
 	}
-	
-	[self addItem:item animation:animation];
+
+	return animation;
 }
 
-// TODO
+- (void) addItem:(L0SlideItem*) item comingFromPeer:(L0SlidePeer*) peer;
+{
+	[self addItem:item animation:[self _animationForPeer:peer]];
+}
 
-- (void) returnItemToTableAfterSend:(L0SlideItem*) item;
-{	
+- (void) returnItemToTableAfterSend:(L0SlideItem*) item toPeer:(L0SlidePeer*) peer;
+{
+	L0SlideItemView* view = (L0SlideItemView*) CFDictionaryGetValue(itemsToViews, item);
+
+	if (view)
+		[self _animateItemView:view animation:[self _animationForPeer:peer]];
 }
 
 @end

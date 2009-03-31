@@ -21,7 +21,7 @@
 
 - (void) beamingPeer:(L0SlidePeer*) peer didSendItem:(L0SlideItem*) item;
 {
-	[self.tableController returnItemToTableAfterSend:item];
+	[self.tableController returnItemToTableAfterSend:item toPeer:peer];
 }
 
 - (void) beamingPeerWillReceiveItem:(L0SlidePeer*) peer;
