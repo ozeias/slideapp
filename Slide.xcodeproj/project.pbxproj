@@ -71,6 +71,13 @@
 			remoteGlobalIDString = 156FD76B0F7A25F900F83283 /* MuiKit.bundle */;
 			remoteInfo = "MuiKit (Resources)";
 		};
+		1572DE940F82C36F006BEEC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 156FD7720F7A261B00F83283 /* MuiKit */;
+			remoteInfo = MuiKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -369,6 +376,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1572DE950F82C36F006BEEC0 /* PBXTargetDependency */,
 			);
 			name = Slide;
 			productName = Shard;
@@ -475,6 +483,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1572DE950F82C36F006BEEC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MuiKit;
+			targetProxy = 1572DE940F82C36F006BEEC0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
