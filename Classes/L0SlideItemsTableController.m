@@ -169,6 +169,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 			view.alpha = 1;
 			
 			[UIView commitAnimations];
+			
+			break;
 		}
 			
 		case kL0SlideItemsTableAddFromSouth: {
