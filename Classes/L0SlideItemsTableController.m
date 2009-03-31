@@ -48,7 +48,20 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	[UIView commitAnimations];	
 }
 
+@interface L0SlideItemsTableController ()
+
+- (L0SlideItemsTableAddAnimation) _animationForPeer:(L0SlidePeer*) peer;
+- (void) _animateItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableAddAnimation) a;
+
+- (void) _setPeer:(L0SlidePeer*) peer withArrow:(UIImageView*) arrow label:(UILabel*) label;
+
+@end
+
+
 @implementation L0SlideItemsTableController
+
+#pragma mark -
+#pragma mark Initialization
 
 - (id) initWithDefaultNibName;
 {
@@ -77,19 +90,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	self.westArrowView.alpha = 0;
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
 }
 
 @synthesize northArrowView, eastArrowView, westArrowView;
@@ -106,10 +109,12 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	self.westLabel = nil;
 }
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 - (void) viewDidUnload;
 {
 	[self clearOutlets];
 }
+#endif
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 30000
 - (void) setView:(UIView*) v;
@@ -130,6 +135,24 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	self.westPeer = nil;
 	
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Item Management & Animation
+
+- (L0SlideItemsTableAddAnimation) _animationForPeer:(L0SlidePeer*) peer;
+{
+	L0SlideItemsTableAddAnimation animation = kL0SlideItemsTableAddByDropping;
+	if (peer) {
+		if ([peer isEqual:self.northPeer])
+			animation = kL0SlideItemsTableAddFromNorth;
+		else if ([peer isEqual:self.eastPeer])
+			animation = kL0SlideItemsTableAddFromEast;
+		else if ([peer isEqual:self.westPeer])
+			animation = kL0SlideItemsTableAddFromWest;
+	}
+	
+	return animation;
 }
 
 - (void) addItem:(L0SlideItem*) item animation:(L0SlideItemsTableAddAnimation) a;
@@ -264,6 +287,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	CFDictionaryRemoveValue(itemsToViews, item);
 }
 
+#pragma mark -
+#pragma mark Peer Management & Animation
+
 @synthesize northPeer, eastPeer, westPeer;
 
 - (BOOL) addPeerIfSpaceAllows:(L0SlidePeer*) peer;
@@ -363,20 +389,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	[self _setPeer:p withArrow:self.westArrowView label:self.westLabel];
 }
 
-- (L0SlideItemsTableAddAnimation) _animationForPeer:(L0SlidePeer*) peer;
-{
-	L0SlideItemsTableAddAnimation animation = kL0SlideItemsTableAddByDropping;
-	if (peer) {
-		if ([peer isEqual:self.northPeer])
-			animation = kL0SlideItemsTableAddFromNorth;
-		else if ([peer isEqual:self.eastPeer])
-			animation = kL0SlideItemsTableAddFromEast;
-		else if ([peer isEqual:self.westPeer])
-			animation = kL0SlideItemsTableAddFromWest;
-	}
-
-	return animation;
-}
+#pragma mark -
+#pragma mark Receiving and Sending
 
 - (void) addItem:(L0SlideItem*) item comingFromPeer:(L0SlidePeer*) peer;
 {
