@@ -505,6 +505,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				HEADER_SEARCH_PATHS = "$(ILABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = Info.plist;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Slide;
 				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
@@ -518,6 +519,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
 				INFOPLIST_FILE = Info.plist;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Shard;
 			};
 			name = Release;

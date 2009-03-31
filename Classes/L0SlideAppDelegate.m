@@ -12,7 +12,7 @@
 
 @interface L0SlideAppDelegate ()
 
-- (void) _showToolbar;
+- (void) _returnFromImagePicker;
 
 @end
 
@@ -21,20 +21,22 @@
 
 - (void) slidePeer:(L0SlidePeer*) peer willBeSentItem:(L0SlideItem*) item;
 {
-	// ignore
+	L0Log(@"About to send item %@", item);
 }
 
 - (void) slidePeer:(L0SlidePeer*) peer wasSentItem:(L0SlideItem*) item;
 {
+	L0Log(@"Sent %@", item);
 	[self.tableController returnItemToTableAfterSend:item toPeer:peer];
 }
 
 - (void) slidePeerWillSendUsItem:(L0SlidePeer*) peer;
 {
-	// ignore
+	L0Log(@"Receiving from %@", peer);
 }
 - (void) slidePeer:(L0SlidePeer*) peer didSendUsItem:(L0SlideItem*) item;
 {
+	L0Log(@"Received %@", item);
 	[item store];
 	[self.tableController addItem:item comingFromPeer:peer];
 }
@@ -63,7 +65,7 @@
 	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedFinder];
 	bonjourFinder.delegate = self;
 	[bonjourFinder start];
-	
+
 	self.tableController = [[[L0SlideItemsTableController alloc] initWithDefaultNibName] autorelease];
 	
 	NSMutableArray* itemsArray = [self.toolbar.items mutableCopy];
@@ -71,8 +73,9 @@
 	self.toolbar.items = itemsArray;
 	[itemsArray release];
     
-	self.tableController.view.frame = tableHostView.bounds;
+	self.tableController.view.frame = [UIScreen mainScreen].bounds;
 	[tableHostView addSubview:self.tableController.view];
+	
 	[window makeKeyAndVisible];
 }
 
@@ -116,17 +119,19 @@
 	[item release];
 	
 	[picker dismissModalViewControllerAnimated:YES];
-	[self _showToolbar];
+	[self _returnFromImagePicker];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
 {
 	[picker dismissModalViewControllerAnimated:YES];
-	[self _showToolbar];
+	[self _returnFromImagePicker];
 }
 
-- (void) _showToolbar;
+- (void) _returnFromImagePicker;
 {
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 	

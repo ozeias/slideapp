@@ -14,6 +14,8 @@
 #import "L0SlideUTISupport.h"
 #endif
 
+#import <MuiKit/MuiKit.h>
+
 @implementation L0ImageItem
 
 + (NSArray*) supportedTypes;
@@ -29,8 +31,8 @@
 }
 
 - (NSData*) networkPacketPayload;
-{
-	return UIImagePNGRepresentation(self.image);
+{	
+	return UIImagePNGRepresentation([self.image imageByRenderingRotation]);
 }
 
 - (id) initWithTitle:(NSString*) ti image:(UIImage*) img;
