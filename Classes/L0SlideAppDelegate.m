@@ -62,7 +62,7 @@
 	
 	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedFinder];
 	bonjourFinder.delegate = self;
-	[bonjourFinder beginPeering];
+	[bonjourFinder start];
 	
 	self.tableController = [[[L0SlideItemsTableController alloc] initWithDefaultNibName] autorelease];
     

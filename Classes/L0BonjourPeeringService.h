@@ -19,7 +19,6 @@
 	NSMutableSet* _peers;
 	
 	BLIPListener* _listener;
-	NSNetService* _publishedService;
 	NSMutableSet* _pendingConnections;
 }
 

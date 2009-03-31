@@ -144,7 +144,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	[view displayWithContentsOfItem:item];
 	CFDictionarySetValue(itemsToViews, item, view);
 
-	
+	[self _animateItemView:view animation:a];
 }
 
 - (void) _animateItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableAddAnimation) a;
@@ -271,22 +271,37 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	if ([peer isEqual:self.northPeer] || [peer isEqual:self.eastPeer] || [peer isEqual:self.westPeer])
 		return YES;
 	
-	if (!self.eastPeer) {
-		self.eastPeer = peer;
-		return YES;
+	if (self.eastPeer && self.northPeer && self.westPeer)
+		return NO;
+	
+	BOOL added = NO;
+	while (!added) {
+		int where = random() % 3;
+		switch (where) {
+			case 0:
+				if (!self.northPeer) {
+					self.northPeer = peer;
+					added = YES;
+				}
+				break;
+
+			case 1:
+				if (!self.westPeer) {
+					self.westPeer = peer;
+					added = YES;
+				}
+				break;
+
+			case 2:
+				if (!self.eastPeer) {
+					self.eastPeer = peer;
+					added = YES;
+				}
+				break;
+		}
 	}
 	
-	if (!self.northPeer) {
-		self.northPeer = peer;
-		return YES;
-	}
-	
-	if (!self.westPeer) {
-		self.westPeer = peer;
-		return YES;
-	}
-	
-	return NO;
+	return YES;
 }
 - (void) removePeer:(L0SlidePeer*) peer;
 {

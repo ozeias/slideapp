@@ -52,7 +52,7 @@
 	return myself;
 }
 
-- (void) beginPeering;
+- (void) start;
 {
 	if (_browser) return;
 	
@@ -75,7 +75,7 @@
 //	[_publishedService publish];
 }
 
-- (void) stopPeering;
+- (void) stop;
 {	
 	[_browser stop];
 	[_browser release]; _browser = nil;
@@ -86,16 +86,30 @@
 	[_peers release]; _peers = nil;
 	
 	[_listener close];
-	[_listener release]; _listener = nil;
-	
-	[_publishedService stop];
-	[_publishedService release]; _publishedService = nil;
+	[_listener release]; _listener = nil;	
 }
 
 - (void) dealloc;
 {
-	[self stopPeering];
+	[self stop];
 	[super dealloc];
+}
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
+{
+	L0BonjourPeer* leavingPeer = nil;
+	for (L0BonjourPeer* peer in _peers) {
+		if ([peer.service isEqual:aNetService]) {
+			leavingPeer = peer;
+			break;
+		}
+	}
+	
+	if (leavingPeer) {
+		[[leavingPeer retain] autorelease];
+		[_peers removeObject:leavingPeer];
+		[delegate peerLeft:leavingPeer];
+	}
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
