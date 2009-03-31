@@ -7,7 +7,7 @@ In order to build it, clone the following repos:
  - The ∞labs Build Tools. [http://github.com/millenomi/infinitelabs-build-tools](http://github.com/millenomi/infinitelabs-build-tools). Clone them in a location and create a source tree in Xcode named `INFINITELABS_TOOLS` that points to that directory.
  - The ∞labs Build Tools. [http://github.com/millenomi/muikit](http://github.com/millenomi/muikit). Clone them in a location and create a source tree in Xcode named `INFINITELABS_LIB_MUIKIT` that points to that directory.
 
-To edit your source trees, choose **Xcode &gt; Preferences &gt; Source Roots**. Yes, I have like a thousand in there. It's pretty sad.
+To edit your source trees, choose **Xcode &gt; Preferences &gt; Source Trees**. Yes, I have like a thousand in there. It's pretty sad.
 
 To use:
 
