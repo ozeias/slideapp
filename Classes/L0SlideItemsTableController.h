@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "L0SlideItem.h"
 #import "L0SlidePeer.h"
-#import "L0DraggableView.h"
+#import <MuiKit/MuiKit.h>
 
 enum {
 	kL0SlideItemsTableNoAddAnimation,

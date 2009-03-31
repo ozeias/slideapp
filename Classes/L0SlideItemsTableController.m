@@ -55,6 +55,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 
 - (void) _setPeer:(L0SlidePeer*) peer withArrow:(UIImageView*) arrow label:(UILabel*) label;
 
+- (void) _bounceOrSendItemOfView:(L0SlideItemView*) view;
+
 @end
 
 
@@ -390,7 +392,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 }
 
 #pragma mark -
-#pragma mark Receiving and Sending
+#pragma mark Receiving
 
 - (void) addItem:(L0SlideItem*) item comingFromPeer:(L0SlidePeer*) peer;
 {
@@ -403,6 +405,112 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 
 	if (view)
 		[self _animateItemView:view animation:[self _animationForPeer:peer]];
+}
+
+#pragma mark -
+#pragma mark Sending
+
+#define kL0SlideItemsTableOffsetBeforeAttractingOutside 30
+
+- (BOOL) draggableView:(L0SlideItemView*) view shouldMoveFromPoint:(CGPoint) start toAttractionPoint:(CGPoint*) outPoint;
+{
+	L0Log(@"Checking for attraction with start = %@", NSStringFromCGPoint(start));
+	CGRect r = self.view.bounds;
+	
+	CGSize itemSize = view.bounds.size;
+	
+	if (self.northPeer && start.y > -itemSize.height * sqrt(2.0) && start.y < kL0SlideItemsTableOffsetBeforeAttractingOutside) {
+		L0Log(@"Will attract the item north");
+		// again this is conservative.
+		start.y = -itemSize.height * sqrt(2.0);
+		*outPoint = start;
+		return YES;
+	} else if (self.eastPeer && start.x > -itemSize.width * sqrt(2.0) && start.x < kL0SlideItemsTableOffsetBeforeAttractingOutside) {
+		L0Log(@"Will attract the item east");
+		// again this is conservative.
+		start.x = -itemSize.width * sqrt(2.0);
+		*outPoint = start;
+		return YES;		
+	} else if (self.westPeer && start.x < r.size.width + itemSize.width * sqrt(2.0) && start.x > r.size.width - kL0SlideItemsTableOffsetBeforeAttractingOutside) {
+		L0Log(@"Will attract the item west");
+		// again this is conservative.
+		start.x = r.size.width + itemSize.width * sqrt(2.0);
+		*outPoint = start;
+		return YES;		
+	} else
+		return NO;
+}
+
+- (void) draggableView:(L0SlideItemView*) view didEndAttractionByFinishing:(BOOL) finished;
+{
+	[self _bounceOrSendItemOfView:view];
+}
+
+- (void) draggableView:(L0SlideItemView*) view didEndInertialSlideByFinishing:(BOOL) finished;
+{
+	[self _bounceOrSendItemOfView:view];
+}
+
+#define kL0SlideItemsTableOffsetSafetyMargin 50
+
+- (void) _bounceOrSendItemOfView:(L0SlideItemView*) view;
+{
+	L0Log(@"%@", view);
+	
+	CGPoint center = view.center;
+	CGSize selfSize = self.view.bounds.size;
+	L0SlidePeer* peer = nil;
+	
+	if (center.y < 0)
+		peer = self.northPeer;
+	else if (center.x < 0)
+		peer = self.westPeer;
+	else if (center.x > selfSize.width)
+		peer = self.eastPeer;
+	else if (!(center.y > selfSize.height))
+		return; // not off the edge -- don't send.
+	// Note that we still want to bounce off the south edge, so we
+	// don't return in that case -- but we don't send either.
+	
+	L0Log(@"Will send to peer: %@ (not sent if null).", peer);
+	
+	BOOL sent = NO;
+	if (peer) {
+		L0SlideItem* item = nil;
+		
+		for (L0SlideItem* candidateItem in (NSDictionary*) itemsToViews) {
+			L0SlideItemView* candidateView = (L0SlideItemView*) CFDictionaryGetValue(itemsToViews, item);
+			if (candidateView == view) {
+				item = candidateItem;
+				break;
+			}
+		}
+		
+		if (item) {
+			[peer beginBeamingItem:item];
+			sent = YES;
+		}
+	} 
+	
+	if (!sent) {
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+		[UIView setAnimationDuration:1.0];
+		
+		if (center.y < kL0SlideItemsTableOffsetBeforeAttractingOutside)
+			center.y = kL0SlideItemsTableOffsetBeforeAttractingOutside + kL0SlideItemsTableOffsetSafetyMargin;
+		if (center.x < kL0SlideItemsTableOffsetBeforeAttractingOutside)
+			center.x = kL0SlideItemsTableOffsetBeforeAttractingOutside + kL0SlideItemsTableOffsetSafetyMargin;
+		if (center.x > selfSize.width - kL0SlideItemsTableOffsetBeforeAttractingOutside)
+			center.x = selfSize.width - kL0SlideItemsTableOffsetBeforeAttractingOutside - kL0SlideItemsTableOffsetSafetyMargin;
+		
+		if (center.y > selfSize.height - kL0SlideItemsTableOffsetBeforeAttractingOutside)
+			center.y = selfSize.height - kL0SlideItemsTableOffsetBeforeAttractingOutside - kL0SlideItemsTableOffsetSafetyMargin - 44; // for the toolbar
+		
+		view.center = center;
+		
+		[UIView commitAnimations];
+	}
 }
 
 @end

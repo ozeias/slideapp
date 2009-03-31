@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "L0DraggableView.h"
+#import <MuiKit/MuiKit.h>
 #import "L0SlideItem.h"
 
 @interface L0SlideItemView : L0DraggableView {
