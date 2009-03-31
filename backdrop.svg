@@ -16,7 +16,10 @@
    inkscape:version="0.46"
    version="1.0"
    sodipodi:docname="backdrop.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Slide/ItemsTableBackdrop.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs2485">
     <linearGradient
@@ -39,7 +42,7 @@
        fx="160"
        fy="230"
        r="160"
-       gradientTransform="matrix(1.7125,0,0,1.7287462,237.42857,-523.82087)"
+       gradientTransform="matrix(1.4571081,0,0,1.6224962,278.29127,-499.38337)"
        gradientUnits="userSpaceOnUse" />
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
