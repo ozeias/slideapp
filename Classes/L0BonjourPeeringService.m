@@ -6,7 +6,7 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0BonjourPeerFinder.h"
+#import "L0BonjourPeeringService.h"
 #import "L0BonjourPeer.h"
 
 #import "BLIP.h"
@@ -42,7 +42,7 @@
 
 
 
-@implementation L0BonjourPeerFinder
+@implementation L0BonjourPeeringService
 
 + sharedFinder;
 {

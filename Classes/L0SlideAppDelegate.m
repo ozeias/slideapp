@@ -8,7 +8,7 @@
 
 #import "L0SlideAppDelegate.h"
 #import "L0ImageItem.h"
-#import "L0BonjourPeerFinder.h"
+#import "L0BonjourPeeringService.h"
 
 @implementation L0SlideAppDelegate
 
@@ -60,7 +60,7 @@
 {
 	[L0ImageItem registerClass];
 	
-	L0BonjourPeerFinder* bonjourFinder = [L0BonjourPeerFinder sharedFinder];
+	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedFinder];
 	bonjourFinder.delegate = self;
 	[bonjourFinder beginPeering];
 	

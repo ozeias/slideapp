@@ -12,7 +12,7 @@
 
 #define kL0BonjourPeeringServiceName @"_x-infinitelabs-slides._tcp."
 
-@interface L0BonjourPeerFinder : NSObject <TCPListenerDelegate, BLIPConnectionDelegate> {
+@interface L0BonjourPeeringService : NSObject <TCPListenerDelegate, BLIPConnectionDelegate> {
 	id <L0PeerDiscoveryDelegate> delegate;
 	NSNetServiceBrowser* _browser;
 
