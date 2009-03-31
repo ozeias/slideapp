@@ -46,6 +46,8 @@ typedef struct {
 - (NSData*) networkPacketPayload;
 - (id) initWithNetworkPacketPayload:(NSData*) payload type:(NSString*) type title:(NSString*) title;
 
+- (void) store;
+
 @end
 
 @interface L0SlideItem (L0BLIPBeaming)

@@ -53,6 +53,11 @@ static NSMutableDictionary* classes = nil;
 	return nil;
 }
 
+- (void) store;
+{
+	// Overridden, optionally, by subclasses.
+}
+
 - (void) dealloc;
 {
 	[title release];

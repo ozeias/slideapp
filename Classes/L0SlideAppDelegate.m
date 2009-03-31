@@ -10,9 +10,14 @@
 #import "L0ImageItem.h"
 #import "L0BonjourPeeringService.h"
 
-@implementation L0SlideAppDelegate
+@interface L0SlideAppDelegate ()
 
-@synthesize window;
+- (void) _showToolbar;
+
+@end
+
+
+@implementation L0SlideAppDelegate
 
 - (void) slidePeer:(L0SlidePeer*) peer willBeSentItem:(L0SlideItem*) item;
 {
@@ -30,6 +35,7 @@
 }
 - (void) slidePeer:(L0SlidePeer*) peer didSendUsItem:(L0SlideItem*) item;
 {
+	[item store];
 	[self.tableController addItem:item comingFromPeer:peer];
 }
 
@@ -37,24 +43,18 @@
 {
 	peer.delegate = self;
 	[self.tableController addPeerIfSpaceAllows:peer];
-
-	if (!peers)
-		peers = [NSMutableSet new];
-	[peers addObject:peer];
 }
 
 - (IBAction) testBySendingItemToAnyPeer;
 {
-	L0SlidePeer* peer = [peers anyObject];
-	L0ImageItem* image = [[L0ImageItem alloc] initWithTitle:@"Test" image:[UIImage imageNamed:@"IMG_0192.JPG"]];
-	[peer receiveItem:image];
-	[image release];
 }
 
 - (void) peerLeft:(L0SlidePeer*) peer;
 {
 	[self.tableController removePeer:peer];
 }
+
+@synthesize window, toolbar;
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application;
 {
@@ -65,6 +65,11 @@
 	[bonjourFinder start];
 	
 	self.tableController = [[[L0SlideItemsTableController alloc] initWithDefaultNibName] autorelease];
+	
+	NSMutableArray* itemsArray = [self.toolbar.items mutableCopy];
+	[itemsArray addObject:self.tableController.editButtonItem];
+	self.toolbar.items = itemsArray;
+	[itemsArray release];
     
 	self.tableController.view.frame = tableHostView.bounds;
 	[tableHostView addSubview:self.tableController.view];
@@ -75,6 +80,7 @@
 
 - (void) dealloc;
 {
+	[toolbar release];
 	[tableHostView release];
 	[tableController release];
     [window release];
@@ -83,26 +89,54 @@
 
 - (IBAction) addItem;
 {
-	static int i = 0;
+	if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+		return;
 	
-	L0ImageItem* images[] = {
-		[[[L0ImageItem alloc] initWithTitle:@"Test" image:[UIImage imageNamed:@"IMG_0192.JPG"]] autorelease],
-		[[[L0ImageItem alloc] initWithTitle:@"Test" image:[UIImage imageNamed:@"IMG_0192.JPG"]] autorelease],
-		[[[L0ImageItem alloc] initWithTitle:@"Test" image:[UIImage imageNamed:@"IMG_0192.JPG"]] autorelease],
-		[[[L0ImageItem alloc] initWithTitle:@"Test" image:[UIImage imageNamed:@"IMG_0192.JPG"]] autorelease],
-		[[[L0ImageItem alloc] initWithTitle:@"Test" image:[UIImage imageNamed:@"IMG_0192.JPG"]] autorelease],
-	};
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 	
-	L0SlideItemsTableAddAnimation animations[] = {
-		kL0SlideItemsTableAddFromSouth,
-		kL0SlideItemsTableAddFromEast,
-		kL0SlideItemsTableAddFromWest,
-		kL0SlideItemsTableAddFromNorth,
-		kL0SlideItemsTableAddByDropping
-	};
+	CGPoint center = self.toolbar.center;
+	center.y += self.toolbar.bounds.size.height;
+	self.toolbar.center = center;
 	
-	[self.tableController addItem:images[i] animation:animations[i]];
-	i++; if (i >= 5) i = 0;
+	[UIView commitAnimations];
+	
+	self.toolbar.userInteractionEnabled = NO;
+	
+	UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
+	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+	imagePicker.delegate = self;
+	[self.tableController presentModalViewController:imagePicker animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo;
+{
+	L0ImageItem* item = [[L0ImageItem alloc] initWithTitle:@"Image" image:image];
+	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
+	[item release];
+	
+	[picker dismissModalViewControllerAnimated:YES];
+	[self _showToolbar];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
+{
+	[picker dismissModalViewControllerAnimated:YES];
+	[self _showToolbar];
+}
+
+- (void) _showToolbar;
+{
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	
+	CGPoint center = self.toolbar.center;
+	center.y -= self.toolbar.bounds.size.height;
+	self.toolbar.center = center;
+	
+	[UIView commitAnimations];
+	
+	self.toolbar.userInteractionEnabled = YES;
 }
 
 @end

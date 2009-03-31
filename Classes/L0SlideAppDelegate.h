@@ -11,16 +11,17 @@
 #import "L0PeerDiscovery.h"
 #import "L0SlidePeer.h"
 
-@interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0SlidePeerDelegate> {
+@interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0SlidePeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIWindow *window;
 	L0SlideItemsTableController* tableController;
 	UIView* tableHostView;
 	
-	NSMutableSet* peers;
+	UIToolbar* toolbar;
 }
 
 @property(retain) IBOutlet UIWindow *window;
 @property(retain) IBOutlet UIView* tableHostView;
+@property(retain) IBOutlet UIToolbar* toolbar;
 
 @property(retain) L0SlideItemsTableController* tableController;
 

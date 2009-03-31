@@ -169,7 +169,7 @@
 	return nil;
 }
 
-- (void) listener:(TCPListener*) listener didAcceptConnection:(BLIPConnection*) connection;
+- (void) listener:(TCPListener*) listener didAcceptConnection:(TCPConnection*) connection;
 {
 	L0BonjourPeer* peer = [self peerForAddress:connection.address];
 	

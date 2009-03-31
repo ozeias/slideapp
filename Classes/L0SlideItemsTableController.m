@@ -9,13 +9,13 @@
 #import "L0SlideItemsTableController.h"
 #import "L0SlideItemView.h"
 
-const CGAffineTransform L0CounterclockwiseQuarterTurnRotationTransform = {
+const CGAffineTransform L0CounterclockwiseQuarterTurnTransform = {
 	0, -1,
 	1, 0,
 	0, 0
 };
 
-const CGAffineTransform L0ClockwiseQuarterTurnRotationTransform = {
+const CGAffineTransform L0ClockwiseQuarterTurnTransform = {
 	0, 1,
 	-1, 0,
 	0, 0
@@ -80,8 +80,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 {
     [super viewDidLoad];
 	
-	self.eastLabel.transform = L0ClockwiseQuarterTurnRotationTransform;
-	self.westLabel.transform = L0CounterclockwiseQuarterTurnRotationTransform;
+	self.eastLabel.transform = L0ClockwiseQuarterTurnTransform;
+	self.westLabel.transform = L0CounterclockwiseQuarterTurnTransform;
 	
 	self.northLabel.alpha = 0;
 	self.eastLabel.alpha = 0;
@@ -412,7 +412,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 
 #define kL0SlideItemsTableOffsetBeforeAttractingOutside 30
 
-- (BOOL) draggableView:(L0SlideItemView*) view shouldMoveFromPoint:(CGPoint) start toAttractionPoint:(CGPoint*) outPoint;
+- (BOOL) draggableView:(L0DraggableView*) view shouldMoveFromPoint:(CGPoint) start toAttractionPoint:(CGPoint*) outPoint;
 {
 	L0Log(@"Checking for attraction with start = %@", NSStringFromCGPoint(start));
 	CGRect r = self.view.bounds;
@@ -441,14 +441,14 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 		return NO;
 }
 
-- (void) draggableView:(L0SlideItemView*) view didEndAttractionByFinishing:(BOOL) finished;
+- (void) draggableView:(L0DraggableView*) view didEndAttractionByFinishing:(BOOL) finished;
 {
-	[self _bounceOrSendItemOfView:view];
+	[self _bounceOrSendItemOfView:(L0SlideItemView*) view];
 }
 
-- (void) draggableView:(L0SlideItemView*) view didEndInertialSlideByFinishing:(BOOL) finished;
+- (void) draggableView:(L0DraggableView*) view didEndInertialSlideByFinishing:(BOOL) finished;
 {
-	[self _bounceOrSendItemOfView:view];
+	[self _bounceOrSendItemOfView:(L0SlideItemView*) view];
 }
 
 #define kL0SlideItemsTableOffsetSafetyMargin 50
@@ -479,7 +479,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 		L0SlideItem* item = nil;
 		
 		for (L0SlideItem* candidateItem in (NSDictionary*) itemsToViews) {
-			L0SlideItemView* candidateView = (L0SlideItemView*) CFDictionaryGetValue(itemsToViews, item);
+			L0SlideItemView* candidateView = (L0SlideItemView*) CFDictionaryGetValue(itemsToViews, candidateItem);
 			if (candidateView == view) {
 				item = candidateItem;
 				break;
