@@ -52,7 +52,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 {
 	srandomdev();
 	
-	if (self = [self initWithNibName:@"L0BeamableItemsTable" bundle:nil]) {
+	if (self = [self initWithNibName:@"L0SlideItemsTable" bundle:nil]) {
 		itemsToViews = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	}
 	
