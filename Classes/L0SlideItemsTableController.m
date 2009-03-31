@@ -125,6 +125,10 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 {
 	CFRelease(itemsToViews);
 	[self clearOutlets];
+	self.northPeer = nil;
+	self.eastPeer = nil;
+	self.westPeer = nil;
+	
     [super dealloc];
 }
 
