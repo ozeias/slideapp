@@ -487,7 +487,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 		}
 		
 		if (item) {
-			[peer beginBeamingItem:item];
+			[peer receiveItem:item];
 			sent = YES;
 		}
 	} 

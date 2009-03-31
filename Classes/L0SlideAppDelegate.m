@@ -14,21 +14,21 @@
 
 @synthesize window;
 
-- (void) beamingPeer:(L0SlidePeer*) peer willSendItem:(L0SlideItem*) item;
+- (void) slidePeer:(L0SlidePeer*) peer willBeSentItem:(L0SlideItem*) item;
 {
 	// ignore
 }
 
-- (void) beamingPeer:(L0SlidePeer*) peer didSendItem:(L0SlideItem*) item;
+- (void) slidePeer:(L0SlidePeer*) peer wasSentItem:(L0SlideItem*) item;
 {
 	[self.tableController returnItemToTableAfterSend:item toPeer:peer];
 }
 
-- (void) beamingPeerWillReceiveItem:(L0SlidePeer*) peer;
+- (void) slidePeerWillSendUsItem:(L0SlidePeer*) peer;
 {
 	// ignore
 }
-- (void) beamingPeer:(L0SlidePeer*) peer didReceiveItem:(L0SlideItem*) item;
+- (void) slidePeer:(L0SlidePeer*) peer didSendUsItem:(L0SlideItem*) item;
 {
 	[self.tableController addItem:item comingFromPeer:peer];
 }
@@ -47,7 +47,7 @@
 {
 	L0SlidePeer* peer = [peers anyObject];
 	L0ImageItem* image = [[L0ImageItem alloc] initWithTitle:@"Test" image:[UIImage imageNamed:@"IMG_0192.JPG"]];
-	[peer beginBeamingItem:image];
+	[peer receiveItem:image];
 	[image release];
 }
 

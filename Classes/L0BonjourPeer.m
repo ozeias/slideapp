@@ -39,7 +39,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	return [_service name];
 }
 
-- (BOOL) beginBeamingItem:(L0SlideItem*) item;
+- (BOOL) receiveItem:(L0SlideItem*) item;
 {
 	if (CFDictionaryContainsValue(_itemsBeingSentByConnection, item))
 		return NO;
@@ -49,7 +49,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	
 	CFDictionarySetValue(_itemsBeingSentByConnection, connection, item);
 	
-	[delegate beamingPeer:self willSendItem:item];
+	[delegate slidePeer:self willBeSentItem:item];
 	
 	connection.delegate = self;
 	BLIPRequest* request = [item networkBLIPRequest];
@@ -60,9 +60,9 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 
 - (void) connection: (BLIPConnection*)connection receivedResponse: (BLIPResponse*)response;
 {
-	L0SlideItem* i = (L0SlideItem*) CFDictionaryGetValue(_itemsBeingSentByConnection,connection);
+	L0SlideItem* i = (L0SlideItem*) CFDictionaryGetValue(_itemsBeingSentByConnection, connection);
 	if (i)
-		[delegate beamingPeer:self didSendItem:i];
+		[delegate slidePeer:self wasSentItem:i];
 	
 	// we assume it's fine. for now.
 	[connection close];

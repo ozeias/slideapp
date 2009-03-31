@@ -178,6 +178,8 @@
 		return;
 	}
 	
+	[peer.delegate slidePeerWillSendUsItem:peer];
+	
 	[connection setDelegate:self];
 	[_pendingConnections addObject:connection];
 }
@@ -200,7 +202,7 @@
 
 	[connection close];
 	[_pendingConnections removeObject:connection];
-	[peer.delegate beamingPeer:peer didReceiveItem:item];
+	[peer.delegate slidePeer:peer didSendUsItem:item];
 }
 
 @end

@@ -9,26 +9,26 @@
 #import <Foundation/Foundation.h>
 #import "L0SlideItem.h"
 
-@protocol L0BeamingPeerDelegate;
+@protocol L0SlidePeerDelegate;
 
 @interface L0SlidePeer : NSObject {
-	id <L0BeamingPeerDelegate> delegate;
+	id <L0SlidePeerDelegate> delegate;
 }
 
 @property(readonly) NSString* name;
-@property(assign) id <L0BeamingPeerDelegate> delegate;
+@property(assign) id <L0SlidePeerDelegate> delegate;
 
-- (BOOL) beginBeamingItem:(L0SlideItem*) item;
+- (BOOL) receiveItem:(L0SlideItem*) item;
 
 @end
 
 
-@protocol L0BeamingPeerDelegate <NSObject>
+@protocol L0SlidePeerDelegate <NSObject>
 
-- (void) beamingPeer:(L0SlidePeer*) peer willSendItem:(L0SlideItem*) item;
-- (void) beamingPeer:(L0SlidePeer*) peer didSendItem:(L0SlideItem*) item;
+- (void) slidePeer:(L0SlidePeer*) peer willBeSentItem:(L0SlideItem*) item;
+- (void) slidePeer:(L0SlidePeer*) peer wasSentItem:(L0SlideItem*) item;
 
-- (void) beamingPeerWillReceiveItem:(L0SlidePeer*) peer;
-- (void) beamingPeer:(L0SlidePeer*) peer didReceiveItem:(L0SlideItem*) item;
+- (void) slidePeerWillSendUsItem:(L0SlidePeer*) peer;
+- (void) slidePeer:(L0SlidePeer*) peer didSendUsItem:(L0SlideItem*) item;
 
 @end

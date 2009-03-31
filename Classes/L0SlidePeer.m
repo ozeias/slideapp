@@ -13,7 +13,7 @@
 
 @synthesize delegate;
 
-- (BOOL) beginBeamingItem:(L0SlideItem*) item;
+- (BOOL) receiveItem:(L0SlideItem*) item;
 {
 	NSAssert(NO, @"Abstract method. Subclasses must override it.");
 	return NO;

@@ -11,7 +11,7 @@
 #import "L0PeerDiscovery.h"
 #import "L0SlidePeer.h"
 
-@interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0BeamingPeerDelegate> {
+@interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0SlidePeerDelegate> {
     UIWindow *window;
 	L0SlideItemsTableController* tableController;
 	UIView* tableHostView;
