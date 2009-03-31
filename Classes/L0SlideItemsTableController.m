@@ -153,14 +153,14 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 			view.center = newCenter;
 			view.alpha = 0;
 			CGAffineTransform currentTransform = view.transform;
-			view.transform = CGAffineTransformScale(CGAffineTransformMakeRotation(L0RandomSlideRotation()), 1.2, 1.2);
+			view.transform = CGAffineTransformScale(currentTransform, 1.3, 1.3);
 			view.userInteractionEnabled = NO;
 			
 			[self.view addSubview:view];
 			
 			[UIView beginAnimations:nil context:[view retain]];
 			[UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-			[UIView setAnimationDuration:1.0];
+			[UIView setAnimationDuration:0.5];
 			
 			[UIView setAnimationDelegate:self];
 			[UIView setAnimationDidStopSelector:@selector(_addByDroppingAnimation:didFinish:forRetainedView:)];

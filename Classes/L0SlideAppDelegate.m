@@ -83,6 +83,8 @@
 
 - (IBAction) addItem;
 {
+	static int i = 0;
+	
 	L0ImageItem* images[] = {
 		[[[L0ImageItem alloc] initWithTitle:@"Test" image:[UIImage imageNamed:@"IMG_0192.JPG"]] autorelease],
 		[[[L0ImageItem alloc] initWithTitle:@"Test" image:[UIImage imageNamed:@"IMG_0192.JPG"]] autorelease],
@@ -99,8 +101,8 @@
 		kL0SlideItemsTableAddByDropping
 	};
 	
-	for (int i = 0; i < 5; i++)
-		[self.tableController addItem:images[i] animation:animations[i]];
+	[self.tableController addItem:images[i] animation:animations[i]];
+	i++; if (i >= 5) i = 0;
 }
 
 @end
