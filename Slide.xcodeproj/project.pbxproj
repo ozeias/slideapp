@@ -61,21 +61,21 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 154B01F00F78156D0082109B /* libMuiKit.a */;
+			remoteGlobalIDString = 154B01F00F78156D0082109B;
 			remoteInfo = "MuiKit (Library)";
 		};
 		1572DE890F82BE7A006BEEC0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 156FD76B0F7A25F900F83283 /* MuiKit.bundle */;
+			remoteGlobalIDString = 156FD76B0F7A25F900F83283;
 			remoteInfo = "MuiKit (Resources)";
 		};
 		1572DE940F82C36F006BEEC0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 156FD7720F7A261B00F83283 /* MuiKit */;
+			remoteGlobalIDString = 156FD7720F7A261B00F83283;
 			remoteInfo = MuiKit;
 		};
 /* End PBXContainerItemProxy section */
@@ -388,6 +388,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Slide" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;

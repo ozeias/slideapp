@@ -19,6 +19,27 @@
 
 @implementation L0SlideAppDelegate
 
+- (void) applicationDidFinishLaunching:(UIApplication *) application;
+{
+	[L0ImageItem registerClass];
+	
+	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedFinder];
+	bonjourFinder.delegate = self;
+	[bonjourFinder start];
+	
+	self.tableController = [[[L0SlideItemsTableController alloc] initWithDefaultNibName] autorelease];
+	
+	NSMutableArray* itemsArray = [self.toolbar.items mutableCopy];
+	[itemsArray addObject:self.tableController.editButtonItem];
+	self.toolbar.items = itemsArray;
+	[itemsArray release];
+    
+	[tableHostView addSubview:self.tableController.view];
+	
+	[window addSubview:self.tableHostController.view];
+	[window makeKeyAndVisible];
+}
+
 - (void) slidePeer:(L0SlidePeer*) peer willBeSentItem:(L0SlideItem*) item;
 {
 	L0Log(@"About to send item %@", item);
@@ -57,34 +78,13 @@
 }
 
 @synthesize window, toolbar;
-
-- (void) applicationDidFinishLaunching:(UIApplication *) application;
-{
-	[L0ImageItem registerClass];
-	
-	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedFinder];
-	bonjourFinder.delegate = self;
-	[bonjourFinder start];
-
-	self.tableController = [[[L0SlideItemsTableController alloc] initWithDefaultNibName] autorelease];
-	
-	NSMutableArray* itemsArray = [self.toolbar.items mutableCopy];
-	[itemsArray addObject:self.tableController.editButtonItem];
-	self.toolbar.items = itemsArray;
-	[itemsArray release];
-    
-	self.tableController.view.frame = [UIScreen mainScreen].bounds;
-	[tableHostView addSubview:self.tableController.view];
-	
-	[window makeKeyAndVisible];
-}
-
-@synthesize tableController, tableHostView;
+@synthesize tableController, tableHostView, tableHostController;
 
 - (void) dealloc;
 {
 	[toolbar release];
 	[tableHostView release];
+	[tableHostController release];
 	[tableController release];
     [window release];
     [super dealloc];
@@ -109,7 +109,7 @@
 	UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
 	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	imagePicker.delegate = self;
-	[self.tableController presentModalViewController:imagePicker animated:YES];
+	[self.tableHostController presentModalViewController:imagePicker animated:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo;

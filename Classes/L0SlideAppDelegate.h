@@ -13,8 +13,10 @@
 
 @interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0SlidePeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIWindow *window;
+	
 	L0SlideItemsTableController* tableController;
 	UIView* tableHostView;
+	UIViewController* tableHostController;
 	
 	UIToolbar* toolbar;
 }
@@ -23,6 +25,7 @@
 @property(retain) IBOutlet UIView* tableHostView;
 @property(retain) IBOutlet UIToolbar* toolbar;
 
+@property(retain) IBOutlet UIViewController* tableHostController;
 @property(retain) L0SlideItemsTableController* tableController;
 
 - (IBAction) addItem;
