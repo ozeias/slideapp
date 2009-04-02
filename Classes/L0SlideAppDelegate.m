@@ -109,6 +109,7 @@
 	UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
 	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	imagePicker.delegate = self;
+	[self.tableController setEditing:NO animated:YES];
 	[self.tableHostController presentModalViewController:imagePicker animated:YES];
 }
 

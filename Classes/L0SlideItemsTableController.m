@@ -53,6 +53,10 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 - (L0SlideItemsTableAddAnimation) _animationForPeer:(L0SlidePeer*) peer;
 - (void) _animateItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableAddAnimation) a;
 
+- (void) _removeItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
+
+- (CGFloat) _labelAlphaForPeer:(L0SlidePeer*) peer;
+- (CGFloat) _arrowAlphaForPeer:(L0SlidePeer*) peer;
 - (void) _setPeer:(L0SlidePeer*) peer withArrow:(UIImageView*) arrow label:(UILabel*) label;
 
 - (void) _bounceOrSendItemOfView:(L0SlideItemView*) view;
@@ -164,6 +168,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	
 	L0SlideItemView* view = [[L0SlideItemView alloc] initWithFrame:CGRectZero];
 	[view sizeToFit];
+	[view setDeletionTarget:self action:@selector(_deleteItemForView:)];
 	view.delegate = self;
 	view.transform = CGAffineTransformMakeRotation(L0RandomSlideRotation());
 	[view displayWithContentsOfItem:item];
@@ -279,14 +284,111 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	retainedView.userInteractionEnabled = YES;
 }
 
-- (void) removeItem:(L0SlideItem*) item;
+- (void) removeItem:(L0SlideItem*) item animation:(L0SlideItemsTableRemoveAnimation) ani;
 {
 	L0SlideItemView* view = (L0SlideItemView*) CFDictionaryGetValue(itemsToViews, item);
 	if (!view)
 		return;
 	
-	[view removeFromSuperview];
-	CFDictionaryRemoveValue(itemsToViews, item);
+	[self _removeItemView:view animation:ani];
+}
+
+- (void) _removeItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
+{
+	NSAssert(!view.superview || view.superview == self.view, @"Must be a view we manage or already removed.");
+	
+	switch (ani) {
+		case kL0SlideItemsTableRemoveByFadingAway: {
+		
+			view.userInteractionEnabled = NO;
+			[UIView beginAnimations:nil context:[view retain]];
+			[UIView setAnimationDuration:0.4];
+			[UIView setAnimationDelegate:self];
+			[UIView setAnimationDidStopSelector:@selector(_itemViewRemoveAnimation:didEndByFinishing:context:)];
+			
+			view.alpha = 0.0;
+			
+			[UIView commitAnimations];
+			
+			break;
+		}
+			
+		case kL0SlideItemsTableNoRemoveAnimation:
+		default: {
+			[view removeFromSuperview];
+			break;
+		}
+	}
+	
+	CFDictionaryRemoveValue(itemsToViews, view.item);
+	if (CFDictionaryGetCount(itemsToViews) == 0) {
+		[self setEditing:NO animated:ani != kL0SlideItemsTableNoRemoveAnimation];
+	}
+}
+
+- (void) _itemViewRemoveAnimation:(NSString*) name didEndByFinishing:(BOOL) finished context:(L0SlideItemView*) retainedView;
+{
+	[retainedView autorelease];
+	[retainedView removeFromSuperview];
+}
+
+- (void) _deleteItemForView:(L0SlideItemView*) view;
+{
+	[self _removeItemView:view animation:kL0SlideItemsTableRemoveByFadingAway];
+}
+
+- (void) setEditing:(BOOL) editing animated:(BOOL) animated;
+{
+	[super setEditing:editing animated:animated];
+	
+	for (L0SlideItem* item in (NSDictionary*) itemsToViews) {
+		L0SlideItemView* view = (L0SlideItemView*) CFDictionaryGetValue(itemsToViews, item);
+		[view setEditing:editing animated:animated];
+	}
+	
+	if (animated) {
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	}
+
+	self.northLabel.alpha = [self _labelAlphaForPeer:self.northPeer];
+	self.eastLabel.alpha = [self _labelAlphaForPeer:self.eastPeer];
+	self.westLabel.alpha = [self _labelAlphaForPeer:self.westPeer];
+	
+	self.northArrowView.alpha = [self _arrowAlphaForPeer:self.northPeer];
+	self.eastArrowView.alpha = [self _arrowAlphaForPeer:self.eastPeer];
+	self.westArrowView.alpha = [self _arrowAlphaForPeer:self.westPeer];
+	
+	if (animated)
+		[UIView commitAnimations];
+	
+}
+
+- (CGFloat) _labelAlphaForPeer:(L0SlidePeer*) peer;
+{
+	CGFloat alpha;
+	
+	if (!peer)
+		alpha = 0.0;
+	else
+		alpha = self.editing? 0.5 : 1.0;
+	
+	L0Log(@"peer = %@, alpha = %f", peer, alpha);
+	return alpha;
+}
+
+- (CGFloat) _arrowAlphaForPeer:(L0SlidePeer*) peer;
+{
+	CGFloat alpha;
+	
+	if (!peer)
+		alpha = 0.0;
+	else
+		alpha = self.editing? 0.0 : 1.0;
+	
+	L0Log(@"peer = %@, alpha = %f", peer, alpha);
+	return alpha;
 }
 
 #pragma mark -
@@ -343,22 +445,16 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 
 - (void) _setPeer:(L0SlidePeer*) peer withArrow:(UIImageView*) arrow label:(UILabel*) label;
 {
-	if (peer) {
+	if (peer)
 		label.text = peer.name;
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:peer? UIViewAnimationCurveEaseOut : UIViewAnimationCurveEaseIn];
 		
-		label.alpha = 1;
-		arrow.alpha = 1;
-		[UIView commitAnimations];
-	} else {
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-		
-		label.alpha = 0;
-		arrow.alpha = 0;
-		[UIView commitAnimations];		
-	}
+	label.alpha = [self _labelAlphaForPeer:peer];
+	arrow.alpha = [self _arrowAlphaForPeer:peer];
+	
+	[UIView commitAnimations];		
 }
 
 - (void) setNorthPeer:(L0SlidePeer*) p;
@@ -454,14 +550,16 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 #define kL0SlideItemsTableOffsetSafetyMargin 50
 
 - (void) _bounceOrSendItemOfView:(L0SlideItemView*) view;
-{
+{	
 	L0Log(@"%@", view);
 	
 	CGPoint center = view.center;
 	CGSize selfSize = self.view.bounds.size;
 	L0SlidePeer* peer = nil;
 	
-	if (center.y < 0)
+	if (self.editing) // no sending while editing
+		peer = nil;
+	else if (center.y < 0)
 		peer = self.northPeer;
 	else if (center.x < 0)
 		peer = self.westPeer;

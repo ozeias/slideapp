@@ -31,7 +31,7 @@ enum {
 	//	kL0SlideItemsTableAddFromEast,
 	//	kL0SlideItemsTableAddFromWest,
 	
-	kL0SlideItemsTableFadeAway,
+	kL0SlideItemsTableRemoveByFadingAway,
 };
 typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 
@@ -70,7 +70,7 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 
 - (void) addItem:(L0SlideItem*) item comingFromPeer:(L0SlidePeer*) peer;
 - (void) addItem:(L0SlideItem*) item animation:(L0SlideItemsTableAddAnimation) animation;
-- (void) removeItem:(L0SlideItem*) item /* animation: ... */;
+- (void) removeItem:(L0SlideItem*) item animation:(L0SlideItemsTableRemoveAnimation) animation;
 
 - (void) returnItemToTableAfterSend:(L0SlideItem*) item toPeer:(L0SlidePeer*) peer;
 

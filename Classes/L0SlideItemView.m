@@ -24,6 +24,7 @@
 		
 		self.backgroundColor = [UIColor clearColor];
 		self.opaque = NO;
+		self.editing = NO;
 	}
 	
     return self;
@@ -44,10 +45,74 @@
 	[super dealloc];
 }
 
-- (void) displayWithContentsOfItem:(L0SlideItem*) item;
+@synthesize item;
+
+- (void) displayWithContentsOfItem:(L0SlideItem*) i;
 {
-	self.label.text = item.title;
-	self.imageView.image = item.representingImage;
+	self.label.text = i.title;
+	self.imageView.image = i.representingImage;
+	item = i;
+}
+
+@synthesize deleteButton;
+
+- (void) setDeletionTarget:(id) target action:(SEL) action;
+{
+	deletionTarget = target;
+	deletionAction = action;
+}
+
+- (IBAction) performDelete;
+{
+	if (deletionTarget && deletionAction)
+		[deletionTarget performSelector:deletionAction withObject:self];
+}
+
+- (void) setEditing:(BOOL) newEditing animated:(BOOL) animated;
+{
+	if (newEditing == editing)
+		return;
+	
+	editing = newEditing;
+	if (editing) {
+		
+		deleteButton.userInteractionEnabled = YES;
+		contentView.userInteractionEnabled = YES;
+
+		if (animated) {
+			[UIView beginAnimations:nil context:NULL];
+			[UIView setAnimationDuration:0.4];
+		}
+
+		imageView.alpha = 0.4;
+		deleteButton.alpha = 1.0;
+		
+		if (animated)
+			[UIView commitAnimations];
+		
+	} else {
+
+		deleteButton.userInteractionEnabled = NO;
+		contentView.userInteractionEnabled = NO;
+
+		if (animated) {
+			[UIView beginAnimations:nil context:NULL];
+			[UIView setAnimationDuration:0.4];
+		}
+		
+		imageView.alpha = 1.0;
+		deleteButton.alpha = 0.0;
+		
+		if (animated)
+			[UIView commitAnimations];
+		
+	}
+}
+
+@synthesize editing;
+- (void) setEditing:(BOOL) e;
+{
+	[self setEditing:e animated:NO];
 }
 
 @end
