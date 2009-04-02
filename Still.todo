@@ -10,6 +10,7 @@ To 1.0:
 	- Add a contact picking UI for adding contacts.
 
 	Fit & Finish:
+	- Allow Z-ordering ("picking up") of items.
 	- Decide whether all items get a slide, or if different item kinds get different item views.
 	- Find a way to fix unmeaningful titles over image items.
 	- Display help alerts explaining what happens when items are moved around.
