@@ -28,6 +28,7 @@ To 1.0:
 
 	Noncriticals:
 	- Create a queue of peers that couldn't fit onscreen, so that when a peer leaves a peer can be dequeued to take its place.
+	- Hide the Edit button when there are no slides rather than disabling it.
 
 OS 3.0:
 	Cut'n'Paste:

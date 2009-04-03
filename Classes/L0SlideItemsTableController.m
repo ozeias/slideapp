@@ -78,6 +78,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	if (self = [self initWithNibName:@"L0SlideItemsTable" bundle:nil]) {
 		itemsToViews = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 		viewsBeingHeld = [NSMutableSet new];
+		self.editButtonItem.enabled = NO;
 	}
 	
 	return self;
@@ -180,6 +181,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	CFDictionarySetValue(itemsToViews, item, view);
 
 	[self _animateItemView:view animation:a];
+	
+	self.editButtonItem.enabled = YES;
 }
 
 - (void) _animateItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableAddAnimation) a;
@@ -295,7 +298,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	if (!view)
 		return;
 	
-	[self _removeItemView:view animation:ani];
+	[self _removeItemView:view animation:ani];	
 }
 
 - (void) _removeItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
@@ -328,6 +331,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	CFDictionaryRemoveValue(itemsToViews, view.item);
 	if (CFDictionaryGetCount(itemsToViews) == 0) {
 		[self setEditing:NO animated:ani != kL0SlideItemsTableNoRemoveAnimation];
+		self.editButtonItem.enabled = NO;
 	}
 }
 
