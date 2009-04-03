@@ -49,6 +49,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 	L0SlidePeer* northPeer;
 	L0SlidePeer* eastPeer;
 	L0SlidePeer* westPeer;
+	
+	NSMutableSet* viewsBeingHeld;
 }
 
 - (id) initWithDefaultNibName;

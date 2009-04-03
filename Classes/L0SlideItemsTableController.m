@@ -61,6 +61,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 
 - (void) _bounceOrSendItemOfView:(L0SlideItemView*) view;
 
+- (void) _endHoldingView:(L0DraggableView*) view;
+
 @end
 
 
@@ -75,6 +77,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	
 	if (self = [self initWithNibName:@"L0SlideItemsTable" bundle:nil]) {
 		itemsToViews = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+		viewsBeingHeld = [NSMutableSet new];
 	}
 	
 	return self;
@@ -135,6 +138,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 - (void) dealloc;
 {
 	CFRelease(itemsToViews);
+	[viewsBeingHeld release];
+	
 	[self clearOutlets];
 	self.northPeer = nil;
 	self.eastPeer = nil;
@@ -389,6 +394,51 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	
 	L0Log(@"peer = %@, alpha = %f", peer, alpha);
 	return alpha;
+}
+
+#define kL0SlideItemsTableScaleWhenHeld 1.1
+#define kL0SlideItemsTableAlphaWhenHeld 0.7
+
+- (BOOL) draggableViewShouldBeginDraggingAfterPressAndHold:(L0DraggableView*) view;
+{
+	[viewsBeingHeld addObject:view];
+	
+	[view.superview bringSubviewToFront:view];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.3];
+
+	view.transform = CGAffineTransformScale(view.transform, kL0SlideItemsTableScaleWhenHeld, kL0SlideItemsTableScaleWhenHeld);
+	view.alpha = kL0SlideItemsTableAlphaWhenHeld;
+	
+	[UIView commitAnimations];
+	
+	return YES;
+}
+
+- (void) _endHoldingView:(L0DraggableView*) view;
+{
+	if ([viewsBeingHeld containsObject:view]) {
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.3];
+		
+		view.transform = CGAffineTransformScale(view.transform, 1/kL0SlideItemsTableScaleWhenHeld, 1/kL0SlideItemsTableScaleWhenHeld);
+		view.alpha = 1.0;
+		
+		[UIView commitAnimations];
+		
+		[viewsBeingHeld removeObject:view];
+	}
+}
+
+- (void) draggableViewDidEndPressAndHold:(L0DraggableView*) view;
+{
+	[self _endHoldingView:view];
+}
+	
+- (void) draggableViewDidEndDragging:(L0DraggableView*) view continuesWithSlide:(BOOL) slide;
+{
+	[self _endHoldingView:view];
 }
 
 #pragma mark -
