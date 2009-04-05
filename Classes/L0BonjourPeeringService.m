@@ -154,6 +154,7 @@
 	L0BonjourPeer* peer = [[L0BonjourPeer alloc] initWithNetService:sender];
 	[_peers addObject:peer];
 	[delegate peerFound:peer];
+	[peer release];
 }
 
 @synthesize delegate;

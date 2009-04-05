@@ -54,6 +54,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	connection.delegate = self;
 	BLIPRequest* request = [item networkBLIPRequest];
 	[connection sendRequest:request];
+	[connection release];
 	
 	return YES;
 }
