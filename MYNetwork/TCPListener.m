@@ -73,7 +73,7 @@ static void* getLastCFSocketError( NSError **outError ) {
 }
 
 // Closes a socket (if it's not already NULL), and returns NULL to assign to it.
-static CFSocketRef closeSocket( CFSocketRef socket ) {
+static inline CFSocketRef TCPReleaseSocket( CFSocketRef socket ) {
     if( socket ) {
         CFSocketInvalidate(socket);
         CFRelease(socket);
@@ -82,7 +82,7 @@ static CFSocketRef closeSocket( CFSocketRef socket ) {
 }
 
 // opens a socket of a given protocol, either ipv4 or ipv6.
-- (CFSocketRef) _openProtocol: (SInt32) protocolFamily 
+- (CFSocketRef) _newSocketByOpeningProtocol: (SInt32) protocolFamily 
                       address: (struct sockaddr*)address
                         error: (NSError**)error
 {
@@ -98,7 +98,15 @@ static CFSocketRef closeSocket( CFSocketRef socket ) {
     NSData *addressData = [NSData dataWithBytes:address length:address->sa_len];
     if (kCFSocketSuccess != CFSocketSetAddress(socket, (CFDataRef)addressData)) {
         getLastCFSocketError(error);
-        return closeSocket(socket);
+        // return TCPReleaseSocket(socket);
+		// inlined to placate Clang:
+		
+		if( socket ) {
+			CFSocketInvalidate(socket);
+			CFRelease(socket);
+		}
+		
+		return NULL;
     }
     // set up the run loop source for the socket
     CFRunLoopRef cfrl = CFRunLoopGetCurrent();
@@ -108,10 +116,13 @@ static CFSocketRef closeSocket( CFSocketRef socket ) {
     return socket;
 }
 
-- (BOOL) _failedToOpen: (NSError*)error
+- (BOOL) _failedToOpen: (NSError**)errorPtr
 {
-    LogTo(TCP,@"%@ failed to open: %@",self,error);
-    [self tellDelegate: @selector(listener:failedToOpen:) withObject: error];
+	if (errorPtr) {
+		NSError* error = *errorPtr;
+		LogTo(TCP,@"%@ failed to open: %@",self,error);
+		[self tellDelegate: @selector(listener:failedToOpen:) withObject: error];
+	}
     return NO;
 }
 
@@ -128,14 +139,14 @@ static CFSocketRef closeSocket( CFSocketRef socket ) {
         addr4.sin_addr.s_addr = htonl(INADDR_ANY);
 
         NSError *error;
-        _ipv4socket = [self _openProtocol: PF_INET address: (struct sockaddr*)&addr4 error: &error];
+        _ipv4socket = [self _newSocketByOpeningProtocol: PF_INET address: (struct sockaddr*)&addr4 error: &error];
         if( ! _ipv4socket ) {
             if( error.code==EADDRINUSE && _pickAvailablePort && _port<0xFFFF ) {
                 LogTo(BLIPVerbose,@"%@: port busy, trying %hu...",self,_port+1);
                 self.port += 1;        // try the next port
             } else {
                 if( outError ) *outError = error;
-                return [self _failedToOpen: error];
+                return [self _failedToOpen: outError];
             }
         }
     }while( ! _ipv4socket );
@@ -156,10 +167,10 @@ static CFSocketRef closeSocket( CFSocketRef socket ) {
         addr6.sin6_port = htons(_port);
         memcpy(&(addr6.sin6_addr), &in6addr_any, sizeof(addr6.sin6_addr));
         
-        _ipv6socket = [self _openProtocol: PF_INET6 address: (struct sockaddr*)&addr6 error: outError];
+        _ipv6socket = [self _newSocketByOpeningProtocol: PF_INET6 address: (struct sockaddr*)&addr6 error: outError];
         if( ! _ipv6socket ) {
-            _ipv4socket = closeSocket(_ipv4socket);
-            return [self _failedToOpen: *outError];
+            _ipv4socket = TCPReleaseSocket(_ipv4socket);
+            return [self _failedToOpen: outError];
         }
     }
     
@@ -180,8 +191,8 @@ static CFSocketRef closeSocket( CFSocketRef socket ) {
 {
     if( _ipv4socket ) {
         [self _closeBonjour];
-        _ipv4socket = closeSocket(_ipv4socket);
-        _ipv6socket = closeSocket(_ipv6socket);
+        _ipv4socket = TCPReleaseSocket(_ipv4socket);
+        _ipv6socket = TCPReleaseSocket(_ipv6socket);
 
         LogTo(BLIP,@"%@ is closed",self);
         [self tellDelegate: @selector(listenerDidClose:) withObject: nil];
