@@ -58,7 +58,7 @@
 - (void) slidePeer:(L0SlidePeer*) peer didSendUsItem:(L0SlideItem*) item;
 {
 	L0Log(@"Received %@", item);
-	[item store];
+	[item storeToAppropriateApplication];
 	[self.tableController addItem:item comingFromPeer:peer];
 }
 

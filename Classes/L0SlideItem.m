@@ -1,5 +1,5 @@
 //
-//  L0BeamableItem.m
+//  L0SlideItem.m
 //  Shard
 //
 //  Created by ∞ on 21/03/09.
@@ -18,7 +18,7 @@
 
 + (NSArray*) supportedTypes;
 {
-	NSAssert(NO, @"Subclasses of L0BeamableItem must implement this method.");
+	NSAssert(NO, @"Subclasses of L0SlideItem must implement this method.");
 	return nil;
 }
 
@@ -39,7 +39,7 @@ static NSMutableDictionary* classes = nil;
 
 - (id) initWithNetworkPacketPayload:(NSData*) payload type:(NSString*) type title:(NSString*) title;
 {
-	NSAssert(NO, @"Subclasses of L0BeamableItem must implement this method.");
+	NSAssert(NO, @"Subclasses of L0SlideItem must implement this method.");
 	return nil;
 }
 
@@ -49,11 +49,16 @@ static NSMutableDictionary* classes = nil;
 
 - (NSData*) networkPacketPayload;
 {
-	NSAssert(NO, @"Subclasses of L0BeamableItem must implement this method.");
+	NSAssert(NO, @"Subclasses of L0SlideItem must implement this method.");
 	return nil;
 }
 
-- (void) store;
+- (void) storeToAppropriateApplication;
+{
+	// Overridden, optionally, by subclasses.
+}
+
+- (void) storeToInternalStorage;
 {
 	// Overridden, optionally, by subclasses.
 }
@@ -73,9 +78,9 @@ static NSMutableDictionary* classes = nil;
 - (BLIPRequest*) networkBLIPRequest;
 {
 	NSDictionary* properties = [NSDictionary dictionaryWithObjectsAndKeys:
-								self.title, @"L0BeamableItemTitle",
-								self.type, @"L0BeamableItemType",
-								@"1", @"L0BeamableItemWireProtocolVersion",
+								self.title, @"L0SlideItemTitle",
+								self.type, @"L0SlideItemType",
+								@"1", @"L0SlideItemWireProtocolVersion",
 								nil];
 								
 	
@@ -85,16 +90,16 @@ static NSMutableDictionary* classes = nil;
 
 + (id) beamableItemWithNetworkBLIPRequest:(BLIPRequest*) req;
 {
-	NSString* version = [req valueOfProperty:@"L0BeamableItemWireProtocolVersion"];
+	NSString* version = [req valueOfProperty:@"L0SlideItemWireProtocolVersion"];
 	if (![version isEqualToString:@"1"])
 		return nil;
 	
-	NSString* type = [req valueOfProperty:@"L0BeamableItemType"];
+	NSString* type = [req valueOfProperty:@"L0SlideItemType"];
 	if (!type)
 		return nil;
 	
 	
-	NSString* title = [req valueOfProperty:@"L0BeamableItemTitle"];
+	NSString* title = [req valueOfProperty:@"L0SlideItemTitle"];
 	if (!title)
 		return nil;
 	

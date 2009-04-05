@@ -69,7 +69,7 @@
 	return self;
 }
 
-- (void) store;
+- (void) storeToAppropriateApplication;
 {
 	UIImageWriteToSavedPhotosAlbum(self.image, nil, nil, NULL);
 }

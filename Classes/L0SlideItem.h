@@ -46,7 +46,8 @@ typedef struct {
 - (NSData*) networkPacketPayload;
 - (id) initWithNetworkPacketPayload:(NSData*) payload type:(NSString*) type title:(NSString*) title;
 
-- (void) store;
+- (void) storeToAppropriateApplication;
+- (void) storeToInternalStorage;
 
 @end
 
