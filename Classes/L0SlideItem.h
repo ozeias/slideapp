@@ -29,6 +29,8 @@ typedef struct {
 	NSString* title;
 	NSString* type;
 	UIImage* representingImage;
+	
+	NSString* offloadingFile;
 }
 
 + (void) registerClass;
@@ -43,11 +45,17 @@ typedef struct {
 // Funnels
 
 + (NSArray*) supportedTypes;
-- (NSData*) networkPacketPayload;
-- (id) initWithNetworkPacketPayload:(NSData*) payload type:(NSString*) type title:(NSString*) title;
+- (NSData*) externalRepresentation;
+- (id) initWithExternalRepresentation:(NSData*) payload type:(NSString*) type title:(NSString*) title;
 
 - (void) storeToAppropriateApplication;
-- (void) storeToInternalStorage;
+
+// Persistance methods.
+// TODO error handling.
+- (void) offloadToFile:(NSString*) file;
+@property(readonly, copy) NSString* offloadingFile;
+- (NSData*) contentsOfOffloadingFile;
+- (void) clearCache;
 
 @end
 

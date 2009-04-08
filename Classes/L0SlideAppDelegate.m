@@ -13,6 +13,7 @@
 @interface L0SlideAppDelegate ()
 
 - (void) _returnFromImagePicker;
+@property(copy, setter=_setDocumentsDirectory:) NSString* documentsDirectory;
 
 @end
 
@@ -115,12 +116,30 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo;
 {
-	L0ImageItem* item = [[L0ImageItem alloc] initWithTitle:@"Image" image:image];
+	L0ImageItem* item = [[L0ImageItem alloc] initWithTitle:@"" image:image];
+	
+#define kL0SlideDebugOffloadedItems 1
+#if kL0SlideDebugOffloadedItems
+	[item offloadToFile:[self.documentsDirectory stringByAppendingPathComponent:@"test.dat"]];
+#endif
+	
 	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
 	[item release];
 	
 	[picker dismissModalViewControllerAnimated:YES];
 	[self _returnFromImagePicker];
+}
+
+@synthesize documentsDirectory;
+- (NSString*) documentsDirectory;
+{
+	if (!documentsDirectory) {
+		NSArray* docsDirs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSAssert([docsDirs count] > 0, @"At least one documents directory is known");
+		self.documentsDirectory = [docsDirs objectAtIndex:0];
+	}
+	
+	return documentsDirectory;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;

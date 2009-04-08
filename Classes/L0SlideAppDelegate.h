@@ -18,6 +18,8 @@
 	UIView* tableHostView;
 	UIViewController* tableHostController;
 	
+	NSString* documentsDirectory;
+	
 	UIToolbar* toolbar;
 }
 
@@ -31,6 +33,8 @@
 - (IBAction) addItem;
 
 - (IBAction) testBySendingItemToAnyPeer;
+
+@property(readonly, copy) NSString* documentsDirectory;
 
 @end
 

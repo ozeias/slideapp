@@ -30,7 +30,7 @@
 			nil];
 }
 
-- (NSData*) networkPacketPayload;
+- (NSData*) externalRepresentation;
 {	
 	return UIImagePNGRepresentation([self.image imageByRenderingRotation]);
 }
@@ -48,10 +48,16 @@
 
 - (UIImage*) representingImage;
 {
-	return self.image;
+	UIImage* storedImage = [super representingImage];
+	if (!storedImage) {
+		storedImage = [self.image imageByRenderingRotationAndScalingWithMaximumSide:130.0];
+		self.representingImage = storedImage;
+	}
+	
+	return storedImage;
 }
 
-- (id) initWithNetworkPacketPayload:(NSData*) payload type:(NSString*) ty title:(NSString*) ti;
+- (id) initWithExternalRepresentation:(NSData*) payload type:(NSString*) ty title:(NSString*) ti;
 {
 	if (self = [super init]) {
 		self.title = ti;
@@ -74,7 +80,28 @@
 	UIImageWriteToSavedPhotosAlbum(self.image, nil, nil, NULL);
 }
 
+- (void) clearCache;
+{
+	L0Log(@"Done to %@", self);
+	self.image = nil;
+}
+
+- (void) offloadToFile:(NSString*) file;
+{
+	(void) [self representingImage]; // ensures it's loaded.
+	[super offloadToFile:file];
+}
+
 @synthesize image;
+- (UIImage*) image;
+{
+	if (!image && self.offloadingFile) {
+		L0Log(@"Caching from contents of offloading file: %@", self.offloadingFile);
+		self.image = [UIImage imageWithContentsOfFile:self.offloadingFile];
+	}
+	
+	return image;
+}
 
 - (void) dealloc;
 {

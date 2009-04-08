@@ -8,6 +8,13 @@
 
 #import "L0SlideItem.h"
 
+@interface L0SlideItem ()
+
+@property(copy, setter=_setOffloadingFile:) NSString* offloadingFile;
+
+@end
+
+
 @implementation L0SlideItem
 
 + (void) registerClass;
@@ -37,7 +44,7 @@ static NSMutableDictionary* classes = nil;
 	return [classes objectForKey:c];
 }
 
-- (id) initWithNetworkPacketPayload:(NSData*) payload type:(NSString*) type title:(NSString*) title;
+- (id) initWithExternalRepresentation:(NSData*) payload type:(NSString*) type title:(NSString*) title;
 {
 	NSAssert(NO, @"Subclasses of L0SlideItem must implement this method.");
 	return nil;
@@ -47,7 +54,7 @@ static NSMutableDictionary* classes = nil;
 @synthesize type;
 @synthesize representingImage;
 
-- (NSData*) networkPacketPayload;
+- (NSData*) externalRepresentation;
 {
 	NSAssert(NO, @"Subclasses of L0SlideItem must implement this method.");
 	return nil;
@@ -58,7 +65,27 @@ static NSMutableDictionary* classes = nil;
 	// Overridden, optionally, by subclasses.
 }
 
-- (void) storeToInternalStorage;
+- (void) offloadToFile:(NSString*) file;
+{	
+	if ([[self externalRepresentation] writeToFile:file atomically:YES]) {
+		self.offloadingFile = file;
+		[self clearCache];
+	}
+}
+
+@synthesize offloadingFile;
+
+// Used by subclasses to 'see' the external representation that
+// was saved in offloadToFile:.
+- (NSData*) contentsOfOffloadingFile;
+{
+	NSString* file = self.offloadingFile;
+	if (!file) return nil;
+	
+	return [NSData dataWithContentsOfFile:self.offloadingFile];
+}
+
+- (void) clearCache;
 {
 	// Overridden, optionally, by subclasses.
 }
@@ -84,7 +111,7 @@ static NSMutableDictionary* classes = nil;
 								nil];
 								
 	
-	return [BLIPRequest requestWithBody:[self networkPacketPayload]
+	return [BLIPRequest requestWithBody:[self externalRepresentation]
 							 properties:properties];
 }
 
@@ -107,7 +134,7 @@ static NSMutableDictionary* classes = nil;
 	if (!c)
 		return nil;
 					   
-	return [[[c alloc] initWithNetworkPacketPayload:req.body type:type title:title] autorelease];
+	return [[[c alloc] initWithExternalRepresentation:req.body type:type title:title] autorelease];
 }
 
 @end
