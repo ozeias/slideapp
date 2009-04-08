@@ -63,6 +63,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 
 - (void) _endHoldingView:(L0DraggableView*) view;
 
+- (UIActivityIndicatorView*) _spinnerForPeer:(L0SlidePeer*) peer;
+
 @end
 
 
@@ -98,6 +100,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	self.northArrowView.alpha = 0;
 	self.eastArrowView.alpha = 0;
 	self.westArrowView.alpha = 0;
+	
+	basePeerLabelColor = [self.northLabel.textColor retain];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,6 +111,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 
 @synthesize northArrowView, eastArrowView, westArrowView;
 @synthesize northLabel, eastLabel, westLabel;
+@synthesize northSpinner, eastSpinner, westSpinner;
 
 - (void) clearOutlets;
 {
@@ -117,6 +122,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	self.northLabel = nil;
 	self.eastLabel = nil;
 	self.westLabel = nil;
+	
+	[basePeerLabelColor release];
+	basePeerLabelColor = nil;
 }
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
@@ -544,9 +552,49 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 #pragma mark -
 #pragma mark Receiving
 
+- (UIActivityIndicatorView*) _spinnerForPeer:(L0SlidePeer*) peer;
+{
+	UIActivityIndicatorView* spinner = nil;
+	if (peer == self.northPeer)
+		spinner = self.northSpinner;
+	else if (peer == self.eastPeer)
+		spinner = self.eastSpinner;
+	else if (peer == self.westPeer)
+		spinner = self.westSpinner;
+	
+	return spinner;
+}
+
+- (UILabel*) _labelForPeer:(L0SlidePeer*) peer;
+{
+	UILabel* label = nil;
+	if (peer == self.northPeer)
+		label = self.northLabel;
+	else if (peer == self.eastPeer)
+		label = self.eastLabel;
+	else if (peer == self.westPeer)
+		label = self.westLabel;
+	
+	return label;
+}
+
 - (void) addItem:(L0SlideItem*) item comingFromPeer:(L0SlidePeer*) peer;
 {
 	[self addItem:item animation:[self _animationForPeer:peer]];
+	[[self _spinnerForPeer:peer] stopAnimating];
+	
+	[self _labelForPeer:peer].textColor = basePeerLabelColor;
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationRepeatCount:1];
+	[UIView setAnimationRepeatAutoreverses:NO];
+	
+	[self _labelForPeer:peer].alpha = 1;
+	
+	[UIView commitAnimations];
 }
 
 - (void) returnItemToTableAfterSend:(L0SlideItem*) item toPeer:(L0SlidePeer*) peer;
@@ -555,6 +603,25 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 
 	if (view)
 		[self _animateItemView:view animation:[self _animationForPeer:peer]];
+}
+
+- (void) itemComingFromPeer:(L0SlidePeer*) peer;
+{
+	[[self _spinnerForPeer:peer] startAnimating];
+	
+	[self _labelForPeer:peer].textColor = [UIColor colorWithRed:33.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0];
+
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+	[UIView setAnimationRepeatCount:1e100f];
+	[UIView setAnimationRepeatAutoreverses:YES];
+	
+	[self _labelForPeer:peer].alpha = 0;
+	
+	[UIView commitAnimations];
+	
+	
 }
 
 #pragma mark -

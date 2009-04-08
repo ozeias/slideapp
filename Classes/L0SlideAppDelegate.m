@@ -55,6 +55,7 @@
 - (void) slidePeerWillSendUsItem:(L0SlidePeer*) peer;
 {
 	L0Log(@"Receiving from %@", peer);
+	[self.tableController itemComingFromPeer:peer];
 }
 - (void) slidePeer:(L0SlidePeer*) peer didSendUsItem:(L0SlideItem*) item;
 {
@@ -116,13 +117,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo;
 {
-	L0ImageItem* item = [[L0ImageItem alloc] initWithTitle:@"" image:image];
-	
-#define kL0SlideDebugOffloadedItems 1
-#if kL0SlideDebugOffloadedItems
-	[item offloadToFile:[self.documentsDirectory stringByAppendingPathComponent:@"test.dat"]];
-#endif
-	
+	L0ImageItem* item = [[L0ImageItem alloc] initWithTitle:@"" image:image];	
 	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
 	[item release];
 	
