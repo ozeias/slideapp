@@ -617,7 +617,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	[UIView setAnimationRepeatCount:1e100f];
 	[UIView setAnimationRepeatAutoreverses:YES];
 	
-	[self _labelForPeer:peer].alpha = 0;
+	[self _labelForPeer:peer].alpha = 0.3;
 	
 	[UIView commitAnimations];
 	
