@@ -65,6 +65,22 @@ static NSMutableDictionary* classes = nil;
 	// Overridden, optionally, by subclasses.
 }
 
+#pragma mark -
+#pragma mark Persistance
+
++ itemWithOffloadedFile:(NSString*) file type:(NSString*) type title:(NSString*) title;
+{
+	NSData* data = [[NSData alloc] initWithContentsOfFile:file];
+	if (!data) return nil;
+	
+	L0SlideItem* item = [[[self classForType:type] alloc] initWithExternalRepresentation:data type:type title:title];
+	item.offloadingFile = file;
+	[item clearCache];
+	[data release];
+	
+	return item;
+}
+
 - (void) offloadToFile:(NSString*) file;
 {	
 	if ([[self externalRepresentation] writeToFile:file atomically:YES]) {

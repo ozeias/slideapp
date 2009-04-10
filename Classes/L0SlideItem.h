@@ -52,6 +52,7 @@ typedef struct {
 
 // Persistance methods.
 // TODO error handling.
++ itemWithOffloadedFile:(NSString*) file type:(NSString*) type title:(NSString*) title;
 - (void) offloadToFile:(NSString*) file;
 @property(readonly, copy) NSString* offloadingFile;
 - (NSData*) contentsOfOffloadingFile;
