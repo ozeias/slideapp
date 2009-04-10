@@ -16,7 +16,7 @@
 
 #define kL0AddressBookCountOfProperties (23) // sizeof(properties) / sizeof(ABPropertyID);
 
-static ABPropertyID L0AddressBookGetPropertyWithIndex(int index) {
+static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	static ABPropertyID L0AddressBookProperties[kL0AddressBookCountOfProperties];
 	static BOOL initialized = NO;
 	
@@ -47,13 +47,16 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int index) {
 			kABPersonURLProperty,
 			kABPersonRelatedNamesProperty
 		};
+		
+		L0Log(@"kABPersonLastNameProperty == %d at %p", kABPersonLastNameProperty, &kABPersonLastNameProperty);
+		
 		int i; for (i = 0; i < kL0AddressBookCountOfProperties; i++)
 			L0AddressBookProperties[i] = properties[i];
 		
 		initialized = YES;
 	}
 	
-	return L0AddressBookProperties[index];
+	return L0AddressBookProperties[idx];
 }
 
 @interface L0AddressBookPersonItem ()
@@ -111,10 +114,21 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int index) {
 			return nil;
 		}
 		
+		// There is a stupid bug where kABPersonLastNameProperty and other constants
+		// from AB are zero'd until I call an AB* function, so I'm doing that once now.
+		static BOOL didCallAddressBookCreate = NO;
+		if (!didCallAddressBookCreate) {
+			ABAddressBookRef ab = ABAddressBookCreate();
+			CFRelease(ab);
+			didCallAddressBookCreate = YES;
+		}
+		
 		self.type = kL0AddressBookPersonDataInPropertyListType;
 		
 		NSString* nameKey = [NSString stringWithFormat:@"%d", kABPersonFirstNameProperty];
 		NSString* surnameKey = [NSString stringWithFormat:@"%d", kABPersonLastNameProperty];
+
+		L0Log(@"kABPersonLastNameProperty == %d at %p", kABPersonLastNameProperty, &kABPersonLastNameProperty);
 		
 		NSDictionary* properties = [[self personInfo] objectForKey:kL0AddressBookPersonInfoProperties];
 		
@@ -322,10 +336,10 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int index) {
 			ABMultiValueRef multi = ABMultiValueCreateMutable(propertyType);
 			
 			for (NSDictionary* valuePart in value) {
-				id value = [valuePart objectForKey:kL0AddressBookValue];
+				id multiValue = [valuePart objectForKey:kL0AddressBookValue];
 				id label = [valuePart objectForKey:kL0AddressBookLabel];
 				
-				ABMultiValueAddValueAndLabel(multi, (CFTypeRef) value, (CFStringRef) label, NULL);
+				ABMultiValueAddValueAndLabel(multi, (CFTypeRef) multiValue, (CFStringRef) label, NULL);
 			}
 			
 			setValue = (CFTypeRef) multi;
