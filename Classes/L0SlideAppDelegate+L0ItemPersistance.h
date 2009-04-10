@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "L0SlideAppDelegate.h"
 
 @interface L0SlideAppDelegate (L0ItemPersistance)
 

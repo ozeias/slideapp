@@ -51,7 +51,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 @interface L0SlideItemsTableController ()
 
 - (L0SlideItemsTableAddAnimation) _animationForPeer:(L0SlidePeer*) peer;
-- (void) _animateItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableAddAnimation) a;
+- (void) _animateItemView:(L0SlideItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
 
 - (void) _removeItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
 
@@ -188,12 +188,12 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	[view displayWithContentsOfItem:item];
 	CFDictionarySetValue(itemsToViews, item, view);
 
-	[self _animateItemView:view animation:a];
+	[self _animateItemView:view withAddAnimation:a];
 	
 	self.editButtonItem.enabled = YES;
 }
 
-- (void) _animateItemView:(L0SlideItemView*) view animation:(L0SlideItemsTableAddAnimation) a;
+- (void) _animateItemView:(L0SlideItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
 {
 	switch (a) {
 		case kL0SlideItemsTableAddByDropping: {
@@ -287,8 +287,20 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 			
 		case kL0SlideItemsTableNoAddAnimation:
 		default: {
-			if (!view.superview)
+			if (!view.superview) {
+				CGSize selfSize = self.view.bounds.size;
+				CGRect itemViewFrame = view.frame;
+				selfSize.width -= itemViewFrame.size.width / 2 + 10;
+				selfSize.height -= itemViewFrame.size.height / 2 + 10;
+				
+				CGPoint newCenter = CGPointMake(
+												(int) selfSize.width % random(),
+												(int) selfSize.height % random()
+												);
+				
+				view.center = newCenter;
 				[self.view addSubview:view];
+			}
 			break;
 		}
 	}
@@ -602,7 +614,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	L0SlideItemView* view = (L0SlideItemView*) CFDictionaryGetValue(itemsToViews, item);
 
 	if (view)
-		[self _animateItemView:view animation:[self _animationForPeer:peer]];
+		[self _animateItemView:view withAddAnimation:[self _animationForPeer:peer]];
 }
 
 - (void) itemComingFromPeer:(L0SlidePeer*) peer;

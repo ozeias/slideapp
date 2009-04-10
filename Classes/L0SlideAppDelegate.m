@@ -9,6 +9,7 @@
 #import "L0SlideAppDelegate.h"
 #import "L0ImageItem.h"
 #import "L0BonjourPeeringService.h"
+#import "L0SlideAppDelegate+L0ItemPersistance.h"
 
 @interface L0SlideAppDelegate ()
 
