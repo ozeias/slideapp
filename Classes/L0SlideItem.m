@@ -73,7 +73,7 @@ static NSMutableDictionary* classes = nil;
 	NSData* data = [[NSData alloc] initWithContentsOfFile:file];
 	if (!data) return nil;
 	
-	L0SlideItem* item = [[[self classForType:type] alloc] initWithExternalRepresentation:data type:type title:title];
+	L0SlideItem* item = [[[[self classForType:type] alloc] initWithExternalRepresentation:data type:type title:title] autorelease];
 	item.offloadingFile = file;
 	[item clearCache];
 	[data release];
@@ -86,10 +86,11 @@ static NSMutableDictionary* classes = nil;
 	if ([[self externalRepresentation] writeToFile:file atomically:YES]) {
 		self.offloadingFile = file;
 		[self clearCache];
+		L0Log(@"%@ offloaded to %@", self, file);
 	}
 }
 
-@synthesize offloadingFile;
+@synthesize offloadingFile, shouldDisposeOfOffloadingFileOnDealloc;
 
 // Used by subclasses to 'see' the external representation that
 // was saved in offloadToFile:.
@@ -108,6 +109,11 @@ static NSMutableDictionary* classes = nil;
 
 - (void) dealloc;
 {
+	if (self.offloadingFile && shouldDisposeOfOffloadingFileOnDealloc) {
+		L0Log(@"Deleting offloading file: %@", self.offloadingFile);
+		[[NSFileManager defaultManager] removeItemAtPath:self.offloadingFile error:NULL]; // TODO error handling.
+	}
+	
 	[title release];
 	[type release];
 	[representingImage release];

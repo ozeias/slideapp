@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "L0SlideAppDelegate.h"
 
+@class L0SlideItem;
+
 @interface L0SlideAppDelegate (L0ItemPersistance)
 
 - (void) persistItemsToMassStorage:(NSArray*) items;

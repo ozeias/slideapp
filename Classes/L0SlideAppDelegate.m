@@ -23,12 +23,15 @@
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application;
 {
+	// Registering item subclasses.
 	[L0ImageItem registerClass];
 	
-	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedFinder];
+	// Starting up peering services.
+	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];
 	bonjourFinder.delegate = self;
 	[bonjourFinder start];
 	
+	// Setting up the UI.
 	self.tableController = [[[L0SlideItemsTableController alloc] initWithDefaultNibName] autorelease];
 	
 	NSMutableArray* itemsArray = [self.toolbar.items mutableCopy];
@@ -37,9 +40,19 @@
 	[itemsArray release];
     
 	[tableHostView addSubview:self.tableController.view];
-	
 	[window addSubview:self.tableHostController.view];
+	
+	// Loading persisted items from disk.
+	for (L0SlideItem* i in [self loadItemsFromMassStorage])
+		[self.tableController addItem:i animation:kL0SlideItemsTableNoAddAnimation];
+	
+	// Go!
 	[window makeKeyAndVisible];
+}
+
+- (void) applicationWillTerminate:(UIApplication*) app;
+{
+	[self persistItemsToMassStorage:[self.tableController items]];
 }
 
 - (void) slidePeer:(L0SlidePeer*) peer willBeSentItem:(L0SlideItem*) item;

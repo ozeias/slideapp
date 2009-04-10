@@ -31,6 +31,7 @@ typedef struct {
 	UIImage* representingImage;
 	
 	NSString* offloadingFile;
+	BOOL shouldDisposeOfOffloadingFileOnDealloc;
 }
 
 + (void) registerClass;
@@ -55,6 +56,7 @@ typedef struct {
 + itemWithOffloadedFile:(NSString*) file type:(NSString*) type title:(NSString*) title;
 - (void) offloadToFile:(NSString*) file;
 @property(readonly, copy) NSString* offloadingFile;
+@property(assign) BOOL shouldDisposeOfOffloadingFileOnDealloc;
 - (NSData*) contentsOfOffloadingFile;
 - (void) clearCache;
 

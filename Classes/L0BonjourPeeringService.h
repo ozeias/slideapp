@@ -22,7 +22,7 @@
 	NSMutableSet* _pendingConnections;
 }
 
-+ sharedFinder;
++ sharedService;
 
 - (void) start;
 - (void) stop;

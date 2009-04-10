@@ -26,19 +26,21 @@ static inline NSDictionary* L0InformationFromItem(L0SlideItem* i) {
 	NSString* docs = self.documentsDirectory;
 	
 	for (L0SlideItem* i in items) {
+		NSString* name;
 		if (!i.offloadingFile) {
-			NSString* path;
 			do {
-				path = [docs stringByAppendingPathComponent:[[L0UUID UUID] stringValue]];
-			} while ([fm fileExistsAtPath:path]);
+				name = [[L0UUID UUID] stringValue];
+			} while ([fm fileExistsAtPath:[docs stringByAppendingPathComponent:name]]);
 			
-			[i offloadToFile:path];
-		}
+			[i offloadToFile:[docs stringByAppendingPathComponent:name]];
+		} else
+			name = [i.offloadingFile lastPathComponent];
 		
-		[pathsToItemInfo setObject:L0InformationFromItem(i) forKey:i.offloadingFile];
+		[pathsToItemInfo setObject:L0InformationFromItem(i) forKey:name];
 	}
 	
 	[[NSUserDefaults standardUserDefaults] setObject:pathsToItemInfo forKey:@"L0SlidePersistedItems"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (NSArray*) loadItemsFromMassStorage;
@@ -48,9 +50,10 @@ static inline NSDictionary* L0InformationFromItem(L0SlideItem* i) {
 		return [NSArray array];
 	
 	NSMutableArray* items = [NSMutableArray array];
+	NSString* docs = self.documentsDirectory;
 
-	for (NSString* path in pathsToItemInfo) {
-		NSDictionary* itemInfo = [pathsToItemInfo objectForKey:path];
+	for (NSString* name in pathsToItemInfo) {
+		NSDictionary* itemInfo = [pathsToItemInfo objectForKey:name];
 		if (![itemInfo isKindOfClass:[NSDictionary class]])
 			continue;
 		
@@ -60,6 +63,7 @@ static inline NSDictionary* L0InformationFromItem(L0SlideItem* i) {
 		if (!title || !type)
 			continue;
 		
+		NSString* path = [docs stringByAppendingPathComponent:name];
 		L0SlideItem* item = [L0SlideItem itemWithOffloadedFile:path type:type title:title];
 		if (item)
 			[items addObject:item];

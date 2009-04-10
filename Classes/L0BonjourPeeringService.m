@@ -44,7 +44,7 @@
 
 @implementation L0BonjourPeeringService
 
-+ sharedFinder;
++ sharedService;
 {
 	static id myself = nil; if (!myself)
 		myself = [self new];

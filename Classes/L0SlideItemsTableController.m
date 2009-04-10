@@ -8,6 +8,8 @@
 
 #import "L0SlideItemsTableController.h"
 #import "L0SlideItemView.h"
+#import "L0SlideAppDelegate.h"
+#import "L0SlideAppDelegate+L0ItemPersistance.h"
 
 const CGAffineTransform L0CounterclockwiseQuarterTurnTransform = {
 	0, -1,
@@ -107,6 +109,11 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
+	
+	for (L0SlideItem* i in [self items]) {
+		if (i.offloadingFile)
+			[i clearCache];
+	}
 }
 
 @synthesize northArrowView, eastArrowView, westArrowView;
@@ -347,6 +354,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 			break;
 		}
 	}
+	
+	// TODO make file lifecycle not dependant on item object lifecycle.
+	view.item.shouldDisposeOfOffloadingFileOnDealloc = YES;
 	
 	CFDictionaryRemoveValue(itemsToViews, view.item);
 	if (CFDictionaryGetCount(itemsToViews) == 0) {
