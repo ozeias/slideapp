@@ -18,7 +18,7 @@ To 1.0:
 	- Decide what errors are so critical that the user needs to know about 'em.
 	- Design first-launch experience.
 		- Decide what to show (alert? text on the table?)
-	- Create an icon.
+	✓ Create an icon.
 	- Create a suitable Default.png.
 	
 	Marketing:
