@@ -21,32 +21,32 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int index) {
 	static BOOL initialized = NO;
 	
 	if (!initialized) {
-	ABPropertyID properties[] = {
-		kABPersonFirstNameProperty,
-		kABPersonLastNameProperty,
-		kABPersonMiddleNameProperty,
-		kABPersonPrefixProperty,
-		kABPersonSuffixProperty,
-		kABPersonNicknameProperty,
-		kABPersonFirstNamePhoneticProperty,
-		kABPersonLastNamePhoneticProperty,
-		kABPersonMiddleNamePhoneticProperty,
-		kABPersonOrganizationProperty,
-		kABPersonJobTitleProperty,
-		kABPersonDepartmentProperty,
-		kABPersonEmailProperty,
-		kABPersonBirthdayProperty,
-		kABPersonNoteProperty,
-		kABPersonCreationDateProperty,
-		kABPersonModificationDateProperty,
-		kABPersonAddressProperty,
-		kABPersonDateProperty,
-		kABPersonKindProperty,
-		kABPersonPhoneProperty,
-		kABPersonInstantMessageProperty,
-		kABPersonURLProperty,
-		kABPersonRelatedNamesProperty
-	};
+		ABPropertyID properties[] = {
+			kABPersonFirstNameProperty,
+			kABPersonLastNameProperty,
+			kABPersonMiddleNameProperty,
+			kABPersonPrefixProperty,
+			kABPersonSuffixProperty,
+			kABPersonNicknameProperty,
+			kABPersonFirstNamePhoneticProperty,
+			kABPersonLastNamePhoneticProperty,
+			kABPersonMiddleNamePhoneticProperty,
+			kABPersonOrganizationProperty,
+			kABPersonJobTitleProperty,
+			kABPersonDepartmentProperty,
+			kABPersonEmailProperty,
+			kABPersonBirthdayProperty,
+			kABPersonNoteProperty,
+			kABPersonCreationDateProperty,
+			kABPersonModificationDateProperty,
+			kABPersonAddressProperty,
+			kABPersonDateProperty,
+			kABPersonKindProperty,
+			kABPersonPhoneProperty,
+			kABPersonInstantMessageProperty,
+			kABPersonURLProperty,
+			kABPersonRelatedNamesProperty
+		};
 		int i; for (i = 0; i < kL0AddressBookCountOfProperties; i++)
 			L0AddressBookProperties[i] = properties[i];
 		
@@ -62,6 +62,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int index) {
 - (void) loadPersonInfoFromAddressBookRecord:(ABRecordRef) record;
 
 - (NSString*) shortenedNameFromAddressBookRecord:(ABRecordRef) record;
+- (NSString*) shortenedNameFromName:(NSString*) name surname:(NSString*) surname;
 
 @end
 
@@ -111,7 +112,13 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int index) {
 		}
 		
 		self.type = kL0AddressBookPersonDataInPropertyListType;
-		self.title = ti;
+		
+		NSString* nameKey = [NSString stringWithFormat:@"%d", kABPersonFirstNameProperty];
+		NSString* surnameKey = [NSString stringWithFormat:@"%d", kABPersonLastNameProperty];
+		
+		NSDictionary* properties = [[self personInfo] objectForKey:kL0AddressBookPersonInfoProperties];
+		
+		self.title = [self shortenedNameFromName:[properties objectForKey:nameKey] surname:[properties objectForKey:surnameKey]];
 		
 		UIImage* image;
 		if ([personInfo objectForKey:kL0AddressBookPersonInfoImageData])
@@ -211,12 +218,18 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int index) {
 
 - (NSString*) shortenedNameFromAddressBookRecord:(ABRecordRef) record;
 {
+	NSString* name = [(NSString*) ABRecordCopyValue(record, kABPersonFirstNameProperty) autorelease];
+	NSString* surname = [(NSString*) ABRecordCopyValue(record, kABPersonLastNameProperty) autorelease];
+	
+	return [self shortenedNameFromName:name surname:surname];
+}
+
+- (NSString*) shortenedNameFromName:(NSString*) name surname:(NSString*) surname;
+{
 	// should we shorten at all?
 	// This includes all latin letters but not IPA extensions, spacing modifiers
 	// and combining diacriticals.
 	NSCharacterSet* latinLetters = [NSCharacterSet characterSetWithRange:NSMakeRange(0, 0x250)];
-	NSString* name = [(NSString*) ABRecordCopyValue(record, kABPersonFirstNameProperty) autorelease];
-	NSString* surname = [(NSString*) ABRecordCopyValue(record, kABPersonLastNameProperty) autorelease];
 	
 	BOOL shouldShorten = [name length] > 1 && [surname length] > 1;
 	
@@ -264,7 +277,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int index) {
 		else if (!surname && name)
 			return name;
 		else {
-			name = [surname substringToIndex:1];
+			name = [name substringToIndex:1];
 			return [NSString stringWithFormat:@"%@, %@.", surname, name];
 		}
 	}

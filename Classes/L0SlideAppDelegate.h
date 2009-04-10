@@ -19,7 +19,7 @@
 	
 	L0SlideItemsTableController* tableController;
 	UIView* tableHostView;
-	UIViewController* tableHostController;
+	L0FlipViewController* tableHostController;
 	
 	NSString* documentsDirectory;
 	
@@ -30,7 +30,7 @@
 @property(retain) IBOutlet UIView* tableHostView;
 @property(retain) IBOutlet UIToolbar* toolbar;
 
-@property(retain) IBOutlet UIViewController* tableHostController;
+@property(retain) IBOutlet L0FlipViewController* tableHostController;
 @property(retain) L0SlideItemsTableController* tableController;
 
 - (IBAction) addItem;

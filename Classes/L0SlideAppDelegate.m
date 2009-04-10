@@ -40,18 +40,27 @@
 	
 	NSMutableArray* itemsArray = [self.toolbar.items mutableCopy];
 	[itemsArray addObject:self.tableController.editButtonItem];
+	UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+	[infoButton addTarget:self.tableHostController action:@selector(showBack) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem* infoButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
+	[itemsArray addObject:infoButtonItem];
 	self.toolbar.items = itemsArray;
 	[itemsArray release];
     
 	[tableHostView addSubview:self.tableController.view];
 	[window addSubview:self.tableHostController.view];
 	
-	// Loading persisted items from disk.
-	for (L0SlideItem* i in [self loadItemsFromMassStorage])
-		[self.tableController addItem:i animation:kL0SlideItemsTableNoAddAnimation];
+	// Loading persisted items from disk. (Later, so we avoid the AB constant bug.)
+	[self performSelector:@selector(addPersistedItemsToTable) withObject:nil afterDelay:0.05];
 	
 	// Go!
 	[window makeKeyAndVisible];
+}
+
+- (void) addPersistedItemsToTable;
+{
+	for (L0SlideItem* i in [self loadItemsFromMassStorage])
+		[self.tableController addItem:i animation:kL0SlideItemsTableNoAddAnimation];
 }
 
 - (void) applicationWillTerminate:(UIApplication*) app;
