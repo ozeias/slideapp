@@ -188,22 +188,24 @@
 
 - (void) connection: (BLIPConnection*)connection receivedRequest: (BLIPRequest*)request;
 {
+	L0BonjourPeer* peer = [self peerForAddress:connection.address];
+	
+	if (!peer) {
+		L0Log(@"No peer associated with this connection; throwing away.");
+		[_pendingConnections removeObject:connection];
+		[connection close];
+		return;
+	}
+
 	L0SlideItem* item = [L0SlideItem beamableItemWithNetworkBLIPRequest:request];
 	if (!item) {
 		L0Log(@"No item could be created.");
 		[connection close];
 		[_pendingConnections removeObject:connection];
+		[peer.delegate slidePeerDidCancelSendingUsItem:peer];
 		return;
 	}
 	
-	L0BonjourPeer* peer = [self peerForAddress:connection.address];
-	
-	if (!peer) {
-		L0Log(@"No peer associated with this connection; throwing away.");
-		[connection close];
-		return;
-	}
-
 	[connection close];
 	[_pendingConnections removeObject:connection];
 	[peer.delegate slidePeer:peer didSendUsItem:item];

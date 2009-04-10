@@ -8,8 +8,11 @@
 
 #import "L0SlideAppDelegate.h"
 #import "L0ImageItem.h"
+#import "L0AddressBookPersonItem.h"
 #import "L0BonjourPeeringService.h"
 #import "L0SlideAppDelegate+L0ItemPersistance.h"
+
+#import <AddressBook/AddressBook.h>
 
 @interface L0SlideAppDelegate ()
 
@@ -25,6 +28,7 @@
 {
 	// Registering item subclasses.
 	[L0ImageItem registerClass];
+	[L0AddressBookPersonItem registerClass];
 	
 	// Starting up peering services.
 	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];
@@ -69,13 +73,17 @@
 - (void) slidePeerWillSendUsItem:(L0SlidePeer*) peer;
 {
 	L0Log(@"Receiving from %@", peer);
-	[self.tableController itemComingFromPeer:peer];
+	[self.tableController beginWaitingForItemComingFromPeer:peer];
 }
 - (void) slidePeer:(L0SlidePeer*) peer didSendUsItem:(L0SlideItem*) item;
 {
 	L0Log(@"Received %@", item);
 	[item storeToAppropriateApplication];
 	[self.tableController addItem:item comingFromPeer:peer];
+}
+- (void) slidePeerDidCancelSendingUsItem:(L0SlidePeer*) peer;
+{
+	[self.tableController stopWaitingForItemFromPeer:peer];
 }
 
 - (void) peerFound:(L0SlidePeer*) peer;
@@ -108,24 +116,67 @@
 
 - (IBAction) addItem;
 {
+	[self.tableController setEditing:NO animated:YES];
+	
+	UIActionSheet* sheet = [[UIActionSheet new] autorelease];
+	sheet.delegate = self;
+	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Image/Contact image button")];
+	[sheet addButtonWithTitle:NSLocalizedString(@"Add Contact", @"Image/Contact contact button")];
+	NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Image/Contact cancel button")];
+	sheet.cancelButtonIndex = i;
+
+	[sheet showInView:self.window];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	switch (buttonIndex) {
+		case 0:
+			[self addImageItem];
+			break;
+		case 1:
+			[self addAddressBookItem];
+			break;
+		default:
+			break;
+	}
+}
+
+- (void) addAddressBookItem;
+{
+	ABPeoplePickerNavigationController* picker = [[[ABPeoplePickerNavigationController alloc] init] autorelease];
+	picker.peoplePickerDelegate = self;
+	[self.tableHostController presentModalViewController:picker animated:YES];
+}
+
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker;
+{
+	[peoplePicker dismissModalViewControllerAnimated:YES];
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person;
+{
+	L0AddressBookPersonItem* item = [[L0AddressBookPersonItem alloc] initWithAddressBookRecord:person];
+	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
+	[item release];
+	
+	[peoplePicker dismissModalViewControllerAnimated:YES];
+	return NO;
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier;
+{
+	return [self peoplePickerNavigationController:peoplePicker shouldContinueAfterSelectingPerson:person];
+}
+
+- (void) addImageItem;
+{
 	if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
 		return;
-	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-	
-	CGPoint center = self.toolbar.center;
-	center.y += self.toolbar.bounds.size.height;
-	self.toolbar.center = center;
-	
-	[UIView commitAnimations];
-	
-	self.toolbar.userInteractionEnabled = NO;
 	
 	UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
 	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	imagePicker.delegate = self;
-	[self.tableController setEditing:NO animated:YES];
 	[self.tableHostController presentModalViewController:imagePicker animated:YES];
 }
 
@@ -159,18 +210,7 @@
 
 - (void) _returnFromImagePicker;
 {
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-	
-	CGPoint center = self.toolbar.center;
-	center.y -= self.toolbar.bounds.size.height;
-	self.toolbar.center = center;
-	
-	[UIView commitAnimations];
-	
-	self.toolbar.userInteractionEnabled = YES;
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];	
 }
 
 @end

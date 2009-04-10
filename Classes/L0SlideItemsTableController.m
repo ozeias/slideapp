@@ -603,6 +603,11 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 - (void) addItem:(L0SlideItem*) item comingFromPeer:(L0SlidePeer*) peer;
 {
 	[self addItem:item animation:[self _animationForPeer:peer]];
+	[self stopWaitingForItemFromPeer:peer];
+}
+
+- (void) stopWaitingForItemFromPeer:(L0SlidePeer*) peer;
+{
 	[[self _spinnerForPeer:peer] stopAnimating];
 	
 	[self _labelForPeer:peer].textColor = basePeerLabelColor;
@@ -627,7 +632,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 		[self _animateItemView:view withAddAnimation:[self _animationForPeer:peer]];
 }
 
-- (void) itemComingFromPeer:(L0SlidePeer*) peer;
+- (void) beginWaitingForItemComingFromPeer:(L0SlidePeer*) peer;
 {
 	[[self _spinnerForPeer:peer] startAnimating];
 	

@@ -30,5 +30,6 @@
 
 - (void) slidePeerWillSendUsItem:(L0SlidePeer*) peer;
 - (void) slidePeer:(L0SlidePeer*) peer didSendUsItem:(L0SlideItem*) item;
+- (void) slidePeerDidCancelSendingUsItem:(L0SlidePeer*) peer;
 
 @end

@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+
 #import "L0SlideItemsTableController.h"
 #import "L0PeerDiscovery.h"
 #import "L0SlidePeer.h"
 
-@interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0SlidePeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0SlidePeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate> {
     UIWindow *window;
 	
 	L0SlideItemsTableController* tableController;
@@ -31,6 +34,8 @@
 @property(retain) L0SlideItemsTableController* tableController;
 
 - (IBAction) addItem;
+- (void) addImageItem;
+- (void) addAddressBookItem;
 
 - (IBAction) testBySendingItemToAnyPeer;
 
