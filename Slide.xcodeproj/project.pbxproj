@@ -20,6 +20,7 @@
 		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159120820F8FD04B00BECD18 /* L0SlideAboutPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 159120810F8FD04B00BECD18 /* L0SlideAboutPane.xib */; };
+		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
 		15C0C1650F7590D000E5BA2F /* L0SlideItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1640F7590D000E5BA2F /* L0SlideItemView.xib */; };
 		15C0C16A0F75910000E5BA2F /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1690F75910000E5BA2F /* frame.png */; };
 		15C0C16D0F75918800E5BA2F /* L0SlideItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C16C0F75918800E5BA2F /* L0SlideItemView.m */; };
@@ -113,6 +114,7 @@
 		15911E770F8FA2F900BECD18 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		15911E790F8FA2F900BECD18 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		159120810F8FD04B00BECD18 /* L0SlideAboutPane.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = L0SlideAboutPane.xib; sourceTree = "<group>"; };
+		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0SlideUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlideUTISupport.h; sourceTree = "<group>"; };
 		15C0C1640F7590D000E5BA2F /* L0SlideItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = L0SlideItemView.xib; sourceTree = "<group>"; };
 		15C0C1690F75910000E5BA2F /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1591220F0F8FE41E00BECD18 /* Default.png */,
 				153735B60F8F5E06005B2BD3 /* Icon.png */,
 				15911E3A0F8F738E00BECD18 /* Gear.png */,
 				15C468DD0F8515ED0088F07F /* RemoveButton.png */,
@@ -509,6 +512,7 @@
 				153735B70F8F5E06005B2BD3 /* Icon.png in Resources */,
 				15911E3B0F8F738E00BECD18 /* Gear.png in Resources */,
 				159120820F8FD04B00BECD18 /* L0SlideAboutPane.xib in Resources */,
+				159122100F8FE41E00BECD18 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,7 +592,6 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				GCC_WARN_SHADOW = YES;
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
@@ -621,7 +624,6 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				GCC_WARN_SHADOW = YES;
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
@@ -642,7 +644,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				GCC_WARN_SHADOW = YES;
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
@@ -658,7 +659,6 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				GCC_WARN_SHADOW = YES;
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
