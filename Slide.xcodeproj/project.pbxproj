@@ -16,6 +16,9 @@
 		1572DE8D0F82BE83006BEEC0 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1572DE880F82BE7A006BEEC0 /* libMuiKit.a */; };
 		1572DE8E0F82BE8B006BEEC0 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1572DE8A0F82BE7A006BEEC0 /* MuiKit.bundle */; };
 		15911E3B0F8F738E00BECD18 /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 15911E3A0F8F738E00BECD18 /* Gear.png */; };
+		15911E760F8FA2D900BECD18 /* L0AddressBookPersonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15911E750F8FA2D900BECD18 /* L0AddressBookPersonItem.m */; };
+		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
+		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		15C0C1650F7590D000E5BA2F /* L0SlideItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1640F7590D000E5BA2F /* L0SlideItemView.xib */; };
 		15C0C16A0F75910000E5BA2F /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1690F75910000E5BA2F /* frame.png */; };
 		15C0C16D0F75918800E5BA2F /* L0SlideItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C16C0F75918800E5BA2F /* L0SlideItemView.m */; };
@@ -104,6 +107,10 @@
 		1559B61B0F798BD9005E4362 /* L0PeerDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0PeerDiscovery.h; sourceTree = "<group>"; };
 		1582D29F0F87DC5E008E5EC0 /* AdHoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdHoc.plist; sourceTree = "<group>"; };
 		15911E3A0F8F738E00BECD18 /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
+		15911E740F8FA2D900BECD18 /* L0AddressBookPersonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0AddressBookPersonItem.h; sourceTree = "<group>"; };
+		15911E750F8FA2D900BECD18 /* L0AddressBookPersonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0AddressBookPersonItem.m; sourceTree = "<group>"; };
+		15911E770F8FA2F900BECD18 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		15911E790F8FA2F900BECD18 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		15AB647C0F82AEFC001221FE /* L0SlideUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlideUTISupport.h; sourceTree = "<group>"; };
 		15C0C1640F7590D000E5BA2F /* L0SlideItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = L0SlideItemView.xib; sourceTree = "<group>"; };
 		15C0C1690F75910000E5BA2F /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
@@ -199,6 +206,8 @@
 				15F67F310F7627B20024A858 /* CFNetwork.framework in Frameworks */,
 				15F67F340F7627C60024A858 /* libz.1.1.3.dylib in Frameworks */,
 				15E054E60F8CEFC400506C27 /* QuartzCore.framework in Frameworks */,
+				15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */,
+				15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				1559B5B20F79843F005E4362 /* Peering */,
-				15C0C1CB0F759B7500E5BA2F /* Beamable Items */,
+				15C0C1CB0F759B7500E5BA2F /* Items */,
 				1D3623240D0F684500981E51 /* L0SlideAppDelegate.h */,
 				1D3623250D0F684500981E51 /* L0SlideAppDelegate.m */,
 				15C0C16B0F75918800E5BA2F /* L0SlideItemView.h */,
@@ -245,15 +254,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		15C0C1CB0F759B7500E5BA2F /* Beamable Items */ = {
+		15C0C1CB0F759B7500E5BA2F /* Items */ = {
 			isa = PBXGroup;
 			children = (
 				15C0C1700F75938F00E5BA2F /* L0SlideItem.h */,
 				15C0C1710F75938F00E5BA2F /* L0SlideItem.m */,
 				15C0C1CC0F759B8700E5BA2F /* L0ImageItem.h */,
 				15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */,
+				15911E740F8FA2D900BECD18 /* L0AddressBookPersonItem.h */,
+				15911E750F8FA2D900BECD18 /* L0AddressBookPersonItem.m */,
 			);
-			name = "Beamable Items";
+			name = Items;
 			sourceTree = "<group>";
 		};
 		15D1C56C0F889D5C00FF3016 /* Configuration FIles */ = {
@@ -394,6 +405,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15911E770F8FA2F900BECD18 /* AddressBook.framework */,
+				15911E790F8FA2F900BECD18 /* AddressBookUI.framework */,
 				15E054E50F8CEFC400506C27 /* QuartzCore.framework */,
 				15F67F300F7627B20024A858 /* CFNetwork.framework */,
 				15F67F330F7627C60024A858 /* libz.1.1.3.dylib */,
@@ -532,6 +545,7 @@
 				1559B5BE0F798463005E4362 /* L0BonjourPeer.m in Sources */,
 				1559B5DC0F798AE1005E4362 /* L0BonjourPeeringService.m in Sources */,
 				153734ED0F8F3C05005B2BD3 /* L0SlideAppDelegate+L0ItemPersistance.m in Sources */,
+				15911E760F8FA2D900BECD18 /* L0AddressBookPersonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
