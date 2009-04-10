@@ -6,8 +6,8 @@ To 1.0:
 		✓ Build a mechanism for items to store and retrieve their contents efficiently.
 	
 	Contacts:
-	- Add Contacts as a new item subclass.
-	- Add a contact picking UI for adding contacts.
+	✓ Add Contacts as a new item subclass.
+	✓ Add a contact picking UI for adding contacts.
 
 	Fit & Finish:
 	- Add in-app preview for all supported item types.
