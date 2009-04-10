@@ -1,7 +1,7 @@
 To 1.0:
 
 	Persistency:
-	- Remember items on the table between terms/restarts.
+	✓ Remember items on the table between terms/restarts.
 	✓ Offload images to disk rather than keeping them in memory (URGENT)
 		✓ Build a mechanism for items to store and retrieve their contents efficiently.
 	
