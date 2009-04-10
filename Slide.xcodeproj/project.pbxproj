@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		15038F250F852340008F6BBB /* RemoveButton_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 15038F240F852340008F6BBB /* RemoveButton_Pressed.png */; };
-		152204B50F8CD34800231375 /* L0SlideItemsCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 152204B40F8CD34800231375 /* L0SlideItemsCoordinator.m */; };
 		1559B5B10F7982D0005E4362 /* L0SlidePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5B00F7982D0005E4362 /* L0SlidePeer.m */; };
 		1559B5BE0F798463005E4362 /* L0BonjourPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5BD0F798463005E4362 /* L0BonjourPeer.m */; };
 		1559B5DC0F798AE1005E4362 /* L0BonjourPeeringService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5DB0F798AE1005E4362 /* L0BonjourPeeringService.m */; };
@@ -89,8 +88,6 @@
 
 /* Begin PBXFileReference section */
 		15038F240F852340008F6BBB /* RemoveButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RemoveButton_Pressed.png; sourceTree = "<group>"; };
-		152204B30F8CD34800231375 /* L0SlideItemsCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlideItemsCoordinator.h; sourceTree = "<group>"; };
-		152204B40F8CD34800231375 /* L0SlideItemsCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0SlideItemsCoordinator.m; sourceTree = "<group>"; };
 		15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
 		1559B5AF0F7982D0005E4362 /* L0SlidePeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlidePeer.h; sourceTree = "<group>"; };
 		1559B5B00F7982D0005E4362 /* L0SlidePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0SlidePeer.m; sourceTree = "<group>"; };
@@ -246,8 +243,6 @@
 				15C0C1710F75938F00E5BA2F /* L0SlideItem.m */,
 				15C0C1CC0F759B8700E5BA2F /* L0ImageItem.h */,
 				15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */,
-				152204B30F8CD34800231375 /* L0SlideItemsCoordinator.h */,
-				152204B40F8CD34800231375 /* L0SlideItemsCoordinator.m */,
 			);
 			name = "Beamable Items";
 			sourceTree = "<group>";
@@ -523,7 +518,6 @@
 				1559B5B10F7982D0005E4362 /* L0SlidePeer.m in Sources */,
 				1559B5BE0F798463005E4362 /* L0BonjourPeer.m in Sources */,
 				1559B5DC0F798AE1005E4362 /* L0BonjourPeeringService.m in Sources */,
-				152204B50F8CD34800231375 /* L0SlideItemsCoordinator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

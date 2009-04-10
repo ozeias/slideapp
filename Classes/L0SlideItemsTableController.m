@@ -732,4 +732,16 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	}
 }
 
+- (NSArray*) items;
+{
+	// VLAs are bad in GCC 4 :(
+	size_t itemsCount = CFDictionaryGetCount(itemsToViews);
+	id* allItemsCArray = malloc(sizeof(id) * itemsCount);
+	CFDictionaryGetKeysAndValues(itemsToViews, (const void**) allItemsCArray, NULL);
+	NSArray* arr = [[[NSArray alloc] initWithObjects:(const id*) allItemsCArray count:itemsCount] autorelease];
+	free(allItemsCArray);
+	
+	return arr;
+}
+
 @end

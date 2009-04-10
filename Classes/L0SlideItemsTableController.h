@@ -86,6 +86,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 - (void) addItem:(L0SlideItem*) item animation:(L0SlideItemsTableAddAnimation) animation;
 - (void) removeItem:(L0SlideItem*) item animation:(L0SlideItemsTableRemoveAnimation) animation;
 
+- (NSArray*) items;
+
 - (void) returnItemToTableAfterSend:(L0SlideItem*) item toPeer:(L0SlidePeer*) peer;
 
 @end
