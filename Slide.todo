@@ -10,7 +10,6 @@ To 1.0:
 	✓ Add a contact picking UI for adding contacts.
 
 	Fit & Finish:
-	- Add in-app preview for all supported item types.
 	✓ Allow Z-ordering ("picking up") of items.
 	✓ Find a way to fix unmeaningful titles over image items.
 	- Display help alerts explaining what happens when items are moved around.
@@ -19,7 +18,7 @@ To 1.0:
 	- Design first-launch experience.
 		- Decide what to show (alert? text on the table?)
 	✓ Create an icon.
-	- Create a suitable Default.png.
+	✓ Create a suitable Default.png.
 	
 	Marketing:
 	- Create a web page. (Possibly in the new ∞labs style like /shelf)
@@ -27,6 +26,7 @@ To 1.0:
 	- Create unnecessary hype.
 
 	Noncriticals:
+	- Add in-app preview for all supported item types.
 	- Display errors in a meaningful way.
 	- Decide whether all items get a slide, or if different item kinds get different item views.
 	- Create a queue of peers that couldn't fit onscreen, so that when a peer leaves a peer can be dequeued to take its place.
