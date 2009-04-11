@@ -76,6 +76,9 @@
 	NSString* index = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html" inDirectory:@"LicensesAndCopyrightPage"];
 	NSURL* url = [NSURL fileURLWithPath:index];
 	[wv loadRequest:[NSURLRequest requestWithURL:url]];
+
+	self.webView = Wv;
+	[wv release];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
