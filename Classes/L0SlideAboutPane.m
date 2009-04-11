@@ -77,7 +77,7 @@
 	NSURL* url = [NSURL fileURLWithPath:index];
 	[wv loadRequest:[NSURLRequest requestWithURL:url]];
 
-	self.webView = Wv;
+	self.webView = wv;
 	[wv release];
 }
 
