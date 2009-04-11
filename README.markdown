@@ -1,6 +1,6 @@
-# Slide.app
+# Mover
 
-Slide.app is an item sharing application for iPhone. For now, it's limited to sharing images, but OH I HAVE DREAMS.
+Mover is an item sharing application for iPhone. For now, it's limited to sharing images and contacts, but OH I HAVE DREAMS.
 
 In order to build it, clone the following repos:
 
@@ -9,12 +9,4 @@ In order to build it, clone the following repos:
 
 To edit your source trees, choose **Xcode &gt; Preferences &gt; Source Trees**. Yes, I have like a thousand in there. It's pretty sad.
 
-To use:
-
- - Open on two different devices connected to the same Wi-Fi network;
- - Use "+" to add an image to the "table" on one of the devices;
- - Slide it over.
-
-Images are automatically saved on arrival.
-
-Pre-alpha. 'nuff said.
+Mover has already been sent to the App Store, so you don't even have to compile it on your own! [When it's up, this link will open Mover's App Store page in iTunes.](http://itunes.com/app/mover)
