@@ -14,9 +14,8 @@ To 1.0:
 	✓ Find a way to fix unmeaningful titles over image items.
 	✓ Display help alerts explaining what happens when items are moved around.
 	✓ Display a spinner near an edge while a transfer is in progress.
-	- Decide what errors are so critical that the user needs to know about 'em.
-	- Design first-launch experience.
-		- Decide what to show (alert? text on the table?)
+	✓ Design first-launch experience.
+		✓ Decide what to show (alert? text on the table?)
 	- Make the about pane.
 	✓ Create an icon.
 	✓ Create a suitable Default.png.
