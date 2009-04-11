@@ -215,7 +215,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* L0SlideAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlideAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* L0SlideAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0SlideAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Shard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Mover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -382,7 +382,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Shard.app */,
+				1D6058910D05DD3D006BFB54 /* Mover.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -466,9 +466,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* Slide */ = {
+		1D6058900D05DD3D006BFB54 /* Mover */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Slide" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -479,9 +479,9 @@
 			dependencies = (
 				1572DE950F82C36F006BEEC0 /* PBXTargetDependency */,
 			);
-			name = Slide;
+			name = Mover;
 			productName = Shard;
-			productReference = 1D6058910D05DD3D006BFB54 /* Shard.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Mover.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -492,7 +492,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Slide" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Mover" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
@@ -505,7 +505,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* Slide */,
+				1D6058900D05DD3D006BFB54 /* Mover */,
 			);
 		};
 /* End PBXProject section */
@@ -647,7 +647,7 @@
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Shard;
+				PRODUCT_NAME = Mover;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F964A417-A6C3-4429-821B-FD1A01DAB1CD";
 				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
@@ -679,7 +679,7 @@
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Shard;
+				PRODUCT_NAME = Mover;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B9112539-A4B0-4CCC-811E-DC7D731B5292";
 				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
@@ -699,7 +699,7 @@
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Slide;
+				PRODUCT_NAME = Mover;
 				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
 			name = Debug;
@@ -714,7 +714,7 @@
 				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Shard;
+				PRODUCT_NAME = Mover;
 				USER_HEADER_SEARCH_PATHS = "MYNetwork/** MYUtilities/**";
 			};
 			name = Release;
@@ -751,7 +751,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Slide" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -762,7 +762,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Slide" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Mover" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

@@ -7,7 +7,7 @@
 		<string>Dismiss</string>
 	</array>
 	<key>L0AlertInformativeText</key>
-	<string>Images that arrive on your iPod through Slide are automatically saved to the saved pictures album inside your iPod's Pictures application.</string>
+	<string>Images that arrive on your iPod through Mover are automatically saved to the saved pictures album inside your iPod's Pictures application.</string>
 	<key>L0AlertMessage</key>
 	<string>An image has been received. It has been saved automatically.</string>
 	<key>L0AlertShowsSuppressionButton</key>

@@ -9,7 +9,7 @@
 	<key>L0AlertInformativeText</key>
 	<string>To see nearby devices, make sure they're all connected to the same Wi-Fi network as this one.</string>
 	<key>L0AlertMessage</key>
-	<string>Welcome to Slide! To start, add a few items to the table by touching “+”, then slide them off to nearby iPhones and iPods.</string>
+	<string>Welcome to Mover! To start, add a few items to the table by touching “+”, then slide them off to nearby iPhones and iPods.</string>
 	<key>L0AlertShowsSuppressionButton</key>
 	<false/>
 </dict>

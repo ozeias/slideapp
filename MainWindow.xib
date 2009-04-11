@@ -120,7 +120,7 @@
 					<object class="IBUIViewController" id="12899069">
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="1010583032">
 							<reference key="IBUINavigationBar"/>
-							<string key="IBUITitle">Slide</string>
+							<string key="IBUITitle">Mover</string>
 							<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="744447442">
 								<int key="IBUIStyle">2</int>
 								<int key="IBUISystemItemIdentifier">0</int>
@@ -425,12 +425,43 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">L0SlideAboutPane</string>
+					<string key="className">L0SlideAboutCopyrightWebPane</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="1073312742">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/L0SlideAboutPane.h</string>
 					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">L0SlideAboutPane</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSMutableArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>openInfiniteLabsDotNet</string>
+							<string>showAboutCopyrightWebPane</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSMutableArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>copyrightPane</string>
+							<string>versionLabel</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>L0SlideAboutCopyrightWebPane</string>
+							<string>UILabel</string>
+						</object>
+					</object>
+					<reference key="sourceIdentifier" ref="1073312742"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">L0SlideAppDelegate</string>
@@ -532,7 +563,7 @@
 			</object>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
-		<string key="IBDocument.LastKnownRelativeProjectPath">Slide.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">Mover.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 	</data>
 </archive>

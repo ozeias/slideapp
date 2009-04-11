@@ -7,7 +7,7 @@
 		<string>Dismiss</string>
 	</array>
 	<key>L0AlertInformativeText</key>
-	<string>Images that arrive on your iPhone through Slide are automatically saved to the camera roll inside your iPhone's Pictures application.</string>
+	<string>Images that arrive on your iPhone through Mover are automatically saved to the camera roll inside your iPhone's Pictures application.</string>
 	<key>L0AlertMessage</key>
 	<string>An image has been received. It has been saved automatically.</string>
 	<key>L0AlertShowsSuppressionButton</key>

@@ -7,7 +7,7 @@
 		<string>Dismiss</string>
 	</array>
 	<key>L0AlertInformativeText</key>
-	<string>Address cards that arrive through Slide are automatically saved inside the Contacts application and are available to other applications that use your address book.</string>
+	<string>Address cards that arrive through Mover are automatically saved inside the Contacts application and are available to other applications that use your address book.</string>
 	<key>L0AlertMessage</key>
 	<string>A new contact's address card has been received. It has been saved automatically.</string>
 	<key>L0AlertShowsSuppressionButton</key>

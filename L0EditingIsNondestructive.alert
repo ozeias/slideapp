@@ -9,7 +9,7 @@
 	<key>L0AlertInformativeText</key>
 	<string>Items you received are saved to their respective applications, and removing them from the table will not delete them from Pictures or Contacts.</string>
 	<key>L0AlertMessage</key>
-	<string>You can remove items from Slide's table. They won't be deleted.</string>
+	<string>You can remove items from Mover's table. They won't be deleted.</string>
 	<key>L0AlertShowsSuppressionButton</key>
 	<false/>
 </dict>
