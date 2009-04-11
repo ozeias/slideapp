@@ -16,7 +16,7 @@ To 1.0:
 	✓ Display a spinner near an edge while a transfer is in progress.
 	✓ Design first-launch experience.
 		✓ Decide what to show (alert? text on the table?)
-	- Make the about pane.
+	✓ Make the about pane.
 	✓ Create an icon.
 	✓ Create a suitable Default.png.
 	
