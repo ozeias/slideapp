@@ -21,6 +21,7 @@
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159120820F8FD04B00BECD18 /* L0SlideAboutPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 159120810F8FD04B00BECD18 /* L0SlideAboutPane.xib */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
+		15B929350F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B929340F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m */; };
 		15C0C1650F7590D000E5BA2F /* L0SlideItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1640F7590D000E5BA2F /* L0SlideItemView.xib */; };
 		15C0C16A0F75910000E5BA2F /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C1690F75910000E5BA2F /* frame.png */; };
 		15C0C16D0F75918800E5BA2F /* L0SlideItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C16C0F75918800E5BA2F /* L0SlideItemView.m */; };
@@ -116,6 +117,8 @@
 		159120810F8FD04B00BECD18 /* L0SlideAboutPane.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = L0SlideAboutPane.xib; sourceTree = "<group>"; };
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0SlideUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlideUTISupport.h; sourceTree = "<group>"; };
+		15B929330F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0SlideAppDelegate+L0HelpAlerts.h"; sourceTree = "<group>"; };
+		15B929340F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0SlideAppDelegate+L0HelpAlerts.m"; sourceTree = "<group>"; };
 		15C0C1640F7590D000E5BA2F /* L0SlideItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = L0SlideItemView.xib; sourceTree = "<group>"; };
 		15C0C1690F75910000E5BA2F /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame.png; sourceTree = "<group>"; };
 		15C0C16B0F75918800E5BA2F /* L0SlideItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlideItemView.h; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 				15F67F820F7632260024A858 /* L0SlideItemsTableController.m */,
 				153734EB0F8F3C05005B2BD3 /* L0SlideAppDelegate+L0ItemPersistance.h */,
 				153734EC0F8F3C05005B2BD3 /* L0SlideAppDelegate+L0ItemPersistance.m */,
+				15B929330F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.h */,
+				15B929340F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				1559B5DC0F798AE1005E4362 /* L0BonjourPeeringService.m in Sources */,
 				153734ED0F8F3C05005B2BD3 /* L0SlideAppDelegate+L0ItemPersistance.m in Sources */,
 				15911E760F8FA2D900BECD18 /* L0AddressBookPersonItem.m in Sources */,
+				15B929350F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
