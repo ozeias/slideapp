@@ -10,6 +10,7 @@
 #import "L0SlideItemView.h"
 #import "L0SlideAppDelegate.h"
 #import "L0SlideAppDelegate+L0ItemPersistance.h"
+#import "L0SlideAppDelegate+L0HelpAlerts.h"
 
 const CGAffineTransform L0CounterclockwiseQuarterTurnTransform = {
 	0, -1,
@@ -402,6 +403,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0SlideItemsTableCon
 	if (animated)
 		[UIView commitAnimations];
 	
+	if (editing)
+		[(L0SlideAppDelegate*)UIApp.delegate showAlertIfNotShownBeforeNamed:@"L0EditingIsNondestructive"];
 }
 
 - (CGFloat) _labelAlphaForPeer:(L0SlidePeer*) peer;

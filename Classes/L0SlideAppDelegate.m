@@ -11,6 +11,7 @@
 #import "L0AddressBookPersonItem.h"
 #import "L0BonjourPeeringService.h"
 #import "L0SlideAppDelegate+L0ItemPersistance.h"
+#import "L0SlideAppDelegate+L0HelpAlerts.h"
 
 #import <AddressBook/AddressBook.h>
 
@@ -55,6 +56,9 @@
 	
 	// Go!
 	[window makeKeyAndVisible];
+	
+	// Be helpful if this is the first time (ahem).
+	[self showAlertIfNotShownBeforeNamed:@"L0SlideWelcome"];
 }
 
 - (void) addPersistedItemsToTable;
@@ -89,6 +93,11 @@
 	L0Log(@"Received %@", item);
 	[item storeToAppropriateApplication];
 	[self.tableController addItem:item comingFromPeer:peer];
+	
+	if ([item isKindOfClass:[L0ImageItem class]])
+		[self showAlertIfNotShownBeforeNamedForiPhone:@"L0ImageReceived_iPhone" foriPodTouch:@"L0ImageReceived_iPodTouch"];
+	else if ([item isKindOfClass:[L0AddressBookPersonItem class]])
+		[self showAlertIfNotShownBeforeNamed:@"L0ContactReceived"];
 }
 - (void) slidePeerDidCancelSendingUsItem:(L0SlidePeer*) peer;
 {

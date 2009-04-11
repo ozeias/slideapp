@@ -15,4 +15,7 @@
 - (void) showAlertIfNotShownBeforeNamed:(NSString*) name;
 - (UIAlertView*) alertIfNotShownBeforeNamed:(NSString*) name;
 
+- (UIAlertView*) alertIfNotShownBeforeNamedForiPhone:(NSString*) iPhoneName foriPodTouch:(NSString*) iPodTouchName;
+- (void) showAlertIfNotShownBeforeNamedForiPhone:(NSString*) iPhoneName foriPodTouch:(NSString*) iPodTouchName;
+
 @end

@@ -32,4 +32,19 @@
 		return nil;
 }
 
+// Device-dependent alerts.
+
+- (UIAlertView*) alertIfNotShownBeforeNamedForiPhone:(NSString*) iPhoneName foriPodTouch:(NSString*) iPodTouchName;
+{
+	if ([UIDevice currentDevice].deviceFamily == kL0DeviceFamily_iPodTouch)
+		return [self alertIfNotShownBeforeNamed:iPodTouchName];
+	else
+		return [self alertIfNotShownBeforeNamed:iPhoneName];
+}
+
+- (void) showAlertIfNotShownBeforeNamedForiPhone:(NSString*) iPhoneName foriPodTouch:(NSString*) iPodTouchName;
+{
+	[[self alertIfNotShownBeforeNamedForiPhone:iPhoneName foriPodTouch:iPodTouchName] show];
+}
+
 @end
