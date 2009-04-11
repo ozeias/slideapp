@@ -33,7 +33,6 @@
 		15C0C16D0F75918800E5BA2F /* L0SlideItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C16C0F75918800E5BA2F /* L0SlideItemView.m */; };
 		15C0C1720F75938F00E5BA2F /* L0SlideItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1710F75938F00E5BA2F /* L0SlideItem.m */; };
 		15C0C1CE0F759B8700E5BA2F /* L0ImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */; };
-		15C0C2360F759EAE00E5BA2F /* IMG_0192.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 15C0C2350F759EAE00E5BA2F /* IMG_0192.JPG */; };
 		15C468DE0F8515ED0088F07F /* RemoveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C468DD0F8515ED0088F07F /* RemoveButton.png */; };
 		15D1C5720F889D7000FF3016 /* Slide.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C56F0F889D7000FF3016 /* Slide.xcconfig */; };
 		15D1C5730F889D7000FF3016 /* Slide-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C5700F889D7000FF3016 /* Slide-Release.xcconfig */; };
@@ -139,7 +138,6 @@
 		15C0C1710F75938F00E5BA2F /* L0SlideItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0SlideItem.m; sourceTree = "<group>"; };
 		15C0C1CC0F759B8700E5BA2F /* L0ImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0ImageItem.h; sourceTree = "<group>"; };
 		15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0ImageItem.m; sourceTree = "<group>"; };
-		15C0C2350F759EAE00E5BA2F /* IMG_0192.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0192.JPG; sourceTree = "<group>"; };
 		15C468DD0F8515ED0088F07F /* RemoveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RemoveButton.png; sourceTree = "<group>"; };
 		15C5E9E80F86103000236370 /* Slide.todo */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 4; path = Slide.todo; sourceTree = "<group>"; };
 		15D1C56F0F889D7000FF3016 /* Slide.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Slide.xcconfig; sourceTree = "<group>"; };
@@ -414,7 +412,6 @@
 				15F67FD80F768A800024A858 /* TableArrow_North.png */,
 				15F67FD90F768A800024A858 /* TableArrow_West.png */,
 				15F67FD50F7689F80024A858 /* ItemsTableBackdrop.png */,
-				15C0C2350F759EAE00E5BA2F /* IMG_0192.JPG */,
 				15C0C1690F75910000E5BA2F /* frame.png */,
 				15B9296B0F907955001E40B7 /* ContactWithoutImageIcon.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
@@ -519,7 +516,6 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				15C0C1650F7590D000E5BA2F /* L0SlideItemView.xib in Resources */,
 				15C0C16A0F75910000E5BA2F /* frame.png in Resources */,
-				15C0C2360F759EAE00E5BA2F /* IMG_0192.JPG in Resources */,
 				15F67E100F76262F0024A858 /* BLIP Overview.txt in Resources */,
 				15F67E110F76262F0024A858 /* BLIP.png in Resources */,
 				15F67F850F7632BB0024A858 /* L0SlideItemsTable.xib in Resources */,
