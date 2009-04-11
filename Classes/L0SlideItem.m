@@ -83,11 +83,12 @@ static NSMutableDictionary* classes = nil;
 
 - (void) offloadToFile:(NSString*) file;
 {	
-	if ([[self externalRepresentation] writeToFile:file atomically:YES]) {
-		self.offloadingFile = file;
-		[self clearCache];
-		L0Log(@"%@ offloaded to %@", self, file);
-	}
+	BOOL didOffload = [[self externalRepresentation] writeToFile:file atomically:YES];
+	NSAssert(didOffload, @"We should be always be able to write a file in our Documents directory.");
+	
+	self.offloadingFile = file;
+	[self clearCache];
+	L0Log(@"%@ offloaded to %@", self, file);
 }
 
 @synthesize offloadingFile, shouldDisposeOfOffloadingFileOnDealloc;
@@ -111,7 +112,10 @@ static NSMutableDictionary* classes = nil;
 {
 	if (self.offloadingFile && shouldDisposeOfOffloadingFileOnDealloc) {
 		L0Log(@"Deleting offloading file: %@", self.offloadingFile);
-		[[NSFileManager defaultManager] removeItemAtPath:self.offloadingFile error:NULL]; // TODO error handling.
+		BOOL didRemove = [[NSFileManager defaultManager] removeItemAtPath:self.offloadingFile error:NULL];
+		
+		// TODO real error handling.
+		NSAssert(didRemove, @"We should be able to always delete a file from the Documents directory.");
 	}
 	
 	[title release];
