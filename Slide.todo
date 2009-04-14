@@ -25,7 +25,8 @@ To 1.0:
 	- Write marketing stuff.
 	- Create unnecessary hype.
 
-	Noncriticals:
+Next Developments:
+  - Add send progress.
 	- Add in-app preview for all supported item types.
 	- Display errors in a meaningful way.
 	- Decide whether all items get a slide, or if different item kinds get different item views.
