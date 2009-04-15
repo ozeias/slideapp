@@ -152,7 +152,7 @@
 		15C0C1CC0F759B8700E5BA2F /* L0ImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0ImageItem.h; sourceTree = "<group>"; };
 		15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0ImageItem.m; sourceTree = "<group>"; };
 		15C468DD0F8515ED0088F07F /* RemoveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RemoveButton.png; sourceTree = "<group>"; };
-		15C5E9E80F86103000236370 /* Slide.todo */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 4; path = Slide.todo; sourceTree = "<group>"; };
+		15C5E9E80F86103000236370 /* Mover.todo */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 4; path = Mover.todo; sourceTree = "<group>"; };
 		15D1C56F0F889D7000FF3016 /* Slide.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Slide.xcconfig; sourceTree = "<group>"; };
 		15D1C5700F889D7000FF3016 /* Slide-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Slide-Release.xcconfig"; sourceTree = "<group>"; };
 		15D1C5710F889D7000FF3016 /* Slide-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Slide-Debug.xcconfig"; sourceTree = "<group>"; };
@@ -391,7 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				1582D29F0F87DC5E008E5EC0 /* AdHoc.plist */,
-				15C5E9E80F86103000236370 /* Slide.todo */,
+				15C5E9E80F86103000236370 /* Mover.todo */,
 				15AB647C0F82AEFC001221FE /* L0SlideUTISupport.h */,
 				15D1C56C0F889D5C00FF3016 /* Configuration FIles */,
 				080E96DDFE201D6D7F000001 /* Classes */,
