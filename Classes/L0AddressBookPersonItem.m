@@ -232,6 +232,10 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 
 - (NSString*) shortenedNameFromAddressBookRecord:(ABRecordRef) record;
 {
+	CFStringRef nickname = ABRecordCopyValue(record, kABPersonNicknameProperty);
+	if (nickname)
+		return [(NSString*)nickname autorelease];
+	
 	NSString* name = [(NSString*) ABRecordCopyValue(record, kABPersonFirstNameProperty) autorelease];
 	NSString* surname = [(NSString*) ABRecordCopyValue(record, kABPersonLastNameProperty) autorelease];
 	
@@ -239,7 +243,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 }
 
 - (NSString*) shortenedNameFromName:(NSString*) name surname:(NSString*) surname;
-{
+{	
 	// should we shorten at all?
 	// This includes all latin letters but not IPA extensions, spacing modifiers
 	// and combining diacriticals.
