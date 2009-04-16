@@ -6,8 +6,8 @@ In order to build it, you need to clone a few support repos and create source tr
 
 The repos are:
 
- - The ∞labs Build Tools. [http://github.com/millenomi/infinitelabs-build-tools](http://github.com/millenomi/infinitelabs-build-tools). Clone them in a location and create a source tree in Xcode named `INFINITELABS_TOOLS` that points to that directory.
- - The MuiKit library. [http://github.com/millenomi/muikit](http://github.com/millenomi/muikit). Clone it in a location and create a source tree in Xcode named `INFINITELABS_LIB_MUIKIT` that points to that directory.
+ - The ∞labs Build Tools. [http://github.com/millenomi/infinitelabs-build-tools](http://github.com/millenomi/infinitelabs-build-tools). Clone them in a location and create a source tree in Xcode named `INFINITELABS_TOOLS`, with a display name of "Infinite Labs - Tools", that points to that directory.
+ - The MuiKit library. [http://github.com/millenomi/muikit](http://github.com/millenomi/muikit). Clone it in a location and create a source tree in Xcode named `INFINITELABS_LIB_MUIKIT`, with a display name of "Infinite Labs - MuiKit", that points to that directory.
 
 Also, **IMPORTANT**: Simulator builds will work fine, but you need to select "(Project Settings)" rather than a Device SDK to build for the device. This is due to [this Xcode bug](http://www.openradar.me/radar?id=21402). Sigh.
 
