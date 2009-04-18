@@ -127,6 +127,7 @@
 	struct ifaddrs* interface;
 	
 	if (getifaddrs(&interface) == 0) {
+		struct ifaddrs* allInterfaces = interface;
 		while (interface != NULL) {
 			const struct sockaddr_in* address = (const struct sockaddr_in*) interface->ifa_addr;
 			if (address->sin_family != AF_INET) {
@@ -148,7 +149,7 @@
 			interface = interface->ifa_next;
 		}
 		
-		freeifaddrs(&interface);
+		freeifaddrs(allInterfaces);
 	}
 	
 	if (isSelf) return;
