@@ -225,6 +225,10 @@ static inline CFSocketRef TCPReleaseSocket( CFSocketRef socket ) {
     Assert(_connectionClass);
     TCPConnection *conn = [[self.connectionClass alloc] initIncomingFromSocket: socket
                                                                       listener: self];
+	
+	// ∞ -- leak prevention
+	[conn release];
+	
     if( ! conn )
         return NO;
     

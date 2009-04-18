@@ -113,6 +113,11 @@ static NSMutableArray *sAllConnections;
     self = [self _initWithAddress: [IPAddress addressOfSocket: socket] 
                       inputStream: (NSInputStream*)readStream
                      outputStream: (NSOutputStream*)writeStream];
+	
+	// ∞ -- leak prevention.
+	CFRelease(readStream);
+	CFRelease(writeStream);
+	
     if( self ) {
         _isIncoming = YES;
         _server = [listener retain];
