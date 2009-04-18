@@ -147,6 +147,8 @@
 			if (isSelf) break;
 			interface = interface->ifa_next;
 		}
+		
+		freeifaddrs(&interface);
 	}
 	
 	if (isSelf) return;
