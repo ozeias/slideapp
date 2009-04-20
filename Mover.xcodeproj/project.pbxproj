@@ -24,6 +24,7 @@
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159120820F8FD04B00BECD18 /* L0SlideAboutPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 159120810F8FD04B00BECD18 /* L0SlideAboutPane.xib */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
+		15B7BF6D0F9C778E00EF9AB9 /* libLogging-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */; };
 		15B929350F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B929340F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m */; };
 		15B929400F906FA2001E40B7 /* L0SlideWelcome.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15B9293F0F906FA2001E40B7 /* L0SlideWelcome.alert */; };
 		15B929440F9070AB001E40B7 /* L0ImageReceived_iPhone.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15B929430F9070AB001E40B7 /* L0ImageReceived_iPhone.alert */; };
@@ -104,6 +105,27 @@
 			remoteGlobalIDString = 156FD7720F7A261B00F83283;
 			remoteInfo = MuiKit;
 		};
+		15B7BF370F9C760300EF9AB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* Logging.framework */;
+			remoteInfo = Logging;
+		};
+		15B7BF390F9C760300EF9AB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 15B7BEE50F9C744100EF9AB9 /* libLogging-iPhone.a */;
+			remoteInfo = "Logging-iPhone (Library)";
+		};
+		15B7BF3B0F9C760F00EF9AB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 15B7BEE40F9C744100EF9AB9 /* Logging-iPhone (Library) */;
+			remoteInfo = "Logging-iPhone (Library)";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +153,7 @@
 		159120810F8FD04B00BECD18 /* L0SlideAboutPane.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = L0SlideAboutPane.xib; sourceTree = "<group>"; };
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0SlideUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlideUTISupport.h; sourceTree = "<group>"; };
+		15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logging.xcodeproj; path = Logging/Logging.xcodeproj; sourceTree = INFINITELABS_TOOLS; };
 		15B929330F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0SlideAppDelegate+L0HelpAlerts.h"; sourceTree = "<group>"; };
 		15B929340F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0SlideAppDelegate+L0HelpAlerts.m"; sourceTree = "<group>"; };
 		15B9293F0F906FA2001E40B7 /* L0SlideWelcome.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0SlideWelcome.alert; sourceTree = "<group>"; };
@@ -229,6 +252,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B7BF6D0F9C778E00EF9AB9 /* libLogging-iPhone.a in Frameworks */,
 				1572DE8D0F82BE83006BEEC0 /* libMuiKit.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -284,6 +308,15 @@
 			children = (
 				1572DE880F82BE7A006BEEC0 /* libMuiKit.a */,
 				1572DE8A0F82BE7A006BEEC0 /* MuiKit.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15B7BF330F9C760300EF9AB9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15B7BF380F9C760300EF9AB9 /* Logging.framework */,
+				15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -407,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */,
+				15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */,
 				15F67EFF0F7626A30024A858 /* MYUtilities */,
 				15F67DF10F76262F0024A858 /* MYNetwork */,
 				32CA4F630368D1EE00C91783 /* Shard_Prefix.pch */,
@@ -478,6 +512,7 @@
 			);
 			dependencies = (
 				1572DE950F82C36F006BEEC0 /* PBXTargetDependency */,
+				15B7BF3C0F9C760F00EF9AB9 /* PBXTargetDependency */,
 			);
 			name = Mover;
 			productName = Shard;
@@ -498,6 +533,10 @@
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 15B7BF330F9C760300EF9AB9 /* Products */;
+					ProjectRef = 15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */;
+				},
 				{
 					ProductGroup = 1572DE810F82BE7A006BEEC0 /* Products */;
 					ProjectRef = 15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */;
@@ -523,6 +562,20 @@
 			fileType = wrapper.cfbundle;
 			path = MuiKit.bundle;
 			remoteRef = 1572DE890F82BE7A006BEEC0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15B7BF380F9C760300EF9AB9 /* Logging.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Logging.framework;
+			remoteRef = 15B7BF370F9C760300EF9AB9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLogging-iPhone.a";
+			remoteRef = 15B7BF390F9C760300EF9AB9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -617,6 +670,11 @@
 			name = MuiKit;
 			targetProxy = 1572DE940F82C36F006BEEC0 /* PBXContainerItemProxy */;
 		};
+		15B7BF3C0F9C760F00EF9AB9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Logging-iPhone (Library)";
+			targetProxy = 15B7BF3B0F9C760F00EF9AB9 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -644,7 +702,11 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
+				GCC_PREPROCESSOR_DEFINITIONS = "L0LogUseOnRequestLogging=1";
+				HEADER_SEARCH_PATHS = (
+					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
+					"$(INFINITELABS_TOOLS)/Logging/Build/Headers",
+				);
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Mover;
@@ -676,7 +738,11 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
+				GCC_PREPROCESSOR_DEFINITIONS = "L0LogUseOnRequestLogging=1";
+				HEADER_SEARCH_PATHS = (
+					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
+					"$(INFINITELABS_TOOLS)/Logging/Build/Headers",
+				);
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Mover;
@@ -695,8 +761,14 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"L0LogUseOnRequestLogging=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
+					"$(INFINITELABS_TOOLS)/Logging/Build/Headers",
+				);
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Mover;
@@ -711,7 +783,10 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(INFINITELABS_TOOLS)/Common/iPhone/UIKit.pch";
-				HEADER_SEARCH_PATHS = "$(INFINITELABS_LIB_MUIKIT)/Build/Headers";
+				HEADER_SEARCH_PATHS = (
+					"$(INFINITELABS_LIB_MUIKIT)/Build/Headers",
+					"$(INFINITELABS_TOOLS)/Logging/Build/Headers",
+				);
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Mover;
