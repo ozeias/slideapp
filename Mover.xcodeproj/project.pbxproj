@@ -109,21 +109,21 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* Logging.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = Logging;
 		};
 		15B7BF390F9C760300EF9AB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 15B7BEE50F9C744100EF9AB9 /* libLogging-iPhone.a */;
+			remoteGlobalIDString = 15B7BEE50F9C744100EF9AB9;
 			remoteInfo = "Logging-iPhone (Library)";
 		};
 		15B7BF3B0F9C760F00EF9AB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 15B7BEE40F9C744100EF9AB9 /* Logging-iPhone (Library) */;
+			remoteGlobalIDString = 15B7BEE40F9C744100EF9AB9;
 			remoteInfo = "Logging-iPhone (Library)";
 		};
 /* End PBXContainerItemProxy section */
