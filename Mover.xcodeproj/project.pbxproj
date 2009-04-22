@@ -18,6 +18,7 @@
 		1582D8E40F90806F0084EBC6 /* WhiteOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 1582D8E30F90806F0084EBC6 /* WhiteOverlay.png */; };
 		1582D8F30F9082A00084EBC6 /* About.png in Resources */ = {isa = PBXBuildFile; fileRef = 1582D8F20F9082A00084EBC6 /* About.png */; };
 		1582D92B0F9086910084EBC6 /* LicensesAndCopyrightPage in Resources */ = {isa = PBXBuildFile; fileRef = 1582D9280F9086910084EBC6 /* LicensesAndCopyrightPage */; };
+		158ED8560F9FAA5E00C65EDE /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 158ED8550F9FAA5E00C65EDE /* iTunesArtwork */; };
 		15911E3B0F8F738E00BECD18 /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 15911E3A0F8F738E00BECD18 /* Gear.png */; };
 		15911E760F8FA2D900BECD18 /* L0AddressBookPersonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15911E750F8FA2D900BECD18 /* L0AddressBookPersonItem.m */; };
 		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
@@ -145,6 +146,7 @@
 		1582D8E30F90806F0084EBC6 /* WhiteOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteOverlay.png; sourceTree = "<group>"; };
 		1582D8F20F9082A00084EBC6 /* About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = About.png; sourceTree = "<group>"; };
 		1582D9280F9086910084EBC6 /* LicensesAndCopyrightPage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LicensesAndCopyrightPage; path = AboutPane/LicensesAndCopyrightPage; sourceTree = "<group>"; };
+		158ED8550F9FAA5E00C65EDE /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		15911E3A0F8F738E00BECD18 /* Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gear.png; sourceTree = "<group>"; };
 		15911E740F8FA2D900BECD18 /* L0AddressBookPersonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0AddressBookPersonItem.h; sourceTree = "<group>"; };
 		15911E750F8FA2D900BECD18 /* L0AddressBookPersonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0AddressBookPersonItem.m; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				158ED8550F9FAA5E00C65EDE /* iTunesArtwork */,
 				1591220F0F8FE41E00BECD18 /* Default.png */,
 				153735B60F8F5E06005B2BD3 /* Icon.png */,
 				15911E3A0F8F738E00BECD18 /* Gear.png */,
@@ -616,6 +619,7 @@
 				1582D8E40F90806F0084EBC6 /* WhiteOverlay.png in Resources */,
 				1582D8F30F9082A00084EBC6 /* About.png in Resources */,
 				1582D92B0F9086910084EBC6 /* LicensesAndCopyrightPage in Resources */,
+				158ED8560F9FAA5E00C65EDE /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
