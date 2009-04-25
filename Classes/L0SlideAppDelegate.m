@@ -13,7 +13,7 @@
 #import "L0SlideAppDelegate+L0ItemPersistance.h"
 #import "L0SlideAppDelegate+L0HelpAlerts.h"
 
-#import <AddressBook/AddressBook.h>
+#import <netinet/in.h>
 
 @interface L0SlideAppDelegate ()
 
@@ -59,7 +59,111 @@
 	
 	// Be helpful if this is the first time (ahem).
 	[self showAlertIfNotShownBeforeNamed:@"L0SlideWelcome"];
+	
+	networkUnavailableViewStartingPosition = self.networkUnavailableView.center;
+	[self beginWatchingNetwork];
 }
+
+#pragma mark -
+#pragma mark Reachability
+
+static SCNetworkReachabilityRef reach = NULL;
+
+static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach, SCNetworkReachabilityFlags flags, void* nothing) {
+	L0SlideAppDelegate* myself = (L0SlideAppDelegate*) UIApp.delegate;
+	[NSObject cancelPreviousPerformRequestsWithTarget:myself selector:@selector(checkNetwork) object:nil];
+	[myself updateNetworkWithFlags:flags];
+}
+
+@synthesize networkUnavailableView;
+
+- (void) beginWatchingNetwork;
+{
+	if (reach) return;
+	
+	// What follows comes from Reachability.m.
+	// Basically, we look for reachability for the link-local address --
+	// and filter for WWAN or connection-required responses in -updateNetworkWithFlags:.
+	
+	// Build a sockaddr_in that we can pass to the address reachability query.
+	struct sockaddr_in sin;
+	bzero(&sin, sizeof(sin));
+	sin.sin_len = sizeof(sin);
+	sin.sin_family = AF_INET;
+	
+	// IN_LINKLOCALNETNUM is defined in <netinet/in.h> as 169.254.0.0
+	sin.sin_addr.s_addr = htonl(IN_LINKLOCALNETNUM);
+	
+	reach = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*) &sin);
+	
+	SCNetworkReachabilityContext emptyContext = {0, self, NULL, NULL, NULL};
+	SCNetworkReachabilitySetCallback(reach, &L0SlideAppDelegateNetworkStateChanged, &emptyContext);
+	SCNetworkReachabilityScheduleWithRunLoop(reach, [[NSRunLoop currentRunLoop] getCFRunLoop], kCFRunLoopDefaultMode);
+	
+	SCNetworkReachabilityFlags flags;
+	if (!SCNetworkReachabilityGetFlags(reach, &flags))
+		[self performSelector:@selector(checkNetwork) withObject:nil afterDelay:0.5];
+	else
+		[self updateNetworkWithFlags:flags];
+}
+
+- (void) checkNetwork;
+{
+	SCNetworkReachabilityFlags flags;
+	if (SCNetworkReachabilityGetFlags(reach, &flags))
+		[self updateNetworkWithFlags:flags];
+}
+
+- (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
+{
+	BOOL habemusNetwork = 
+		(flags & kSCNetworkReachabilityFlagsReachable) &&
+		!(flags & kSCNetworkReachabilityFlagsConnectionRequired);
+	// note that unlike Reachability.m we don't care about WWANs.
+	
+	if (habemusNetwork) {
+		L0Log(@"We have network!");
+		
+		// update UI for network. Huzzah!
+		if (self.networkUnavailableView.alpha > 0) {
+			[UIView beginAnimations:nil context:NULL];
+			[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+			[UIView setAnimationDuration:1.0];
+			
+			self.networkUnavailableView.alpha = 0.0;
+			CGPoint position = self.networkUnavailableView.center;
+			position.y =
+				self.networkUnavailableView.superview.frame.size.height +
+				self.networkUnavailableView.superview.frame.size.height;
+			self.networkUnavailableView.center = position;
+			
+			[UIView commitAnimations];
+		}
+	} else {
+		L0Log(@"No network!");
+
+		// disable UI for no network. Boo, user, boo!
+		if (self.networkUnavailableView.alpha == 0) {
+			CGPoint position = self.networkUnavailableView.center;
+			position.y =
+				self.networkUnavailableView.superview.frame.size.height +
+				self.networkUnavailableView.superview.frame.size.height;
+			self.networkUnavailableView.center = position;
+			
+			[UIView beginAnimations:nil context:NULL];
+			[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+			[UIView setAnimationDuration:1.0];
+			
+			self.networkUnavailableView.alpha = 1.0;
+			self.networkUnavailableView.center = networkUnavailableViewStartingPosition;
+			
+			[UIView commitAnimations];
+		}
+	}
+}
+
+#pragma mark -
+#pragma mark Other methods
 
 - (void) addPersistedItemsToTable;
 {

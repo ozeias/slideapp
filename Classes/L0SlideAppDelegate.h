@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <SystemConfiguration/SystemConfiguration.h>
 
 #import "L0SlideItemsTableController.h"
 #import "L0PeerDiscovery.h"
@@ -24,6 +25,8 @@
 	NSString* documentsDirectory;
 	
 	UIToolbar* toolbar;
+	UIView* networkUnavailableView;
+	CGPoint networkUnavailableViewStartingPosition;
 }
 
 @property(retain) IBOutlet UIWindow *window;
@@ -40,6 +43,12 @@
 - (IBAction) testBySendingItemToAnyPeer;
 
 @property(readonly, copy) NSString* documentsDirectory;
+
+- (void) beginWatchingNetwork;
+- (void) checkNetwork;
+- (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
+
+@property(retain) IBOutlet UIView* networkUnavailableView;
 
 @end
 
