@@ -159,6 +159,11 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 			
 			[UIView commitAnimations];
 		}
+		
+		// clear all peers off the table. TODO: only Bonjour peers!
+		self.tableController.northPeer = nil;
+		self.tableController.eastPeer = nil;
+		self.tableController.westPeer = nil;
 	}
 }
 
