@@ -26,6 +26,7 @@
 		15911E7A0F8FA2F900BECD18 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E790F8FA2F900BECD18 /* AddressBookUI.framework */; };
 		159120820F8FD04B00BECD18 /* L0SlideAboutPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 159120810F8FD04B00BECD18 /* L0SlideAboutPane.xib */; };
 		159122100F8FE41E00BECD18 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1591220F0F8FE41E00BECD18 /* Default.png */; };
+		15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15AF0FEF0FA46B8B0047634C /* Settings.bundle */; };
 		15B7BF6D0F9C778E00EF9AB9 /* libLogging-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B7BF3A0F9C760300EF9AB9 /* libLogging-iPhone.a */; };
 		15B929350F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B929340F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m */; };
 		15B929400F906FA2001E40B7 /* L0SlideWelcome.alert in Resources */ = {isa = PBXBuildFile; fileRef = 15B9293F0F906FA2001E40B7 /* L0SlideWelcome.alert */; };
@@ -157,6 +158,7 @@
 		159120810F8FD04B00BECD18 /* L0SlideAboutPane.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = L0SlideAboutPane.xib; sourceTree = "<group>"; };
 		1591220F0F8FE41E00BECD18 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		15AB647C0F82AEFC001221FE /* L0SlideUTISupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlideUTISupport.h; sourceTree = "<group>"; };
+		15AF0FEF0FA46B8B0047634C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		15B7BF2A0F9C75FD00EF9AB9 /* Logging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logging.xcodeproj; path = Logging/Logging.xcodeproj; sourceTree = INFINITELABS_TOOLS; };
 		15B929330F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0SlideAppDelegate+L0HelpAlerts.h"; sourceTree = "<group>"; };
 		15B929340F906DFF001E40B7 /* L0SlideAppDelegate+L0HelpAlerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0SlideAppDelegate+L0HelpAlerts.m"; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				15B929DD0F907B6C001E40B7 /* inflabs.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				1582D9280F9086910084EBC6 /* LicensesAndCopyrightPage */,
+				15AF0FEF0FA46B8B0047634C /* Settings.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				1582D8F30F9082A00084EBC6 /* About.png in Resources */,
 				1582D92B0F9086910084EBC6 /* LicensesAndCopyrightPage in Resources */,
 				158ED8560F9FAA5E00C65EDE /* iTunesArtwork in Resources */,
+				15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
