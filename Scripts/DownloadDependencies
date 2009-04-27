@@ -1,0 +1,28 @@
+#!/bin/bash
+
+HERE="`dirname "$0"`"
+cd "$HERE"/..
+touch Local-Debug.xcconfig
+touch Local-Release.xcconfig
+
+mkdir -p Dependencies
+if [ ! -d Dependencies/BuildTools ]; then
+	git clone git://github.com/millenomi/infinitelabs-build-tools.git Dependencies/BuildTools || exit 1
+else
+	(cd Dependencies/BuildTools; git pull) || exit 1
+fi
+
+if [ ! -d Dependencies/MuiKit ]; then
+	git clone git://github.com/millenomi/muikit.git Dependencies/MuiKit
+else
+	(cd Dependencies/MuiKit; git pull) || exit 1
+fi
+
+if [ ! -f Local.xcconfig ]; then
+	echo "#include \"Dependencies.xcconfig\"" > Local.xcconfig
+fi
+
+cat > Dependencies.xcconfig << EOF
+INFINITELABS_TOOLS = \$(SRCROOT)/Dependencies/BuildTools
+INFINITELABS_LIB_MUIKIT = \$(SRCROOT)/Dependencies/MuiKit
+EOF

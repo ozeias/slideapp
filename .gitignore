@@ -8,3 +8,6 @@ TemporaryItems
 Compiled Locales
 user.*.espressostorage
 LabsPrivate
+Local.xcconfig
+Local-Debug.xcconfig
+Local-Release.xcconfig
