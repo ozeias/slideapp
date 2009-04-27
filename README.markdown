@@ -6,6 +6,8 @@ In order to build it, you need to set up its dependencies. Ideally, the included
 
 ## Automatic setup.
 
+**EXTREMELY IMPORTANT**: The iPhone SDK 2.2.1 package (containing Xcode 3.1.2) does **NOT** work with this script. See below under "Manual setup" instead. Later versions **do** work.
+
 1. Clone this repository.
 2. Close Xcode if it's running.
 3. Execute the following in a terminal:
