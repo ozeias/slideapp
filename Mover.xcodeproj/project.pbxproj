@@ -44,9 +44,6 @@
 		15C0C1720F75938F00E5BA2F /* L0SlideItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1710F75938F00E5BA2F /* L0SlideItem.m */; };
 		15C0C1CE0F759B8700E5BA2F /* L0ImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */; };
 		15C468DE0F8515ED0088F07F /* RemoveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C468DD0F8515ED0088F07F /* RemoveButton.png */; };
-		15D1C5720F889D7000FF3016 /* Mover.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */; };
-		15D1C5730F889D7000FF3016 /* Mover-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */; };
-		15D1C5740F889D7000FF3016 /* Mover-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */; };
 		15E054E60F8CEFC400506C27 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E054E50F8CEFC400506C27 /* QuartzCore.framework */; };
 		15F67E100F76262F0024A858 /* BLIP Overview.txt in Resources */ = {isa = PBXBuildFile; fileRef = 15F67DF20F76262F0024A858 /* BLIP Overview.txt */; };
 		15F67E110F76262F0024A858 /* BLIP.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F67DF40F76262F0024A858 /* BLIP.png */; };
@@ -608,9 +605,6 @@
 				15F67FDC0F768A800024A858 /* TableArrow_West.png in Resources */,
 				15C468DE0F8515ED0088F07F /* RemoveButton.png in Resources */,
 				15038F250F852340008F6BBB /* RemoveButton_Pressed.png in Resources */,
-				15D1C5720F889D7000FF3016 /* Mover.xcconfig in Resources */,
-				15D1C5730F889D7000FF3016 /* Mover-Release.xcconfig in Resources */,
-				15D1C5740F889D7000FF3016 /* Mover-Debug.xcconfig in Resources */,
 				153735B70F8F5E06005B2BD3 /* Icon.png in Resources */,
 				15911E3B0F8F738E00BECD18 /* Gear.png in Resources */,
 				159120820F8FD04B00BECD18 /* L0SlideAboutPane.xib in Resources */,
