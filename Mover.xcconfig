@@ -27,3 +27,5 @@ CODE_SIGN_IDENTITY[sdk=iphoneos*] = $(INFINITELABS_IPHONE_CODE_SIGN_IDENTITY)
 
 // Version info
 INTERNAL_VERSION = $(VERSION)
+
+#include "Local.xcconfig"

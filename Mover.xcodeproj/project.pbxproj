@@ -44,9 +44,9 @@
 		15C0C1720F75938F00E5BA2F /* L0SlideItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1710F75938F00E5BA2F /* L0SlideItem.m */; };
 		15C0C1CE0F759B8700E5BA2F /* L0ImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */; };
 		15C468DE0F8515ED0088F07F /* RemoveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C468DD0F8515ED0088F07F /* RemoveButton.png */; };
-		15D1C5720F889D7000FF3016 /* Slide.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C56F0F889D7000FF3016 /* Slide.xcconfig */; };
-		15D1C5730F889D7000FF3016 /* Slide-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C5700F889D7000FF3016 /* Slide-Release.xcconfig */; };
-		15D1C5740F889D7000FF3016 /* Slide-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C5710F889D7000FF3016 /* Slide-Debug.xcconfig */; };
+		15D1C5720F889D7000FF3016 /* Mover.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */; };
+		15D1C5730F889D7000FF3016 /* Mover-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */; };
+		15D1C5740F889D7000FF3016 /* Mover-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */; };
 		15E054E60F8CEFC400506C27 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E054E50F8CEFC400506C27 /* QuartzCore.framework */; };
 		15F67E100F76262F0024A858 /* BLIP Overview.txt in Resources */ = {isa = PBXBuildFile; fileRef = 15F67DF20F76262F0024A858 /* BLIP Overview.txt */; };
 		15F67E110F76262F0024A858 /* BLIP.png in Resources */ = {isa = PBXBuildFile; fileRef = 15F67DF40F76262F0024A858 /* BLIP.png */; };
@@ -182,9 +182,9 @@
 		15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0ImageItem.m; sourceTree = "<group>"; };
 		15C468DD0F8515ED0088F07F /* RemoveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RemoveButton.png; sourceTree = "<group>"; };
 		15C5E9E80F86103000236370 /* Mover.todo */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 4; path = Mover.todo; sourceTree = "<group>"; };
-		15D1C56F0F889D7000FF3016 /* Slide.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Slide.xcconfig; sourceTree = "<group>"; };
-		15D1C5700F889D7000FF3016 /* Slide-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Slide-Release.xcconfig"; sourceTree = "<group>"; };
-		15D1C5710F889D7000FF3016 /* Slide-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Slide-Debug.xcconfig"; sourceTree = "<group>"; };
+		15D1C56F0F889D7000FF3016 /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
+		15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Release.xcconfig"; sourceTree = "<group>"; };
+		15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Debug.xcconfig"; sourceTree = "<group>"; };
 		15E054E50F8CEFC400506C27 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15F67DF20F76262F0024A858 /* BLIP Overview.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "BLIP Overview.txt"; sourceTree = "<group>"; };
 		15F67DF30F76262F0024A858 /* BLIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLIP.h; sourceTree = "<group>"; };
@@ -344,9 +344,9 @@
 		15D1C56C0F889D5C00FF3016 /* Configuration FIles */ = {
 			isa = PBXGroup;
 			children = (
-				15D1C56F0F889D7000FF3016 /* Slide.xcconfig */,
-				15D1C5700F889D7000FF3016 /* Slide-Release.xcconfig */,
-				15D1C5710F889D7000FF3016 /* Slide-Debug.xcconfig */,
+				15D1C56F0F889D7000FF3016 /* Mover.xcconfig */,
+				15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */,
+				15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */,
 			);
 			name = "Configuration FIles";
 			sourceTree = "<group>";
@@ -608,9 +608,9 @@
 				15F67FDC0F768A800024A858 /* TableArrow_West.png in Resources */,
 				15C468DE0F8515ED0088F07F /* RemoveButton.png in Resources */,
 				15038F250F852340008F6BBB /* RemoveButton_Pressed.png in Resources */,
-				15D1C5720F889D7000FF3016 /* Slide.xcconfig in Resources */,
-				15D1C5730F889D7000FF3016 /* Slide-Release.xcconfig in Resources */,
-				15D1C5740F889D7000FF3016 /* Slide-Debug.xcconfig in Resources */,
+				15D1C5720F889D7000FF3016 /* Mover.xcconfig in Resources */,
+				15D1C5730F889D7000FF3016 /* Mover-Release.xcconfig in Resources */,
+				15D1C5740F889D7000FF3016 /* Mover-Debug.xcconfig in Resources */,
 				153735B70F8F5E06005B2BD3 /* Icon.png in Resources */,
 				15911E3B0F8F738E00BECD18 /* Gear.png in Resources */,
 				159120820F8FD04B00BECD18 /* L0SlideAboutPane.xib in Resources */,
@@ -692,7 +692,7 @@
 /* Begin XCBuildConfiguration section */
 		1582D2A00F87DC72008E5EC0 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Slide.xcconfig */;
+			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -706,7 +706,7 @@
 		};
 		1582D2A10F87DC72008E5EC0 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15D1C5700F889D7000FF3016 /* Slide-Release.xcconfig */;
+			baseConfigurationReference = 15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = AdHoc.plist;
@@ -729,7 +729,7 @@
 		};
 		1582D2A20F87DC76008E5EC0 /* App Store */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Slide.xcconfig */;
+			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -743,7 +743,7 @@
 		};
 		1582D2A30F87DC76008E5EC0 /* App Store */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15D1C5700F889D7000FF3016 /* Slide-Release.xcconfig */;
+			baseConfigurationReference = 15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Emanuele Vulcano";
@@ -765,7 +765,7 @@
 		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15D1C5710F889D7000FF3016 /* Slide-Debug.xcconfig */;
+			baseConfigurationReference = 15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -790,6 +790,7 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
@@ -808,7 +809,7 @@
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Slide.xcconfig */;
+			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -823,7 +824,7 @@
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Slide.xcconfig */;
+			baseConfigurationReference = 15D1C56F0F889D7000FF3016 /* Mover.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
