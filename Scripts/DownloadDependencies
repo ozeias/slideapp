@@ -18,6 +18,8 @@ else
 	(cd Dependencies/MuiKit; git pull) || exit 1
 fi
 
+INFINITELABS_TOOLS=../BuildTools Dependencies/MuiKit/Scripts/DownloadDependencies
+
 if [ ! -f Local.xcconfig ]; then
 	echo "#include \"Dependencies.xcconfig\"" > Local.xcconfig
 fi
