@@ -436,7 +436,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -492,6 +491,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */,
 				15911E770F8FA2F900BECD18 /* AddressBook.framework */,
 				15911E790F8FA2F900BECD18 /* AddressBookUI.framework */,
 				15E054E50F8CEFC400506C27 /* QuartzCore.framework */,
