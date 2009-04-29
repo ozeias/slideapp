@@ -28,8 +28,10 @@ CODE_SIGN_IDENTITY[sdk=iphoneos*] = $(INFINITELABS_IPHONE_CODE_SIGN_IDENTITY)
 // Version info
 INTERNAL_VERSION = $(VERSION)
 
-#include "Local.xcconfig"
-
 // Silences IB.
 IBC_NOTICES = NO
 IBC_WARNINGS = NO
+
+// Local settings. See the Scripts/ directory and the README for more info.
+#include "Local.xcconfig"
+
