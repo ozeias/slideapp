@@ -17,8 +17,8 @@
 
 @interface L0SlideAppDelegate ()
 
-- (void) _returnFromImagePicker;
-@property(copy, setter=_setDocumentsDirectory:) NSString* documentsDirectory;
+- (void) returnFromImagePicker;
+@property(copy, setter=privateSetDocumentsDirectory:) NSString* documentsDirectory;
 
 @end
 
@@ -247,9 +247,11 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	
 	UIActionSheet* sheet = [[UIActionSheet new] autorelease];
 	sheet.delegate = self;
-	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Image/Contact image button")];
-	[sheet addButtonWithTitle:NSLocalizedString(@"Add Contact", @"Image/Contact contact button")];
-	NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Image/Contact cancel button")];
+	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Add item - image button")];
+	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+		[sheet addButtonWithTitle:NSLocalizedString(@"Take a Photo", @"Add item - take a photo button")];
+	[sheet addButtonWithTitle:NSLocalizedString(@"Add Contact", @"Add item - contact button")];
+	NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Add item - cancel button")];
 	sheet.cancelButtonIndex = i;
 
 	[sheet showInView:self.window];
@@ -262,8 +264,13 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 			[self addImageItem];
 			break;
 		case 1:
-			[self addAddressBookItem];
+			if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+				[self takeAPhotoAndAddImageItem];
+			else
+				[self addAddressBookItem];
 			break;
+		case 2:
+			[self addAddressBookItem];
 		default:
 			break;
 	}
@@ -296,10 +303,25 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	return [self peoplePickerNavigationController:peoplePicker shouldContinueAfterSelectingPerson:person];
 }
 
+- (void) takeAPhotoAndAddImageItem;
+{
+	if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+		return;
+	
+	isImageTakenUsingTheCamera = YES;
+
+	UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
+	imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+	imagePicker.delegate = self;
+	[self.tableHostController presentModalViewController:imagePicker animated:YES];
+}	
+
 - (void) addImageItem;
 {
 	if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
 		return;
+	
+	isImageTakenUsingTheCamera = NO;
 	
 	UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
 	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -309,12 +331,15 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo;
 {
-	L0ImageItem* item = [[L0ImageItem alloc] initWithTitle:@"" image:image];	
+	L0ImageItem* item = [[L0ImageItem alloc] initWithTitle:@"" image:image];
+	if (isImageTakenUsingTheCamera)
+		[item storeToAppropriateApplication];
+	
 	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];
 	[item release];
 	
 	[picker dismissModalViewControllerAnimated:YES];
-	[self _returnFromImagePicker];
+	[self returnFromImagePicker];
 }
 
 @synthesize documentsDirectory;
@@ -332,10 +357,10 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
 {
 	[picker dismissModalViewControllerAnimated:YES];
-	[self _returnFromImagePicker];
+	[self returnFromImagePicker];
 }
 
-- (void) _returnFromImagePicker;
+- (void) returnFromImagePicker;
 {
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];	
 }

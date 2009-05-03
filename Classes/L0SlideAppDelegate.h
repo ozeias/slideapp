@@ -27,6 +27,8 @@
 	UIToolbar* toolbar;
 	UIView* networkUnavailableView;
 	CGPoint networkUnavailableViewStartingPosition;
+	
+	BOOL isImageTakenUsingTheCamera;
 }
 
 @property(retain) IBOutlet UIWindow *window;
@@ -38,6 +40,7 @@
 
 - (IBAction) addItem;
 - (void) addImageItem;
+- (void) takeAPhotoAndAddImageItem;
 - (void) addAddressBookItem;
 
 - (IBAction) testBySendingItemToAnyPeer;
