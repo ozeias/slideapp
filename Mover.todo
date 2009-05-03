@@ -27,6 +27,8 @@ To 1.0:
 
 Next Developments:
   - Add send progress.
+		- ... okay, okay, with a slide that comes out with a progress spinner or bar on it.
+			- Make it so that it is usable. (For example, make it obvious when the slide's been received and saved.)
 	- Add in-app preview for all supported item types.
 	- Display errors in a meaningful way.
 	- Decide whether all items get a slide, or if different item kinds get different item views.
