@@ -65,7 +65,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 - (void) loadPersonInfoFromAddressBookRecord:(ABRecordRef) record;
 
 - (NSString*) shortenedNameFromAddressBookRecord:(ABRecordRef) record;
-- (NSString*) shortenedNameFromName:(NSString*) name surname:(NSString*) surname;
+- (NSString*) shortenedNameFromNickname:(NSString*) nickname name:(NSString*) name surname:(NSString*) surname companyName:(NSString*) companyName;
 
 @end
 
@@ -232,18 +232,26 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 
 - (NSString*) shortenedNameFromAddressBookRecord:(ABRecordRef) record;
 {
-	CFStringRef nickname = ABRecordCopyValue(record, kABPersonNicknameProperty);
-	if (nickname)
-		return [(NSString*)nickname autorelease];
-	
+	NSString* nickname = [(NSString*) ABRecordCopyValue(record, kABPersonNicknameProperty) autorelease];
 	NSString* name = [(NSString*) ABRecordCopyValue(record, kABPersonFirstNameProperty) autorelease];
 	NSString* surname = [(NSString*) ABRecordCopyValue(record, kABPersonLastNameProperty) autorelease];
+	NSString* companyName = [(NSString*) ABRecordCopyValue(record, kABPersonOrganizationProperty) autorelease];
 	
-	return [self shortenedNameFromName:name surname:surname];
+	return [self shortenedNameFromNickname:nickname name:name surname:surname companyName:companyName];
 }
 
-- (NSString*) shortenedNameFromName:(NSString*) name surname:(NSString*) surname;
+- (NSString*) shortenedNameFromNickname:(NSString*) nickname name:(NSString*) name surname:(NSString*) surname companyName:(NSString*) companyName;
 {	
+	if (nickname)
+		return nickname;
+	
+	if (!name && !surname) {
+		if (companyName)
+			return companyName;
+		else
+			return @"?";
+	}
+	
 	// should we shorten at all?
 	// This includes all latin letters but not IPA extensions, spacing modifiers
 	// and combining diacriticals.
