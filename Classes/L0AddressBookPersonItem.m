@@ -127,12 +127,19 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 		
 		NSString* nameKey = [NSString stringWithFormat:@"%d", kABPersonFirstNameProperty];
 		NSString* surnameKey = [NSString stringWithFormat:@"%d", kABPersonLastNameProperty];
-
+		NSString* nicknameKey = [NSString stringWithFormat:@"%d", kABPersonNicknameProperty];
+		NSString* organizationKey = [NSString stringWithFormat:@"%d", kABPersonOrganizationProperty];
+		
 		L0Log(@"kABPersonLastNameProperty == %d at %p", kABPersonLastNameProperty, &kABPersonLastNameProperty);
 		
 		NSDictionary* properties = [[self personInfo] objectForKey:kL0AddressBookPersonInfoProperties];
 		
-		self.title = [self shortenedNameFromName:[properties objectForKey:nameKey] surname:[properties objectForKey:surnameKey]];
+		NSString* name = [properties objectForKey:nameKey];
+		NSString* surname = [properties objectForKey:surnameKey];
+		NSString* nickname = [properties objectForKey:nicknameKey];
+		NSString* companyName = [properties objectForKey:organizationKey];
+		
+		self.title = [self shortenedNameFromNickname:nickname name:name surname:surname companyName:companyName];
 		
 		UIImage* image;
 		if ([personInfo objectForKey:kL0AddressBookPersonInfoImageData])
