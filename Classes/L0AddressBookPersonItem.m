@@ -270,10 +270,30 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	// while we have still more string to scan and we still have the intention
 	// of shortening, see if there's some character there that we might not
 	// like.
-	for (i = 0; i < [name length] || !shouldShorten; i++)
+//	for (i = 0; i < [name length] || !shouldShorten; i++)
+//		shouldShorten = [latinLetters characterIsMember:[name characterAtIndex:i]];
+//	for (i = 0; i < [surname length] || !shouldShorten; i++)
+//		shouldShorten = [latinLetters characterIsMember:[surname characterAtIndex:i]];
+
+	// stupid buggy for loops I hate you :'(
+	// NOTE TO SELF: NEVER EVER WEAKEN BREAK CONDITIONS
+	// and if you're not sure about the semantics of a for loop, it's better to
+	// unwind it.
+	i = 0;
+	while (i < [name length]) {
 		shouldShorten = [latinLetters characterIsMember:[name characterAtIndex:i]];
-	for (i = 0; i < [surname length] || !shouldShorten; i++)
+		if (shouldShorten)
+			break;
+		i++;
+	}
+	
+	i = 0;
+	while (i < [surname length]) {
 		shouldShorten = [latinLetters characterIsMember:[surname characterAtIndex:i]];
+		if (shouldShorten)
+			break;
+		i++;
+	}
 	
 	if (!shouldShorten) {
 		if (ABPersonGetCompositeNameFormat() == kABPersonCompositeNameFormatFirstNameFirst) {
