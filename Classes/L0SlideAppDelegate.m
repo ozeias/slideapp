@@ -246,6 +246,7 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self.tableController setEditing:NO animated:YES];
 	
 	UIActionSheet* sheet = [[UIActionSheet new] autorelease];
+	sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
 	sheet.delegate = self;
 	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Add item - image button")];
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
