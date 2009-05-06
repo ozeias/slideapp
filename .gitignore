@@ -6,6 +6,7 @@ TemporaryItems
 *.xcodeproj/*.pbxuser
 .DS_Store
 Compiled Locales
+Compiled Settings Locales
 user.*.espressostorage
 LabsPrivate
 Local.xcconfig
