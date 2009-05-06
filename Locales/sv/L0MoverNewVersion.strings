@@ -1,4 +1,4 @@
-"App Store" = "App Store";
-"Dismiss" = "Dismiss";
-"A newer version of Mover is available: %@." = "A newer version of Mover is available: %@.";
-"You can find Mover updates for free on the Updates pane of App Store." = "You can find Mover updates for free on the Updates pane of App Store.";
+﻿"App Store" = "App Store";
+"Dismiss" = "OK";
+"A newer version of Mover is available: %@." = "En nyare version av Mover finns tillgänglig: %@.";
+"You can find Mover updates for free on the Updates pane of App Store." = "Du kan hämta nya versioner av Mover utan kostnad under Uppdatera i App Store.";
