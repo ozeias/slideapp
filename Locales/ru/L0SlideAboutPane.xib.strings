@@ -1,0 +1,9 @@
+﻿
+/* Class = "IBUILabel"; text = "version %@\n© Emanuele Vulcano, 2009. All rights reserved."; ObjectID = "6"; */
+"6.text" = "версия %@\n© Emanuele Vulcano, 2009. Все права защищены.";
+
+/* Class = "IBUILabel"; text = "Licenses & Copyright"; ObjectID = "9"; */
+"9.text" = "Лицензии & Права";
+
+/* Class = "IBUINavigationItem"; title = "Licenses & Copyright"; ObjectID = "20"; */
+"20.title" = "Лицензии & Права";

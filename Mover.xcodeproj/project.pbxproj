@@ -14,6 +14,9 @@
 		1559B5B10F7982D0005E4362 /* L0SlidePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5B00F7982D0005E4362 /* L0SlidePeer.m */; };
 		1559B5BE0F798463005E4362 /* L0BonjourPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5BD0F798463005E4362 /* L0BonjourPeer.m */; };
 		1559B5DC0F798AE1005E4362 /* L0BonjourPeeringService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5DB0F798AE1005E4362 /* L0BonjourPeeringService.m */; };
+		15729EAC0FB09BD500CD1310 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15729E8A0FB09BD500CD1310 /* fr.lproj */; };
+		15729EAD0FB09BD500CD1310 /* ru.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15729E950FB09BD500CD1310 /* ru.lproj */; };
+		15729EAE0FB09BD500CD1310 /* sv.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 15729EA10FB09BD500CD1310 /* sv.lproj */; };
 		1572DE8D0F82BE83006BEEC0 /* libMuiKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1572DE880F82BE7A006BEEC0 /* libMuiKit.a */; };
 		1572DE8E0F82BE8B006BEEC0 /* MuiKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1572DE8A0F82BE7A006BEEC0 /* MuiKit.bundle */; };
 		1582D8E40F90806F0084EBC6 /* WhiteOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 1582D8E30F90806F0084EBC6 /* WhiteOverlay.png */; };
@@ -144,6 +147,9 @@
 		1559B5DA0F798AE1005E4362 /* L0BonjourPeeringService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0BonjourPeeringService.h; sourceTree = "<group>"; };
 		1559B5DB0F798AE1005E4362 /* L0BonjourPeeringService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0BonjourPeeringService.m; sourceTree = "<group>"; };
 		1559B61B0F798BD9005E4362 /* L0PeerDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0PeerDiscovery.h; sourceTree = "<group>"; };
+		15729E8A0FB09BD500CD1310 /* fr.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fr.lproj; path = "Compiled Locales/fr.lproj"; sourceTree = "<group>"; };
+		15729E950FB09BD500CD1310 /* ru.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ru.lproj; path = "Compiled Locales/ru.lproj"; sourceTree = "<group>"; };
+		15729EA10FB09BD500CD1310 /* sv.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sv.lproj; path = "Compiled Locales/sv.lproj"; sourceTree = "<group>"; };
 		1582D29F0F87DC5E008E5EC0 /* AdHoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdHoc.plist; sourceTree = "<group>"; };
 		1582D8E30F90806F0084EBC6 /* WhiteOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteOverlay.png; sourceTree = "<group>"; };
 		1582D8F20F9082A00084EBC6 /* About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = About.png; sourceTree = "<group>"; };
@@ -311,6 +317,17 @@
 			name = Peering;
 			sourceTree = "<group>";
 		};
+		15729E260FB09BC200CD1310 /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				15729E8A0FB09BD500CD1310 /* fr.lproj */,
+				15729E950FB09BD500CD1310 /* ru.lproj */,
+				15729EA10FB09BD500CD1310 /* sv.lproj */,
+				15E7FE010FADC45400E9C438 /* it.lproj */,
+			);
+			name = Localizations;
+			sourceTree = "<group>";
+		};
 		1572DE810F82BE7A006BEEC0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,8 +477,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15729E260FB09BC200CD1310 /* Localizations */,
 				158ED8550F9FAA5E00C65EDE /* iTunesArtwork */,
-				15E7FE010FADC45400E9C438 /* it.lproj */,
 				1591220F0F8FE41E00BECD18 /* Default.png */,
 				153735B60F8F5E06005B2BD3 /* Icon.png */,
 				15911E3A0F8F738E00BECD18 /* Gear.png */,
@@ -544,6 +561,15 @@
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Mover" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				fr,
+				ru,
+				sv,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectReferences = (
@@ -631,6 +657,9 @@
 				15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */,
 				15E7FDF60FADC3B800E9C438 /* Localizable.strings in Resources */,
 				15E7FE080FADC45400E9C438 /* it.lproj in Resources */,
+				15729EAC0FB09BD500CD1310 /* fr.lproj in Resources */,
+				15729EAD0FB09BD500CD1310 /* ru.lproj in Resources */,
+				15729EAE0FB09BD500CD1310 /* sv.lproj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,7 +678,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$INFINITELABS_TOOLS\"/BuildLocale";
+			shellScript = "PRODUCE_APPLIED=YES \"$INFINITELABS_TOOLS\"/BuildLocale";
 		};
 /* End PBXShellScriptBuildPhase section */
 

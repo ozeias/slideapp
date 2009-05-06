@@ -1,0 +1,9 @@
+﻿
+/* Class = "IBUINavigationItem"; title = "Mover"; ObjectID = "42"; */
+"42.title" = "Mover";
+
+/* Class = "IBUILabel"; text = "Disconnected."; ObjectID = "49"; */
+"49.text" = "Отключен.";
+
+/* Class = "IBUILabel"; text = "Connect to a Wi-Fi network to see other devices."; ObjectID = "51"; */
+"51.text" = "Подключитесь к сети Wi-Fi, чтобы увидеть другие устройства.";
