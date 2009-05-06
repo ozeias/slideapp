@@ -1,3 +1,9 @@
-"8.text" = "\U041c\U0435\U0442\U043a\U0430";
-"9.text" = "\U041c\U0435\U0442\U043a\U0430";
-"10.text" = "\U041c\U0435\U0442\U043a\U0430";
+﻿
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "8"; */
+"8.text" = "Метка";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "9"; */
+"9.text" = "Метка";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "10"; */
+"10.text" = "Метка";

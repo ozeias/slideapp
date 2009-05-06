@@ -1,3 +1,9 @@
+﻿
+/* Class = "IBUINavigationItem"; title = "Mover"; ObjectID = "42"; */
 "42.title" = "Mover";
-"49.text" = "\U041e\U0442\U043a\U043b\U044e\U0447\U0435\U043d.";
-"51.text" = "\U041f\U043e\U0434\U043a\U043b\U044e\U0447\U0438\U0442\U0435\U0441\U044c \U043a \U0441\U0435\U0442\U0438 Wi-Fi, \U0447\U0442\U043e\U0431\U044b \U0443\U0432\U0438\U0434\U0435\U0442\U044c \U0434\U0440\U0443\U0433\U0438\U0435 \U0443\U0441\U0442\U0440\U043e\U0439\U0441\U0442\U0432\U0430.";
+
+/* Class = "IBUILabel"; text = "Disconnected."; ObjectID = "49"; */
+"49.text" = "Отключен.";
+
+/* Class = "IBUILabel"; text = "Connect to a Wi-Fi network to see other devices."; ObjectID = "51"; */
+"51.text" = "Подключитесь к сети Wi-Fi, чтобы увидеть другие устройства.";
