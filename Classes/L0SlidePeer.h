@@ -9,14 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "L0SlideItem.h"
 
+#define kL0UnknownApplicationVersion (0.0)
+
 @protocol L0SlidePeerDelegate;
 
 @interface L0SlidePeer : NSObject {
 	id <L0SlidePeerDelegate> delegate;
+	double applicationVersion;
+	NSString* userVisibleApplicationVersion;
 }
 
 @property(readonly) NSString* name;
 @property(assign) id <L0SlidePeerDelegate> delegate;
+@property(readonly) double applicationVersion;
+@property(readonly, copy) NSString* userVisibleApplicationVersion;
 
 - (BOOL) receiveItem:(L0SlideItem*) item;
 

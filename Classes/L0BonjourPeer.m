@@ -12,15 +12,41 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	return CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 }
 
+@interface L0BonjourPeer ()
+
+@property(assign, setter=privateSetApplicationVersion:) double applicationVersion;
+@property(copy, setter=privateSetUserVisibleApplicationVersion:) NSString* userVisibleApplicationVersion;
+
+@end
+
+
 @implementation L0BonjourPeer
 
 @synthesize service = _service;
+@synthesize applicationVersion, userVisibleApplicationVersion;
 
 - (id) initWithNetService:(NSNetService*) service;
 {
 	if (self = [super init]) {
 		_service = [service retain];
 		_itemsBeingSentByConnection = L0CFDictionaryCreateMutableForObjects();
+		
+		NSData* txtData = [service TXTRecordData];
+		if (txtData) {
+			NSDictionary* info = [NSNetService dictionaryFromTXTRecordData:txtData];
+			L0Log(@"Parsing info dictionary %@ for peer %@", info, self);
+			
+			NSData* appVersionData;
+			if (appVersionData = [info objectForKey:kL0BonjourPeerApplicationVersionKey])
+				self.applicationVersion = [[[[NSString alloc] initWithData:appVersionData encoding:NSUTF8StringEncoding] autorelease] doubleValue];
+			
+			NSData* userVisibleAppVersionData;
+			if (userVisibleAppVersionData = [info objectForKey:kL0BonjourPeerUserVisibleApplicationVersionKey])
+				self.userVisibleApplicationVersion = [[[NSString alloc] initWithData:userVisibleAppVersionData encoding:NSUTF8StringEncoding] autorelease];
+			
+			L0Log(@"App version found: %f.", self.applicationVersion);
+			L0Log(@"User visible app version found: %@", self.userVisibleApplicationVersion);
+		}
 	}
 	
 	return self;

@@ -11,6 +11,7 @@
 		150A4D770FA39D5D006B9BB4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */; };
 		153734ED0F8F3C05005B2BD3 /* L0SlideAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0SlideAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
+		154FB61E0FB18EA500DB26C6 /* L0MoverNewVersion.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FB61D0FB18EA500DB26C6 /* L0MoverNewVersion.alert */; };
 		1559B5B10F7982D0005E4362 /* L0SlidePeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5B00F7982D0005E4362 /* L0SlidePeer.m */; };
 		1559B5BE0F798463005E4362 /* L0BonjourPeer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5BD0F798463005E4362 /* L0BonjourPeer.m */; };
 		1559B5DC0F798AE1005E4362 /* L0BonjourPeeringService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559B5DB0F798AE1005E4362 /* L0BonjourPeeringService.m */; };
@@ -139,6 +140,7 @@
 		153734EB0F8F3C05005B2BD3 /* L0SlideAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0SlideAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
 		153734EC0F8F3C05005B2BD3 /* L0SlideAppDelegate+L0ItemPersistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0SlideAppDelegate+L0ItemPersistance.m"; sourceTree = "<group>"; };
 		153735B60F8F5E06005B2BD3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		154FB61D0FB18EA500DB26C6 /* L0MoverNewVersion.alert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = L0MoverNewVersion.alert; sourceTree = "<group>"; };
 		15518FAE0F8254FD0055BCEC /* MuiKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MuiKit.xcodeproj; sourceTree = INFINITELABS_LIB_MUIKIT; };
 		1559B5AF0F7982D0005E4362 /* L0SlidePeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0SlidePeer.h; sourceTree = "<group>"; };
 		1559B5B00F7982D0005E4362 /* L0SlidePeer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0SlidePeer.m; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				15B929470F907147001E40B7 /* L0ContactReceived.alert */,
 				15B929610F907589001E40B7 /* L0EditingIsNondestructive.alert */,
 				15B9293F0F906FA2001E40B7 /* L0SlideWelcome.alert */,
+				154FB61D0FB18EA500DB26C6 /* L0MoverNewVersion.alert */,
 				15E7FDF40FADC3B800E9C438 /* Localizable.strings */,
 				1582D8E30F90806F0084EBC6 /* WhiteOverlay.png */,
 				1582D8F20F9082A00084EBC6 /* About.png */,
@@ -660,6 +663,7 @@
 				15729EAC0FB09BD500CD1310 /* fr.lproj in Resources */,
 				15729EAD0FB09BD500CD1310 /* ru.lproj in Resources */,
 				15729EAE0FB09BD500CD1310 /* sv.lproj in Resources */,
+				154FB61E0FB18EA500DB26C6 /* L0MoverNewVersion.alert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

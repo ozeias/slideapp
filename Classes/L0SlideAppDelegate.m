@@ -15,6 +15,13 @@
 
 #import <netinet/in.h>
 
+// Alert tags
+enum {
+	kL0MoverNewVersionAlertTag = 1000,
+};
+
+#define kL0MoverLastSeenVersionKey @"L0MoverLastSeenVersion"
+
 @interface L0SlideAppDelegate ()
 
 - (void) returnFromImagePicker;
@@ -217,6 +224,40 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 {
 	peer.delegate = self;
 	[self.tableController addPeerIfSpaceAllows:peer];
+	
+	if (lastSeenVersion == 0.0) {
+		double seen = [[NSUserDefaults standardUserDefaults] doubleForKey:kL0MoverLastSeenVersionKey];
+		double mine = [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"] doubleValue];
+		
+		lastSeenVersion = MAX(seen, mine);
+	}
+	
+	if (peer.applicationVersion > lastSeenVersion) {
+		lastSeenVersion = peer.applicationVersion;
+		[[NSUserDefaults standardUserDefaults] setDouble:peer.applicationVersion forKey:kL0MoverLastSeenVersionKey];
+		
+		UIAlertView* alert = [UIAlertView alertNamed:@"L0MoverNewVersion"];
+		alert.tag = kL0MoverNewVersionAlertTag;
+		NSString* version = peer.userVisibleApplicationVersion?: @"(no version number)";
+		[alert setTitleFormat:nil, version];
+		alert.delegate = self;
+		[alert show];
+	}
+}
+
+- (void) alertView:(UIAlertView*) alertView clickedButtonAtIndex:(NSInteger) buttonIndex;
+{
+	switch (alertView.tag) {
+		case kL0MoverNewVersionAlertTag: {
+			if (buttonIndex != 1) return;
+			
+			NSString* appStoreURLString = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"L0MoverAppStoreURL"];
+			if (!appStoreURLString)
+				appStoreURLString = @"http://infinite-labs.net/mover/download";
+			[UIApp openURL:[NSURL URLWithString:appStoreURLString]];
+			return;
+		}
+	}
 }
 
 - (IBAction) testBySendingItemToAnyPeer;
@@ -309,8 +350,6 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
 		return;
 	
-	isImageTakenUsingTheCamera = YES;
-
 	UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
 	imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
 	imagePicker.delegate = self;
@@ -322,8 +361,6 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
 		return;
 	
-	isImageTakenUsingTheCamera = NO;
-	
 	UIImagePickerController* imagePicker = [[[UIImagePickerController alloc] init] autorelease];
 	imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	imagePicker.delegate = self;
@@ -333,7 +370,7 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo;
 {
 	L0ImageItem* item = [[L0ImageItem alloc] initWithTitle:@"" image:image];
-	if (isImageTakenUsingTheCamera)
+	if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
 		[item storeToAppropriateApplication];
 	
 	[self.tableController addItem:item animation:kL0SlideItemsTableAddFromSouth];

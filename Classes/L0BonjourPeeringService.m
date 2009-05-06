@@ -67,6 +67,10 @@
 	_listener.pickAvailablePort = YES;
 	_listener.bonjourServiceType = kL0BonjourPeeringServiceName;
 	_listener.bonjourServiceName = [UIDevice currentDevice].name;
+	_listener.bonjourTXTRecord = [NSDictionary dictionaryWithObjectsAndKeys:
+								  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kL0BonjourPeerApplicationVersionKey,
+								  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], kL0BonjourPeerUserVisibleApplicationVersionKey,
+								  nil];
 	NSError* e = nil;
 	[_listener open:&e];
 	NSLog(@"%@", e);

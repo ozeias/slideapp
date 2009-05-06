@@ -15,7 +15,7 @@
 #import "L0PeerDiscovery.h"
 #import "L0SlidePeer.h"
 
-@interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0SlidePeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate> {
+@interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0SlidePeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate> {
     UIWindow *window;
 	
 	L0SlideItemsTableController* tableController;
@@ -28,7 +28,7 @@
 	UIView* networkUnavailableView;
 	CGPoint networkUnavailableViewStartingPosition;
 	
-	BOOL isImageTakenUsingTheCamera;
+	double lastSeenVersion;
 }
 
 @property(retain) IBOutlet UIWindow *window;

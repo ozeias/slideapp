@@ -11,6 +11,9 @@
 #import "L0SlideItem.h"
 #import "BLIP.h"
 
+#define kL0BonjourPeerApplicationVersionKey @"L0AppVersion"
+#define kL0BonjourPeerUserVisibleApplicationVersionKey @"L0UserAppVersion"
+
 @interface L0BonjourPeer : L0SlidePeer <BLIPConnectionDelegate> {
 	NSNetService* _service;
 	CFMutableDictionaryRef _itemsBeingSentByConnection;

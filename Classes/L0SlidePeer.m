@@ -19,6 +19,6 @@
 	return NO;
 }
 
-@dynamic name;
+@dynamic name, applicationVersion, userVisibleApplicationVersion;
 
 @end
