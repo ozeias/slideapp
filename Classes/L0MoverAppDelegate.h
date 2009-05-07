@@ -11,14 +11,14 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
-#import "L0SlideItemsTableController.h"
+#import "L0MoverItemsTableController.h"
 #import "L0PeerDiscovery.h"
-#import "L0SlidePeer.h"
+#import "L0MoverPeer.h"
 
-@interface L0SlideAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0SlidePeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate> {
+@interface L0MoverAppDelegate : NSObject <UIApplicationDelegate, L0PeerDiscoveryDelegate, L0MoverPeerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate> {
     UIWindow *window;
 	
-	L0SlideItemsTableController* tableController;
+	L0MoverItemsTableController* tableController;
 	UIView* tableHostView;
 	L0FlipViewController* tableHostController;
 	
@@ -36,7 +36,7 @@
 @property(retain) IBOutlet UIToolbar* toolbar;
 
 @property(retain) IBOutlet L0FlipViewController* tableHostController;
-@property(retain) L0SlideItemsTableController* tableController;
+@property(retain) L0MoverItemsTableController* tableController;
 
 - (IBAction) addItem;
 - (void) addImageItem;

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "L0SlideItem.h"
-#import "L0SlidePeer.h"
+#import "L0MoverItem.h"
+#import "L0MoverPeer.h"
 #import <MuiKit/MuiKit.h>
 
 enum {
@@ -35,7 +35,7 @@ enum {
 };
 typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 
-@interface L0SlideItemsTableController : UIViewController <L0DraggableViewDelegate> {
+@interface L0MoverItemsTableController : UIViewController <L0DraggableViewDelegate> {
 	CFMutableDictionaryRef itemsToViews;
 	
 	UIImageView* northArrowView;
@@ -50,9 +50,9 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 	UIActivityIndicatorView* eastSpinner;
 	UIActivityIndicatorView* westSpinner;
 	
-	L0SlidePeer* northPeer;
-	L0SlidePeer* eastPeer;
-	L0SlidePeer* westPeer;
+	L0MoverPeer* northPeer;
+	L0MoverPeer* eastPeer;
+	L0MoverPeer* westPeer;
 	
 	UIColor* basePeerLabelColor;
 	
@@ -73,22 +73,22 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 @property(assign) IBOutlet UIActivityIndicatorView* eastSpinner;
 @property(assign) IBOutlet UIActivityIndicatorView* westSpinner;
 
-@property(retain) L0SlidePeer* northPeer;
-@property(retain) L0SlidePeer* eastPeer;
-@property(retain) L0SlidePeer* westPeer;
+@property(retain) L0MoverPeer* northPeer;
+@property(retain) L0MoverPeer* eastPeer;
+@property(retain) L0MoverPeer* westPeer;
 
-- (BOOL) addPeerIfSpaceAllows:(L0SlidePeer*) peer;
-- (void) removePeer:(L0SlidePeer*) peer;
+- (BOOL) addPeerIfSpaceAllows:(L0MoverPeer*) peer;
+- (void) removePeer:(L0MoverPeer*) peer;
 
-- (void) addItem:(L0SlideItem*) item comingFromPeer:(L0SlidePeer*) peer;
-- (void) beginWaitingForItemComingFromPeer:(L0SlidePeer*) peer;
-- (void) stopWaitingForItemFromPeer:(L0SlidePeer*) peer;
+- (void) addItem:(L0MoverItem*) item comingFromPeer:(L0MoverPeer*) peer;
+- (void) beginWaitingForItemComingFromPeer:(L0MoverPeer*) peer;
+- (void) stopWaitingForItemFromPeer:(L0MoverPeer*) peer;
 
-- (void) addItem:(L0SlideItem*) item animation:(L0SlideItemsTableAddAnimation) animation;
-- (void) removeItem:(L0SlideItem*) item animation:(L0SlideItemsTableRemoveAnimation) animation;
+- (void) addItem:(L0MoverItem*) item animation:(L0SlideItemsTableAddAnimation) animation;
+- (void) removeItem:(L0MoverItem*) item animation:(L0SlideItemsTableRemoveAnimation) animation;
 
 - (NSArray*) items;
 
-- (void) returnItemToTableAfterSend:(L0SlideItem*) item toPeer:(L0SlidePeer*) peer;
+- (void) returnItemToTableAfterSend:(L0MoverItem*) item toPeer:(L0MoverPeer*) peer;
 
 @end

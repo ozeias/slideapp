@@ -65,7 +65,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	return [_service name];
 }
 
-- (BOOL) receiveItem:(L0SlideItem*) item;
+- (BOOL) receiveItem:(L0MoverItem*) item;
 {
 	if (CFDictionaryContainsValue(_itemsBeingSentByConnection, item))
 		return NO;
@@ -78,7 +78,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 	[delegate slidePeer:self willBeSentItem:item];
 	
 	connection.delegate = self;
-	BLIPRequest* request = [item networkBLIPRequest];
+	BLIPRequest* request = [item contentsAsBLIPRequest];
 	[connection sendRequest:request];
 	[connection release];
 	
@@ -87,7 +87,7 @@ static inline CFMutableDictionaryRef L0CFDictionaryCreateMutableForObjects() {
 
 - (void) connection: (BLIPConnection*)connection receivedResponse: (BLIPResponse*)response;
 {
-	L0SlideItem* i = (L0SlideItem*) CFDictionaryGetValue(_itemsBeingSentByConnection, connection);
+	L0MoverItem* i = (L0MoverItem*) CFDictionaryGetValue(_itemsBeingSentByConnection, connection);
 	if (i)
 		[delegate slidePeer:self wasSentItem:i];
 	

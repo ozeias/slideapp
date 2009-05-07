@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "L0SlidePeer.h"
-#import "L0SlideItem.h"
+#import "L0MoverPeer.h"
+#import "L0MoverItem.h"
 #import "BLIP.h"
 
 #define kL0BonjourPeerApplicationVersionKey @"L0AppVersion"
 #define kL0BonjourPeerUserVisibleApplicationVersionKey @"L0UserAppVersion"
 
-@interface L0BonjourPeer : L0SlidePeer <BLIPConnectionDelegate> {
+@interface L0BonjourPeer : L0MoverPeer <BLIPConnectionDelegate> {
 	NSNetService* _service;
 	CFMutableDictionaryRef _itemsBeingSentByConnection;
 }

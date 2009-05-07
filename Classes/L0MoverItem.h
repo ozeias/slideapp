@@ -25,7 +25,7 @@ typedef struct {
 	uint32_t Size; // Size of the payload in bytes.
 } L0BeamableItemNetworkHeader;
 
-@interface L0SlideItem : NSObject {
+@interface L0MoverItem : NSObject {
 	NSString* title;
 	NSString* type;
 	UIImage* representingImage;
@@ -62,9 +62,9 @@ typedef struct {
 
 @end
 
-@interface L0SlideItem (L0BLIPBeaming)
+@interface L0MoverItem (L0BLIPBeaming)
 
-- (BLIPRequest*) networkBLIPRequest;
-+ (id) beamableItemWithNetworkBLIPRequest:(BLIPRequest*) req;
+- (BLIPRequest*) contentsAsBLIPRequest;
++ (id) itemWithContentsOfBLIPRequest:(BLIPRequest*) req;
 
 @end

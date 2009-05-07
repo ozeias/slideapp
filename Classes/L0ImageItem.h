@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "L0SlideItem.h"
+#import "L0MoverItem.h"
 
-@interface L0ImageItem : L0SlideItem {
+@interface L0ImageItem : L0MoverItem {
 	UIImage* image;
 }
 

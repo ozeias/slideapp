@@ -6,9 +6,9 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0SlideAboutPane.h"
+#import "L0MoverAboutPane.h"
 
-@implementation L0SlideAboutPane
+@implementation L0MoverAboutPane
 
 - (void)viewDidLoad;
 {

@@ -24,6 +24,12 @@
 
 @implementation IPAddress (L0BonjourPeerFinder_NetServicesMatching)
 
+#define L0IPv6AddressIsEqual(a, b) (\
+	(a).__u6_addr.__u6_addr32[0] == (b).__u6_addr.__u6_addr32[0] && \
+	(a).__u6_addr.__u6_addr32[1] == (b).__u6_addr.__u6_addr32[1] && \
+	(a).__u6_addr.__u6_addr32[2] == (b).__u6_addr.__u6_addr32[2] && \
+	(a).__u6_addr.__u6_addr32[3] == (b).__u6_addr.__u6_addr32[3])
+
 - (BOOL) _l0_comesFromAddressOfService:(NSNetService*) s;
 {
 	for (NSData* addressData in [s addresses]) {
@@ -32,7 +38,11 @@
 			const struct sockaddr_in* sIPv4 = (const struct sockaddr_in*) s;
 			if (self.ipv4 == sIPv4->sin_addr.s_addr)
 				return YES;
-		}
+		} /* else if (s->sa_family == AF_INET6) {
+			const struct sockaddr_in6* sIPv6 = (const struct sockaddr_in6*) s;
+			if (L0IPv6AddressIsEqual(self.ipv6, sIPv6->sin6_addr))
+				return YES;
+		} */
 	}
 	
 	return NO;
@@ -54,25 +64,25 @@
 
 - (void) start;
 {
-	if (_browser) return;
+	if (browser) return;
 	
-	_peers = [NSMutableSet new];
+	peers = [NSMutableSet new];
 	
-	_browser = [[NSNetServiceBrowser alloc] init];
-	[_browser setDelegate:self];
-	[_browser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
+	browser = [[NSNetServiceBrowser alloc] init];
+	[browser setDelegate:self];
+	[browser searchForServicesOfType:kL0BonjourPeeringServiceName inDomain:@""];
 	
-	_listener = [[BLIPListener alloc] initWithPort:52525];
-	_listener.delegate = self;
-	_listener.pickAvailablePort = YES;
-	_listener.bonjourServiceType = kL0BonjourPeeringServiceName;
-	_listener.bonjourServiceName = [UIDevice currentDevice].name;
-	_listener.bonjourTXTRecord = [NSDictionary dictionaryWithObjectsAndKeys:
+	listener = [[BLIPListener alloc] initWithPort:52525];
+	listener.delegate = self;
+	listener.pickAvailablePort = YES;
+	listener.bonjourServiceType = kL0BonjourPeeringServiceName;
+	listener.bonjourServiceName = [UIDevice currentDevice].name;
+	listener.bonjourTXTRecord = [NSDictionary dictionaryWithObjectsAndKeys:
 								  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], kL0BonjourPeerApplicationVersionKey,
 								  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"], kL0BonjourPeerUserVisibleApplicationVersionKey,
 								  nil];
 	NSError* e = nil;
-	[_listener open:&e];
+	[listener open:&e];
 	NSLog(@"%@", e);
 	
 //	_publishedService = [[NSNetService alloc] initWithDomain:@"" type:kL0BonjourPeeringServiceName name:[UIDevice currentDevice].name port:52525];
@@ -81,16 +91,16 @@
 
 - (void) stop;
 {	
-	[_browser stop];
-	[_browser release]; _browser = nil;
+	[browser stop];
+	[browser release]; browser = nil;
 	
-	for (L0BonjourPeer* peer in _peers)
+	for (L0BonjourPeer* peer in peers)
 		[delegate peerLeft:peer];
 	
-	[_peers release]; _peers = nil;
+	[peers release]; peers = nil;
 	
-	[_listener close];
-	[_listener release]; _listener = nil;	
+	[listener close];
+	[listener release]; listener = nil;	
 }
 
 - (void) dealloc;
@@ -102,7 +112,7 @@
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didRemoveService:(NSNetService *)aNetService moreComing:(BOOL)moreComing;
 {
 	L0BonjourPeer* leavingPeer = nil;
-	for (L0BonjourPeer* peer in _peers) {
+	for (L0BonjourPeer* peer in peers) {
 		if ([peer.service isEqual:aNetService]) {
 			leavingPeer = peer;
 			break;
@@ -111,7 +121,7 @@
 	
 	if (leavingPeer) {
 		[[leavingPeer retain] autorelease];
-		[_peers removeObject:leavingPeer];
+		[peers removeObject:leavingPeer];
 		[delegate peerLeft:leavingPeer];
 	}
 }
@@ -159,7 +169,7 @@
 	if (isSelf) return;
 	
 	L0BonjourPeer* peer = [[L0BonjourPeer alloc] initWithNetService:sender];
-	[_peers addObject:peer];
+	[peers addObject:peer];
 	[delegate peerFound:peer];
 	[peer release];
 }
@@ -168,7 +178,7 @@
 
 - (L0BonjourPeer*) peerForAddress:(IPAddress*) a;
 {
-	for (L0BonjourPeer* aPeer in _peers) {
+	for (L0BonjourPeer* aPeer in peers) {
 		if ([a _l0_comesFromAddressOfService:aPeer.service]) {
 			return aPeer;
 		}
@@ -190,7 +200,7 @@
 	[peer.delegate slidePeerWillSendUsItem:peer];
 	
 	[connection setDelegate:self];
-	[_pendingConnections addObject:connection];
+	[pendingConnections addObject:connection];
 }
 
 - (void) connection: (BLIPConnection*)connection receivedRequest: (BLIPRequest*)request;
@@ -199,22 +209,22 @@
 	
 	if (!peer) {
 		L0Log(@"No peer associated with this connection; throwing away.");
-		[_pendingConnections removeObject:connection];
+		[pendingConnections removeObject:connection];
 		[connection close];
 		return;
 	}
 
-	L0SlideItem* item = [L0SlideItem beamableItemWithNetworkBLIPRequest:request];
+	L0MoverItem* item = [L0MoverItem itemWithContentsOfBLIPRequest:request];
 	if (!item) {
 		L0Log(@"No item could be created.");
 		[connection close];
-		[_pendingConnections removeObject:connection];
+		[pendingConnections removeObject:connection];
 		[peer.delegate slidePeerDidCancelSendingUsItem:peer];
 		return;
 	}
 	
 	[connection close];
-	[_pendingConnections removeObject:connection];
+	[pendingConnections removeObject:connection];
 	[peer.delegate slidePeer:peer didSendUsItem:item];
 	
 	[request respondWithString:@"OK"];

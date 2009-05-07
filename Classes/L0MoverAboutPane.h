@@ -10,7 +10,7 @@
 
 @class L0SlideAboutCopyrightWebPane;
 
-@interface L0SlideAboutPane : UIViewController {
+@interface L0MoverAboutPane : UIViewController {
 	IBOutlet UILabel* versionLabel;
 	IBOutlet L0SlideAboutCopyrightWebPane* copyrightPane;
 }

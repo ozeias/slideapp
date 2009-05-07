@@ -14,12 +14,12 @@
 
 @interface L0BonjourPeeringService : NSObject <TCPListenerDelegate, BLIPConnectionDelegate> {
 	id <L0PeerDiscoveryDelegate> delegate;
-	NSNetServiceBrowser* _browser;
+	NSNetServiceBrowser* browser;
 
-	NSMutableSet* _peers;
+	NSMutableSet* peers;
 	
-	BLIPListener* _listener;
-	NSMutableSet* _pendingConnections;
+	BLIPListener* listener;
+	NSMutableSet* pendingConnections;
 }
 
 + sharedService;

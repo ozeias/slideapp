@@ -1,5 +1,5 @@
 //
-//  L0SlideAppDelegate+L0HelpAlerts.h
+//  L0MoverAppDelegate+L0HelpAlerts.h
 //  Slide
 //
 //  Created by ∞ on 11/04/09.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "L0SlideAppDelegate.h"
+#import "L0MoverAppDelegate.h"
 
-@interface L0SlideAppDelegate (L0HelpAlerts)
+@interface L0MoverAppDelegate (L0HelpAlerts)
 
 - (void) showAlertIfNotShownBeforeNamed:(NSString*) name;
 - (UIAlertView*) alertIfNotShownBeforeNamed:(NSString*) name;

@@ -1,5 +1,5 @@
 //
-//  L0SlideAppDelegate+L0ItemPersistance.h
+//  L0MoverAppDelegate+L0ItemPersistance.h
 //  Slide
 //
 //  Created by ∞ on 10/04/09.
@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "L0SlideAppDelegate.h"
+#import "L0MoverAppDelegate.h"
 
-@class L0SlideItem;
+@class L0MoverItem;
 
-@interface L0SlideAppDelegate (L0ItemPersistance)
+@interface L0MoverAppDelegate (L0ItemPersistance)
 
 - (void) persistItemsToMassStorage:(NSArray*) items;
 - (NSArray*) loadItemsFromMassStorage;

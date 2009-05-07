@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "L0SlideItem.h"
+#import "L0MoverItem.h"
 
 #import <AddressBook/AddressBook.h>
 
 #define kL0AddressBookPersonDataInPropertyListType @"net.infinite-labs.Slide.AddressBookPersonPropertyList"
 
-@interface L0AddressBookPersonItem : L0SlideItem {
+@interface L0AddressBookPersonItem : L0MoverItem {
 	NSDictionary* personInfo;
 }
 

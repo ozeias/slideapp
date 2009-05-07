@@ -8,8 +8,6 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="2"/>
-			<integer value="21"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -34,11 +32,10 @@
 			</object>
 			<object class="IBUICustomObject" id="664661524"/>
 			<object class="IBUIWindow" id="380026005">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">1316</int>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{320, 480}</string>
-				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MC41MDcyOTkyNAA</bytes>
@@ -52,7 +49,7 @@
 			</object>
 			<object class="IBUIViewController" id="201299165">
 				<object class="IBUIView" key="IBUIView" id="114362815">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">292</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -160,7 +157,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{320, 460}</string>
-					<reference key="NSSuperview"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MQA</bytes>
@@ -192,7 +188,7 @@
 							</object>
 						</object>
 						<reference key="IBUIParentViewController" ref="200578797"/>
-						<string key="IBUINibName">L0SlideAboutPane</string>
+						<string key="IBUINibName">L0MoverAboutPane</string>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 					</object>
 				</object>
@@ -482,7 +478,7 @@
 					<string>{{39, 276}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>L0SlideAppDelegate</string>
+					<string>L0MoverAppDelegate</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>L0FlipViewController</string>
 					<string>{{108, 171}, {320, 480}}</string>
@@ -490,7 +486,7 @@
 					<string>{{21, 242}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>L0SlideAboutPane</string>
+					<string>L0MoverAboutPane</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -523,15 +519,7 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">L0SlideAboutCopyrightWebPane</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="1073312742">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/L0SlideAboutPane.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">L0SlideAboutPane</string>
+					<string key="className">L0MoverAboutPane</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -559,24 +547,35 @@
 							<string>UILabel</string>
 						</object>
 					</object>
-					<reference key="sourceIdentifier" ref="1073312742"/>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">L0SlideAppDelegate</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="867841166">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/L0SlideAppDelegate+L0HelpAlerts.h</string>
+						<string key="minorKey">Classes/L0MoverAboutPane.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">L0SlideAppDelegate</string>
+					<string key="className">L0MoverAboutPane</string>
+					<string key="superclassName">UIViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/L0SlideAppDelegate+L0ItemPersistance.h</string>
+						<string key="majorKey">IBUserSource</string>
+						<string key="minorKey"/>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">L0SlideAppDelegate</string>
+					<string key="className">L0MoverAppDelegate</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/L0MoverAppDelegate+L0HelpAlerts.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">L0MoverAppDelegate</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/L0MoverAppDelegate+L0ItemPersistance.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">L0MoverAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -612,16 +611,21 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/L0SlideAppDelegate.h</string>
+						<string key="minorKey">Classes/L0MoverAppDelegate.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">L0SlideAppDelegate</string>
+					<string key="className">L0MoverAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
 					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">L0SlideAboutCopyrightWebPane</string>
+					<string key="superclassName">UIViewController</string>
+					<reference key="sourceIdentifier" ref="867841166"/>
 				</object>
 			</object>
 		</object>

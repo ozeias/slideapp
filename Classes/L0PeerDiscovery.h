@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 
-#import "L0SlidePeer.h"
+#import "L0MoverPeer.h"
 
 @protocol L0PeerDiscoveryDelegate <NSObject>
 
-- (void) peerFound:(L0SlidePeer*) peer;
-- (void) peerLeft:(L0SlidePeer*) peer;
+- (void) peerFound:(L0MoverPeer*) peer;
+- (void) peerLeft:(L0MoverPeer*) peer;
 
 @end

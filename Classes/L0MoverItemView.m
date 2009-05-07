@@ -6,10 +6,10 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0SlideItemView.h"
+#import "L0MoverItemView.h"
 
 
-@implementation L0SlideItemView
+@implementation L0MoverItemView
 
 @synthesize contentView, label, imageView;
 
@@ -47,7 +47,7 @@
 
 @synthesize item;
 
-- (void) displayWithContentsOfItem:(L0SlideItem*) i;
+- (void) displayWithContentsOfItem:(L0MoverItem*) i;
 {
 	self.label.text = i.title;
 	self.imageView.image = i.representingImage;

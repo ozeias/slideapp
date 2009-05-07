@@ -6,12 +6,12 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
-#import "L0SlideAppDelegate.h"
+#import "L0MoverAppDelegate.h"
 #import "L0ImageItem.h"
 #import "L0AddressBookPersonItem.h"
 #import "L0BonjourPeeringService.h"
-#import "L0SlideAppDelegate+L0ItemPersistance.h"
-#import "L0SlideAppDelegate+L0HelpAlerts.h"
+#import "L0MoverAppDelegate+L0ItemPersistance.h"
+#import "L0MoverAppDelegate+L0HelpAlerts.h"
 
 #import <netinet/in.h>
 
@@ -22,7 +22,7 @@ enum {
 
 #define kL0MoverLastSeenVersionKey @"L0MoverLastSeenVersion"
 
-@interface L0SlideAppDelegate ()
+@interface L0MoverAppDelegate ()
 
 - (void) returnFromImagePicker;
 @property(copy, setter=privateSetDocumentsDirectory:) NSString* documentsDirectory;
@@ -30,7 +30,7 @@ enum {
 @end
 
 
-@implementation L0SlideAppDelegate
+@implementation L0MoverAppDelegate
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application;
 {
@@ -44,7 +44,7 @@ enum {
 	[bonjourFinder start];
 	
 	// Setting up the UI.
-	self.tableController = [[[L0SlideItemsTableController alloc] initWithDefaultNibName] autorelease];
+	self.tableController = [[[L0MoverItemsTableController alloc] initWithDefaultNibName] autorelease];
 	
 	NSMutableArray* itemsArray = [self.toolbar.items mutableCopy];
 	[itemsArray addObject:self.tableController.editButtonItem];
@@ -65,7 +65,7 @@ enum {
 	[window makeKeyAndVisible];
 	
 	// Be helpful if this is the first time (ahem).
-	[self showAlertIfNotShownBeforeNamed:@"L0SlideWelcome"];
+	[self showAlertIfNotShownBeforeNamed:@"L0MoverWelcome"];
 	
 	networkUnavailableViewStartingPosition = self.networkUnavailableView.center;
 	[self beginWatchingNetwork];
@@ -76,8 +76,8 @@ enum {
 
 static SCNetworkReachabilityRef reach = NULL;
 
-static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach, SCNetworkReachabilityFlags flags, void* nothing) {
-	L0SlideAppDelegate* myself = (L0SlideAppDelegate*) UIApp.delegate;
+static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach, SCNetworkReachabilityFlags flags, void* nothing) {
+	L0MoverAppDelegate* myself = (L0MoverAppDelegate*) UIApp.delegate;
 	[NSObject cancelPreviousPerformRequestsWithTarget:myself selector:@selector(checkNetwork) object:nil];
 	[myself updateNetworkWithFlags:flags];
 }
@@ -104,7 +104,7 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	reach = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*) &sin);
 	
 	SCNetworkReachabilityContext emptyContext = {0, self, NULL, NULL, NULL};
-	SCNetworkReachabilitySetCallback(reach, &L0SlideAppDelegateNetworkStateChanged, &emptyContext);
+	SCNetworkReachabilitySetCallback(reach, &L0MoverAppDelegateNetworkStateChanged, &emptyContext);
 	SCNetworkReachabilityScheduleWithRunLoop(reach, [[NSRunLoop currentRunLoop] getCFRunLoop], kCFRunLoopDefaultMode);
 	
 	SCNetworkReachabilityFlags flags;
@@ -179,7 +179,7 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 - (void) addPersistedItemsToTable;
 {
-	for (L0SlideItem* i in [self loadItemsFromMassStorage])
+	for (L0MoverItem* i in [self loadItemsFromMassStorage])
 		[self.tableController addItem:i animation:kL0SlideItemsTableNoAddAnimation];
 }
 
@@ -188,23 +188,23 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self persistItemsToMassStorage:[self.tableController items]];
 }
 
-- (void) slidePeer:(L0SlidePeer*) peer willBeSentItem:(L0SlideItem*) item;
+- (void) slidePeer:(L0MoverPeer*) peer willBeSentItem:(L0MoverItem*) item;
 {
 	L0Log(@"About to send item %@", item);
 }
 
-- (void) slidePeer:(L0SlidePeer*) peer wasSentItem:(L0SlideItem*) item;
+- (void) slidePeer:(L0MoverPeer*) peer wasSentItem:(L0MoverItem*) item;
 {
 	L0Log(@"Sent %@", item);
 	[self.tableController returnItemToTableAfterSend:item toPeer:peer];
 }
 
-- (void) slidePeerWillSendUsItem:(L0SlidePeer*) peer;
+- (void) slidePeerWillSendUsItem:(L0MoverPeer*) peer;
 {
 	L0Log(@"Receiving from %@", peer);
 	[self.tableController beginWaitingForItemComingFromPeer:peer];
 }
-- (void) slidePeer:(L0SlidePeer*) peer didSendUsItem:(L0SlideItem*) item;
+- (void) slidePeer:(L0MoverPeer*) peer didSendUsItem:(L0MoverItem*) item;
 {
 	L0Log(@"Received %@", item);
 	[item storeToAppropriateApplication];
@@ -215,12 +215,12 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	else if ([item isKindOfClass:[L0AddressBookPersonItem class]])
 		[self showAlertIfNotShownBeforeNamed:@"L0ContactReceived"];
 }
-- (void) slidePeerDidCancelSendingUsItem:(L0SlidePeer*) peer;
+- (void) slidePeerDidCancelSendingUsItem:(L0MoverPeer*) peer;
 {
 	[self.tableController stopWaitingForItemFromPeer:peer];
 }
 
-- (void) peerFound:(L0SlidePeer*) peer;
+- (void) peerFound:(L0MoverPeer*) peer;
 {
 	peer.delegate = self;
 	[self.tableController addPeerIfSpaceAllows:peer];
@@ -264,7 +264,7 @@ static void L0SlideAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 {
 }
 
-- (void) peerLeft:(L0SlidePeer*) peer;
+- (void) peerLeft:(L0MoverPeer*) peer;
 {
 	[self.tableController removePeer:peer];
 }

@@ -6,14 +6,14 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0SlidePeer.h"
+#import "L0MoverPeer.h"
 
 
-@implementation L0SlidePeer
+@implementation L0MoverPeer
 
 @synthesize delegate;
 
-- (BOOL) receiveItem:(L0SlideItem*) item;
+- (BOOL) receiveItem:(L0MoverItem*) item;
 {
 	NSAssert(NO, @"Abstract method. Subclasses must override it.");
 	return NO;

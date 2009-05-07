@@ -8,11 +8,7 @@
 
 #import "L0ImageItem.h"
 
-//#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
-//#import <MobileCoreServices/MobileCoreServices.h>
-//#else
-#import "L0SlideUTISupport.h"
-//#endif
+#import "L0MoverUTISupport.h"
 
 #import <MuiKit/MuiKit.h>
 

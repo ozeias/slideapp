@@ -8,16 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <MuiKit/MuiKit.h>
-#import "L0SlideItem.h"
+#import "L0MoverItem.h"
 
-@interface L0SlideItemView : L0DraggableView {
+@interface L0MoverItemView : L0DraggableView {
 	UIView* contentView;
 		
 	UILabel* label;
 	UIImageView* imageView;
 	UIButton* deleteButton;
 	
-	L0SlideItem* item;
+	L0MoverItem* item;
 
 	id deletionTarget;
 	SEL deletionAction;
@@ -32,8 +32,8 @@
 
 - (void) setDeletionTarget:(id) target action:(SEL) action;
 
-- (void) displayWithContentsOfItem:(L0SlideItem*) item;
-@property(readonly) L0SlideItem* item;
+- (void) displayWithContentsOfItem:(L0MoverItem*) item;
+@property(readonly) L0MoverItem* item;
 
 - (void) setEditing:(BOOL) editing animated:(BOOL) animated;
 @property(getter=isEditing) BOOL editing;

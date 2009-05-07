@@ -6,16 +6,16 @@
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "L0SlideItem.h"
+#import "L0MoverItem.h"
 
-@interface L0SlideItem ()
+@interface L0MoverItem ()
 
 @property(copy, setter=_setOffloadingFile:) NSString* offloadingFile;
 
 @end
 
 
-@implementation L0SlideItem
+@implementation L0MoverItem
 
 + (void) registerClass;
 {
@@ -73,7 +73,7 @@ static NSMutableDictionary* classes = nil;
 	NSData* data = [[NSData alloc] initWithContentsOfFile:file];
 	if (!data) return nil;
 	
-	L0SlideItem* item = [[[[self classForType:type] alloc] initWithExternalRepresentation:data type:type title:title] autorelease];
+	L0MoverItem* item = [[[[self classForType:type] alloc] initWithExternalRepresentation:data type:type title:title] autorelease];
 	item.offloadingFile = file;
 	[item clearCache];
 	[data release];
@@ -126,9 +126,9 @@ static NSMutableDictionary* classes = nil;
 
 @end
 
-@implementation L0SlideItem (L0BLIPBeaming)
+@implementation L0MoverItem (L0BLIPBeaming)
 
-- (BLIPRequest*) networkBLIPRequest;
+- (BLIPRequest*) contentsAsBLIPRequest;
 {
 	NSDictionary* properties = [NSDictionary dictionaryWithObjectsAndKeys:
 								self.title, @"L0SlideItemTitle",
@@ -141,7 +141,7 @@ static NSMutableDictionary* classes = nil;
 							 properties:properties];
 }
 
-+ (id) beamableItemWithNetworkBLIPRequest:(BLIPRequest*) req;
++ (id) itemWithContentsOfBLIPRequest:(BLIPRequest*) req;
 {
 	NSString* version = [req valueOfProperty:@"L0SlideItemWireProtocolVersion"];
 	if (![version isEqualToString:@"1"])
