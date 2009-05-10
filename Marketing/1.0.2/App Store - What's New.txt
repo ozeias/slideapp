@@ -1,0 +1,9 @@
+Updates warning.
+• If Mover detects other iPhones with newer versions of the application, it prompts the user to check App Store for updates.
+(It's recommended that all users have an updated version of Mover before use.)
+
+Mover is now localized in Russian, French and Swedish.
+• Swedish localization courtesy of David Härdne (http://tx.se/).
+• French localization courtesy of François AMBERT (http://www.sosiphone.com/).
+• Russian localization courtesy of Alexandr Gladkikh, Snowlander Software Group.
+
