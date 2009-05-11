@@ -53,21 +53,21 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 @interface L0MoverItemsTableController ()
 
-- (L0SlideItemsTableAddAnimation) _animationForPeer:(L0MoverPeer*) peer;
-- (void) _animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
+- (L0SlideItemsTableAddAnimation) animationForPeer:(L0MoverPeer*) peer;
+- (void) animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
 
-- (void) _removeItemView:(L0MoverItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
+- (void) removeItemView:(L0MoverItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
 
-- (CGFloat) _labelAlphaForPeer:(L0MoverPeer*) peer;
-- (CGFloat) _arrowAlphaForPeer:(L0MoverPeer*) peer;
-- (void) _setPeer:(L0MoverPeer*) peer forKey:(NSString*) key withArrow:(UIImageView*) arrow label:(UILabel*) label hadPreviousPeer:(BOOL) hadPreviousPeer;
+- (CGFloat) labelAlphaForPeer:(L0MoverPeer*) peer;
+- (CGFloat) arrowAlphaForPeer:(L0MoverPeer*) peer;
+- (void) updateUIWithPeer:(L0MoverPeer*) peer forKey:(NSString*) key withArrow:(UIImageView*) arrow label:(UILabel*) label hadPreviousPeer:(BOOL) hadPreviousPeer;
 - (void) performFadeInOutAnimationForKey:(NSString*) key assumingStillIsPeer:(L0MoverPeer*) peer withArrow:(UIImageView*) arrow label:(UILabel*) label;
 
-- (void) _bounceOrSendItemOfView:(L0MoverItemView*) view;
+- (void) bounceOrSendItemOfView:(L0MoverItemView*) view;
 
-- (void) _endHoldingView:(L0DraggableView*) view;
+- (void) endHoldingView:(L0DraggableView*) view;
 
-- (UIActivityIndicatorView*) _spinnerForPeer:(L0MoverPeer*) peer;
+- (UIActivityIndicatorView*) spinnerForPeer:(L0MoverPeer*) peer;
 
 @end
 
@@ -171,7 +171,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 #pragma mark -
 #pragma mark Item Management & Animation
 
-- (L0SlideItemsTableAddAnimation) _animationForPeer:(L0MoverPeer*) peer;
+- (L0SlideItemsTableAddAnimation) animationForPeer:(L0MoverPeer*) peer;
 {
 	L0SlideItemsTableAddAnimation animation = kL0SlideItemsTableAddByDropping;
 	if (peer) {
@@ -199,12 +199,12 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	[view displayWithContentsOfItem:item];
 	CFDictionarySetValue(itemsToViews, item, view);
 
-	[self _animateItemView:view withAddAnimation:a];
+	[self animateItemView:view withAddAnimation:a];
 	
 	self.editButtonItem.enabled = YES;
 }
 
-- (void) _animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
+- (void) animateItemView:(L0MoverItemView*) view withAddAnimation:(L0SlideItemsTableAddAnimation) a;
 {
 	switch (a) {
 		case kL0SlideItemsTableAddByDropping: {
@@ -329,10 +329,10 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	if (!view)
 		return;
 	
-	[self _removeItemView:view animation:ani];	
+	[self removeItemView:view animation:ani];	
 }
 
-- (void) _removeItemView:(L0MoverItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
+- (void) removeItemView:(L0MoverItemView*) view animation:(L0SlideItemsTableRemoveAnimation) ani;
 {
 	NSAssert(!view.superview || view.superview == self.view, @"Must be a view we manage or already removed.");
 	
@@ -377,7 +377,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) _deleteItemForView:(L0MoverItemView*) view;
 {
-	[self _removeItemView:view animation:kL0SlideItemsTableRemoveByFadingAway];
+	[self removeItemView:view animation:kL0SlideItemsTableRemoveByFadingAway];
 }
 
 - (void) setEditing:(BOOL) editing animated:(BOOL) animated;
@@ -395,13 +395,13 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 	}
 
-	self.northLabel.alpha = [self _labelAlphaForPeer:self.northPeer];
-	self.eastLabel.alpha = [self _labelAlphaForPeer:self.eastPeer];
-	self.westLabel.alpha = [self _labelAlphaForPeer:self.westPeer];
+	self.northLabel.alpha = [self labelAlphaForPeer:self.northPeer];
+	self.eastLabel.alpha = [self labelAlphaForPeer:self.eastPeer];
+	self.westLabel.alpha = [self labelAlphaForPeer:self.westPeer];
 	
-	self.northArrowView.alpha = [self _arrowAlphaForPeer:self.northPeer];
-	self.eastArrowView.alpha = [self _arrowAlphaForPeer:self.eastPeer];
-	self.westArrowView.alpha = [self _arrowAlphaForPeer:self.westPeer];
+	self.northArrowView.alpha = [self arrowAlphaForPeer:self.northPeer];
+	self.eastArrowView.alpha = [self arrowAlphaForPeer:self.eastPeer];
+	self.westArrowView.alpha = [self arrowAlphaForPeer:self.westPeer];
 	
 	if (animated)
 		[UIView commitAnimations];
@@ -410,7 +410,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		[(L0MoverAppDelegate*)UIApp.delegate showAlertIfNotShownBeforeNamed:@"L0EditingIsNondestructive"];
 }
 
-- (CGFloat) _labelAlphaForPeer:(L0MoverPeer*) peer;
+- (CGFloat) labelAlphaForPeer:(L0MoverPeer*) peer;
 {
 	CGFloat alpha;
 	
@@ -423,7 +423,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	return alpha;
 }
 
-- (CGFloat) _arrowAlphaForPeer:(L0MoverPeer*) peer;
+- (CGFloat) arrowAlphaForPeer:(L0MoverPeer*) peer;
 {
 	CGFloat alpha;
 	
@@ -456,7 +456,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	return YES;
 }
 
-- (void) _endHoldingView:(L0DraggableView*) view;
+- (void) endHoldingView:(L0DraggableView*) view;
 {
 	if ([viewsBeingHeld containsObject:view]) {
 		[UIView beginAnimations:nil context:NULL];
@@ -473,12 +473,12 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) draggableViewDidEndPressAndHold:(L0DraggableView*) view;
 {
-	[self _endHoldingView:view];
+	[self endHoldingView:view];
 }
 	
 - (void) draggableViewDidEndDragging:(L0DraggableView*) view continuesWithSlide:(BOOL) slide;
 {
-	[self _endHoldingView:view];
+	[self endHoldingView:view];
 }
 
 #pragma mark -
@@ -552,7 +552,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		[queuedPeers removeLastObject];
 }
 
-- (void) _setPeer:(L0MoverPeer*) peer forKey:(NSString*) key withArrow:(UIImageView*) arrow label:(UILabel*) label hadPreviousPeer:(BOOL) hadPreviousPeer;
+- (void) updateUIWithPeer:(L0MoverPeer*) peer forKey:(NSString*) key withArrow:(UIImageView*) arrow label:(UILabel*) label hadPreviousPeer:(BOOL) hadPreviousPeer;
 {	
 	L0Log(@"%@, %@, %@, %@, %d", peer, key, arrow, label, hadPreviousPeer);
 	
@@ -610,8 +610,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	[UIView setAnimationCurve:peer? UIViewAnimationCurveEaseOut : UIViewAnimationCurveEaseIn];
 	[UIView setAnimationDuration:1.0];
 	
-	label.alpha = [self _labelAlphaForPeer:peer];
-	arrow.alpha = [self _arrowAlphaForPeer:peer];
+	label.alpha = [self labelAlphaForPeer:peer];
+	arrow.alpha = [self arrowAlphaForPeer:peer];
 	
 	[UIView commitAnimations];
 }
@@ -626,7 +626,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		northPeer = [p retain];
 	}
 	
-	[self _setPeer:p forKey:@"northPeer" withArrow:self.northArrowView label:self.northLabel hadPreviousPeer:hadPeer];
+	[self updateUIWithPeer:p forKey:@"northPeer" withArrow:self.northArrowView label:self.northLabel hadPreviousPeer:hadPeer];
 }
 
 - (void) setEastPeer:(L0MoverPeer*) p;
@@ -639,7 +639,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		eastPeer = [p retain];
 	}
 	
-	[self _setPeer:p forKey:@"eastPeer" withArrow:self.eastArrowView label:self.eastLabel hadPreviousPeer:hadPeer];
+	[self updateUIWithPeer:p forKey:@"eastPeer" withArrow:self.eastArrowView label:self.eastLabel hadPreviousPeer:hadPeer];
 }
 
 - (void) setWestPeer:(L0MoverPeer*) p;
@@ -652,13 +652,13 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		westPeer = [p retain];
 	}
 	
-	[self _setPeer:p forKey:@"westPeer" withArrow:self.westArrowView label:self.westLabel hadPreviousPeer:hadPeer];
+	[self updateUIWithPeer:p forKey:@"westPeer" withArrow:self.westArrowView label:self.westLabel hadPreviousPeer:hadPeer];
 }
 
 #pragma mark -
 #pragma mark Receiving
 
-- (UIActivityIndicatorView*) _spinnerForPeer:(L0MoverPeer*) peer;
+- (UIActivityIndicatorView*) spinnerForPeer:(L0MoverPeer*) peer;
 {
 	UIActivityIndicatorView* spinner = nil;
 	if (peer == self.northPeer)
@@ -686,13 +686,13 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) addItem:(L0MoverItem*) item comingFromPeer:(L0MoverPeer*) peer;
 {
-	[self addItem:item animation:[self _animationForPeer:peer]];
+	[self addItem:item animation:[self animationForPeer:peer]];
 	[self stopWaitingForItemFromPeer:peer];
 }
 
 - (void) stopWaitingForItemFromPeer:(L0MoverPeer*) peer;
 {
-	[[self _spinnerForPeer:peer] stopAnimating];
+	[[self spinnerForPeer:peer] stopAnimating];
 	
 	[self _labelForPeer:peer].textColor = basePeerLabelColor;
 	
@@ -713,12 +713,12 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	L0MoverItemView* view = (L0MoverItemView*) CFDictionaryGetValue(itemsToViews, item);
 
 	if (view)
-		[self _animateItemView:view withAddAnimation:[self _animationForPeer:peer]];
+		[self animateItemView:view withAddAnimation:[self animationForPeer:peer]];
 }
 
 - (void) beginWaitingForItemComingFromPeer:(L0MoverPeer*) peer;
 {
-	[[self _spinnerForPeer:peer] startAnimating];
+	[[self spinnerForPeer:peer] startAnimating];
 	
 	[self _labelForPeer:peer].textColor = [UIColor colorWithRed:33.0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.0];
 
@@ -771,17 +771,17 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) draggableView:(L0DraggableView*) view didEndAttractionByFinishing:(BOOL) finished;
 {
-	[self _bounceOrSendItemOfView:(L0MoverItemView*) view];
+	[self bounceOrSendItemOfView:(L0MoverItemView*) view];
 }
 
 - (void) draggableView:(L0DraggableView*) view didEndInertialSlideByFinishing:(BOOL) finished;
 {
-	[self _bounceOrSendItemOfView:(L0MoverItemView*) view];
+	[self bounceOrSendItemOfView:(L0MoverItemView*) view];
 }
 
 #define kL0SlideItemsTableOffsetSafetyMargin 50
 
-- (void) _bounceOrSendItemOfView:(L0MoverItemView*) view;
+- (void) bounceOrSendItemOfView:(L0MoverItemView*) view;
 {	
 	L0Log(@"%@", view);
 	
