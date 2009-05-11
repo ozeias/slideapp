@@ -312,7 +312,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self.tableController setEditing:NO animated:YES];
 	
 	UIActionSheet* sheet = [[UIActionSheet new] autorelease];
-	sheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+	sheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	sheet.delegate = self;
 	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Add item - image button")];
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
