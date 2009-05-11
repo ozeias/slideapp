@@ -39,24 +39,56 @@
 
 - (void) testNetworkBecomingUnavailable; // WARNING: Disables network watching, use with care.
 {
-	[self performSelector:@selector(_performTestNetworkUnavailable) withObject:nil afterDelay:1.0];
+	[self performSelector:@selector(performTestNetworkUnavailable) withObject:nil afterDelay:1.0];
 }
 
-- (void) _performTestNetworkUnavailable;
+- (void) performTestNetworkUnavailable;
 {
+	[self beginTestingModeBannerAnimation];
 	[self stopWatchingNetwork];
 	self.networkAvailable = NO;
 }
 
 - (void) testNetworkBecomingAvailable; // WARNING: Disables network watching, use with care.
 {
-	[self performSelector:@selector(_performTestNetworkAvailable) withObject:nil afterDelay:1.0];
+	[self performSelector:@selector(performTestNetworkAvailable) withObject:nil afterDelay:1.0];
 }
 
-- (void) _performTestNetworkAvailable;
+- (void) performTestNetworkAvailable;
 {
+	[self beginTestingModeBannerAnimation];
 	[self stopWatchingNetwork];
 	self.networkAvailable = YES;
+}
+
+- (void) testByPerformingAlertParade; // WARNING: Disables network watching, use with care.
+{
+	[self performSelector:@selector(beginTestingModeBannerAnimation) withObject:nil afterDelay:0.01];
+	[self performSelector:@selector(testWelcomeAlert) withObject:nil afterDelay:0.02];
+	[self performSelector:@selector(testContactTutorialAlert) withObject:nil afterDelay:5.0];
+	[self performSelector:@selector(testImageTutorialAlert) withObject:nil afterDelay:10.0];
+	[self performSelector:@selector(testImageTutorialAlert_iPod) withObject:nil afterDelay:15.0];
+	[self performSelector:@selector(testNewVersionAlert) withObject:nil afterDelay:20.0];
+	[self performSelector:@selector(testNetworkBecomingUnavailable) withObject:nil afterDelay:25.0];
+	[self performSelector:@selector(testNetworkBecomingAvailable) withObject:nil afterDelay:30.0];
+}
+
+- (void) beginTestingModeBannerAnimation;
+{
+	static BOOL isInTestingMode = NO;
+	
+	if (!isInTestingMode) {
+		[[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(switchStatusBarColorForTestingModeAnimation:) userInfo:nil repeats:YES] retain];
+		isInTestingMode = YES;
+	}
+}
+
+- (void) switchStatusBarColorForTestingModeAnimation:(NSTimer*) t;
+{
+	static BOOL black = NO;
+	UIStatusBarStyle style = black? UIStatusBarStyleDefault : UIStatusBarStyleBlackOpaque;
+	black = !black;
+	[UIApp setStatusBarStyle:style animated:YES];
 }
 
 @end
