@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		15038F250F852340008F6BBB /* RemoveButton_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 15038F240F852340008F6BBB /* RemoveButton_Pressed.png */; };
 		150A4D770FA39D5D006B9BB4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */; };
+		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
 		153734ED0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
 		154FB61E0FB18EA500DB26C6 /* L0MoverNewVersion.alert in Resources */ = {isa = PBXBuildFile; fileRef = 154FB61D0FB18EA500DB26C6 /* L0MoverNewVersion.alert */; };
@@ -158,6 +159,8 @@
 /* Begin PBXFileReference section */
 		15038F240F852340008F6BBB /* RemoveButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RemoveButton_Pressed.png; sourceTree = "<group>"; };
 		150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
+		153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0UITestingHooks.m"; sourceTree = "<group>"; };
 		153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
 		153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0ItemPersistance.m"; sourceTree = "<group>"; };
 		153735B60F8F5E06005B2BD3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -316,14 +319,16 @@
 				15C0C1CB0F759B7500E5BA2F /* Items */,
 				1D3623240D0F684500981E51 /* L0MoverAppDelegate.h */,
 				1D3623250D0F684500981E51 /* L0MoverAppDelegate.m */,
-				15C0C16B0F75918800E5BA2F /* L0MoverItemView.h */,
-				15C0C16C0F75918800E5BA2F /* L0MoverItemView.m */,
-				15F67F810F7632260024A858 /* L0MoverItemsTableController.h */,
-				15F67F820F7632260024A858 /* L0MoverItemsTableController.m */,
 				153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */,
 				153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */,
 				15B929330F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.h */,
 				15B929340F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m */,
+				153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */,
+				153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */,
+				15C0C16B0F75918800E5BA2F /* L0MoverItemView.h */,
+				15C0C16C0F75918800E5BA2F /* L0MoverItemView.m */,
+				15F67F810F7632260024A858 /* L0MoverItemsTableController.h */,
+				15F67F820F7632260024A858 /* L0MoverItemsTableController.m */,
 				15B929FC0F907BD9001E40B7 /* L0MoverAboutPane.h */,
 				15B929FD0F907BD9001E40B7 /* L0MoverAboutPane.m */,
 			);
@@ -762,6 +767,7 @@
 				15911E760F8FA2D900BECD18 /* L0AddressBookPersonItem.m in Sources */,
 				15B929350F906DFF001E40B7 /* L0MoverAppDelegate+L0HelpAlerts.m in Sources */,
 				15B929FE0F907BD9001E40B7 /* L0MoverAboutPane.m in Sources */,
+				153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

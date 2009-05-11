@@ -29,6 +29,7 @@
 	CGPoint networkUnavailableViewStartingPosition;
 	
 	double lastSeenVersion;
+	BOOL networkAvailable;
 }
 
 @property(retain) IBOutlet UIWindow *window;
@@ -52,6 +53,19 @@
 - (void) updateNetworkWithFlags:(SCNetworkReachabilityFlags) flags;
 
 @property(retain) IBOutlet UIView* networkUnavailableView;
+@property(readonly, getter=isNetworkAvailable) BOOL networkAvailable;
 
 @end
 
+#if L0MoverAppDelegateAllowFriendMethods
+@interface L0MoverAppDelegate (L0FriendMethods)
+
+@property(readwrite) BOOL networkAvailable;
+#if DEBUG
+- (void) stopWatchingNetwork;
+#endif
+
+- (void) displayNewVersionAlertWithVersion:(NSString*) version;
+
+@end
+#endif

@@ -6,6 +6,7 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
+#define L0MoverAppDelegateAllowFriendMethods 1
 #import "L0MoverAppDelegate.h"
 #import "L0ImageItem.h"
 #import "L0AddressBookPersonItem.h"
@@ -68,7 +69,9 @@ enum {
 	[self showAlertIfNotShownBeforeNamed:@"L0MoverWelcome"];
 	
 	networkUnavailableViewStartingPosition = self.networkUnavailableView.center;
-	[self beginWatchingNetwork];
+	self.networkUnavailableView.hidden = YES;
+	networkAvailable = YES;
+	[self beginWatchingNetwork];	
 }
 
 #pragma mark -
@@ -82,7 +85,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[myself updateNetworkWithFlags:flags];
 }
 
-@synthesize networkUnavailableView;
+@synthesize networkUnavailableView, networkAvailable;
 
 - (void) beginWatchingNetwork;
 {
@@ -114,6 +117,16 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 		[self updateNetworkWithFlags:flags];
 }
 
+#if DEBUG
+- (void) stopWatchingNetwork;
+{
+	if (!reach) return;
+	
+	SCNetworkReachabilityUnscheduleFromRunLoop(reach, [[NSRunLoop currentRunLoop] getCFRunLoop], kCFRunLoopDefaultMode);
+	CFRelease(reach); reach = NULL;
+}
+#endif
+
 - (void) checkNetwork;
 {
 	SCNetworkReachabilityFlags flags;
@@ -128,50 +141,57 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 		!(flags & kSCNetworkReachabilityFlagsConnectionRequired);
 	// note that unlike Reachability.m we don't care about WWANs.
 	
-	if (habemusNetwork) {
-		L0Log(@"We have network!");
-		
-		// update UI for network. Huzzah!
-		if (self.networkUnavailableView.alpha > 0) {
-			[UIView beginAnimations:nil context:NULL];
-			[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-			[UIView setAnimationDuration:1.0];
-			
-			self.networkUnavailableView.alpha = 0.0;
-			CGPoint position = self.networkUnavailableView.center;
-			position.y =
-				self.networkUnavailableView.superview.frame.size.height +
-				self.networkUnavailableView.superview.frame.size.height;
-			self.networkUnavailableView.center = position;
-			
-			[UIView commitAnimations];
-		}
-	} else {
-		L0Log(@"No network!");
+	self.networkAvailable = habemusNetwork;
+}
 
+- (void) setNetworkAvailable:(BOOL) habemusNetwork;
+{
+	BOOL wasUp = networkAvailable;
+	networkAvailable = habemusNetwork;
+	L0Log(@"Available = %d", habemusNetwork);
+	
+	if (habemusNetwork && !wasUp) {
+		// update UI for network. Huzzah!
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+		[UIView setAnimationDuration:1.0];
+		
+		self.networkUnavailableView.alpha = 0.0;
+		CGPoint position = self.networkUnavailableView.center;
+		position.y =
+		self.networkUnavailableView.superview.frame.size.height +
+		self.networkUnavailableView.superview.frame.size.height;
+		self.networkUnavailableView.center = position;
+		
+		[UIView commitAnimations];
+
+		self.networkUnavailableView.hidden = NO;
+	} else if (!habemusNetwork && wasUp) {
 		// disable UI for no network. Boo, user, boo!
-		if (self.networkUnavailableView.alpha == 0) {
-			CGPoint position = self.networkUnavailableView.center;
-			position.y =
-				self.networkUnavailableView.superview.frame.size.height +
-				self.networkUnavailableView.superview.frame.size.height;
-			self.networkUnavailableView.center = position;
-			
-			[UIView beginAnimations:nil context:NULL];
-			[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-			[UIView setAnimationDuration:1.0];
-			
-			self.networkUnavailableView.alpha = 1.0;
-			self.networkUnavailableView.center = networkUnavailableViewStartingPosition;
-			
-			[UIView commitAnimations];
-		}
+		CGPoint position = self.networkUnavailableView.center;
+		position.y =
+		self.networkUnavailableView.superview.frame.size.height +
+		self.networkUnavailableView.superview.frame.size.height;
+		self.networkUnavailableView.center = position;
+		
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+		[UIView setAnimationDuration:1.0];
+		
+		self.networkUnavailableView.alpha = 1.0;
+		self.networkUnavailableView.center = networkUnavailableViewStartingPosition;
+		
+		[UIView commitAnimations];
 		
 		// clear all peers off the table. TODO: only Bonjour peers!
 		self.tableController.northPeer = nil;
 		self.tableController.eastPeer = nil;
 		self.tableController.westPeer = nil;
+		
+		self.networkUnavailableView.hidden = NO;
 	}
+
+	[self.networkUnavailableView.superview bringSubviewToFront:self.networkUnavailableView];
 }
 
 #pragma mark -
@@ -235,14 +255,19 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	if (peer.applicationVersion > lastSeenVersion) {
 		lastSeenVersion = peer.applicationVersion;
 		[[NSUserDefaults standardUserDefaults] setDouble:peer.applicationVersion forKey:kL0MoverLastSeenVersionKey];
-		
-		UIAlertView* alert = [UIAlertView alertNamed:@"L0MoverNewVersion"];
-		alert.tag = kL0MoverNewVersionAlertTag;
+
 		NSString* version = peer.userVisibleApplicationVersion?: @"(no version number)";
-		[alert setTitleFormat:nil, version];
-		alert.delegate = self;
-		[alert show];
+		[self displayNewVersionAlertWithVersion:version];
 	}
+}
+
+- (void) displayNewVersionAlertWithVersion:(NSString*) version;
+{
+	UIAlertView* alert = [UIAlertView alertNamed:@"L0MoverNewVersion"];
+	alert.tag = kL0MoverNewVersionAlertTag;
+	[alert setTitleFormat:nil, version];
+	alert.delegate = self;
+	[alert show];
 }
 
 - (void) alertView:(UIAlertView*) alertView clickedButtonAtIndex:(NSInteger) buttonIndex;
