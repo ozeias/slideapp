@@ -60,7 +60,8 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (CGFloat) _labelAlphaForPeer:(L0MoverPeer*) peer;
 - (CGFloat) _arrowAlphaForPeer:(L0MoverPeer*) peer;
-- (void) _setPeer:(L0MoverPeer*) peer withArrow:(UIImageView*) arrow label:(UILabel*) label;
+- (void) _setPeer:(L0MoverPeer*) peer forKey:(NSString*) key withArrow:(UIImageView*) arrow label:(UILabel*) label hadPreviousPeer:(BOOL) hadPreviousPeer;
+- (void) performFadeInOutAnimationForKey:(NSString*) key assumingStillIsPeer:(L0MoverPeer*) peer withArrow:(UIImageView*) arrow label:(UILabel*) label;
 
 - (void) _bounceOrSendItemOfView:(L0MoverItemView*) view;
 
@@ -84,6 +85,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		itemsToViews = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 		viewsBeingHeld = [NSMutableSet new];
 		self.editButtonItem.enabled = NO;
+		queuedPeers = [NSMutableArray new];
 	}
 	
 	return self;
@@ -161,6 +163,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	self.northPeer = nil;
 	self.eastPeer = nil;
 	self.westPeer = nil;
+	[queuedPeers release];
 	
     [super dealloc];
 }
@@ -485,11 +488,18 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (BOOL) addPeerIfSpaceAllows:(L0MoverPeer*) peer;
 {
+	L0Log(@"%@", peer);
+	
 	if ([peer isEqual:self.northPeer] || [peer isEqual:self.eastPeer] || [peer isEqual:self.westPeer])
 		return YES;
 	
-	if (self.eastPeer && self.northPeer && self.westPeer)
-		return NO;
+	if ([queuedPeers containsObject:peer])
+		return YES;
+	
+	if (self.eastPeer && self.northPeer && self.westPeer) {
+		[queuedPeers addObject:peer];
+		return YES;
+	}
 	
 	BOOL added = NO;
 	while (!added) {
@@ -522,56 +532,127 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 }
 - (void) removePeer:(L0MoverPeer*) peer;
 {
-	if ([peer isEqual:self.northPeer])
-		self.northPeer = nil;
-	else if ([peer isEqual:self.eastPeer])
-		self.eastPeer = nil;
-	else if ([peer isEqual:self.westPeer])
-		self.westPeer = nil;	
+	L0Log(@"%@", peer);
+	
+	id nextPeer = nil; BOOL used = NO;
+	if ([queuedPeers count] > 0) {
+		nextPeer = [queuedPeers lastObject];
+	}
+	
+	if ([peer isEqual:self.northPeer]) {
+		self.northPeer = nextPeer; used = (nextPeer != nil);
+	} else if ([peer isEqual:self.eastPeer]) {
+		self.eastPeer = nextPeer; used = (nextPeer != nil);
+	} else if ([peer isEqual:self.westPeer]) {
+		self.westPeer = nextPeer; used = (nextPeer != nil);
+	} else
+		[queuedPeers removeObject:peer];
+	
+	if (used)
+		[queuedPeers removeLastObject];
 }
 
-- (void) _setPeer:(L0MoverPeer*) peer withArrow:(UIImageView*) arrow label:(UILabel*) label;
-{
-	if (peer)
-		label.text = peer.name;
+- (void) _setPeer:(L0MoverPeer*) peer forKey:(NSString*) key withArrow:(UIImageView*) arrow label:(UILabel*) label hadPreviousPeer:(BOOL) hadPreviousPeer;
+{	
+	L0Log(@"%@, %@, %@, %@, %d", peer, key, arrow, label, hadPreviousPeer);
 	
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationCurve:peer? UIViewAnimationCurveEaseOut : UIViewAnimationCurveEaseIn];
+	if (hadPreviousPeer && peer) {
+		[UIView beginAnimations:@"L0ArrowFadeOutForBlankingAnimation" context:NULL];
+		[UIView setAnimationCurve:peer? UIViewAnimationCurveEaseOut : UIViewAnimationCurveEaseIn];
+		[UIView setAnimationDuration:0.5];
 		
+		label.alpha = 0.0;
+		arrow.alpha = 0.0;
+		
+		[UIView commitAnimations];
+		
+		[label performSelector:@selector(setText:) withObject:peer.name afterDelay:0.55];
+	}
+	
+	if (peer && !hadPreviousPeer)
+		label.text = peer.name;
+
+	if (!hadPreviousPeer)
+		[self performFadeInOutAnimationForKey:key assumingStillIsPeer:peer withArrow:arrow label:label];
+	else {
+		NSMutableDictionary* attrs = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+									  key, @"key",
+									  arrow, @"arrow",
+									  label, @"label",
+									  nil];
+		if (peer)
+			[attrs setObject:peer forKey:@"peer"];
+		[self performSelector:@selector(performFadeInOutAnimationWithAttributes:) withObject:attrs afterDelay:0.7];
+	}
+}
+
+- (void) performFadeInOutAnimationWithAttributes:(NSDictionary*) d;
+{
+	L0Log(@"%@", d);
+	[self performFadeInOutAnimationForKey:[d objectForKey:@"key"] assumingStillIsPeer:[d objectForKey:@"peer"] withArrow:[d objectForKey:@"arrow"] label:[d objectForKey:@"label"]];
+}
+
+- (void) performFadeInOutAnimationForKey:(NSString*) key assumingStillIsPeer:(L0MoverPeer*) assumedPeer withArrow:(UIImageView*) arrow label:(UILabel*) label;
+{
+	L0Log(@"key = %@, assumed peer = %@, arrow = %@, label = %@", key, assumedPeer, arrow, label);
+	NSAssert(arrow != nil, @"Have an arrow");
+	NSAssert(label != nil, @"Have an arrow");
+	
+	L0MoverPeer* peer = [self valueForKey:key];
+	if ([peer isEqual:[NSNull null]])
+		peer = nil;
+	if ([self valueForKey:key] != assumedPeer) {
+		L0Log(@"Assumption no longer valid, now %@", peer);
+		return;
+	}
+	
+	[UIView beginAnimations:@"L0ArrowFadeInOutAnimation" context:NULL];
+	[UIView setAnimationCurve:peer? UIViewAnimationCurveEaseOut : UIViewAnimationCurveEaseIn];
+	[UIView setAnimationDuration:1.0];
+	
 	label.alpha = [self _labelAlphaForPeer:peer];
 	arrow.alpha = [self _arrowAlphaForPeer:peer];
 	
-	[UIView commitAnimations];		
+	[UIView commitAnimations];
 }
 
 - (void) setNorthPeer:(L0MoverPeer*) p;
 {
+	L0Log(@"replacing %@ with %@", northPeer, p);	
+	BOOL hadPeer = (northPeer != nil);
+	
 	if (p != northPeer) {
 		[northPeer release];
 		northPeer = [p retain];
 	}
 	
-	[self _setPeer:p withArrow:self.northArrowView label:self.northLabel];
+	[self _setPeer:p forKey:@"northPeer" withArrow:self.northArrowView label:self.northLabel hadPreviousPeer:hadPeer];
 }
 
 - (void) setEastPeer:(L0MoverPeer*) p;
 {
+	L0Log(@"replacing %@ with %@", eastPeer, p);	
+	BOOL hadPeer = (eastPeer != nil);
+	
 	if (p != eastPeer) {
 		[eastPeer release];
 		eastPeer = [p retain];
 	}
 	
-	[self _setPeer:p withArrow:self.eastArrowView label:self.eastLabel];
+	[self _setPeer:p forKey:@"eastPeer" withArrow:self.eastArrowView label:self.eastLabel hadPreviousPeer:hadPeer];
 }
 
 - (void) setWestPeer:(L0MoverPeer*) p;
 {
+	L0Log(@"replacing %@ with %@", westPeer, p);	
+	BOOL hadPeer = (westPeer != nil);
+	
 	if (p != westPeer) {
 		[westPeer release];
 		westPeer = [p retain];
 	}
 	
-	[self _setPeer:p withArrow:self.westArrowView label:self.westLabel];
+	[self _setPeer:p forKey:@"westPeer" withArrow:self.westArrowView label:self.westLabel hadPreviousPeer:hadPeer];
 }
 
 #pragma mark -

@@ -53,6 +53,7 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 	L0MoverPeer* northPeer;
 	L0MoverPeer* eastPeer;
 	L0MoverPeer* westPeer;
+	NSMutableArray* queuedPeers;
 	
 	UIColor* basePeerLabelColor;
 	
