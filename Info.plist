@@ -24,6 +24,17 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>${INTERNAL_VERSION}</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>net.infinite-labs.Mover.API</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>x-infinitelabs-mover</string>
+			</array>
+		</dict>
+	</array>
 	<key>L0Motto</key>
 	<string>Per aspera ad astra.</string>
 	<key>L0Truism</key>

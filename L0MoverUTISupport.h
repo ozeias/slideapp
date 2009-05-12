@@ -11,5 +11,7 @@
 	#define kUTTypePNG @"public.png"
 	#define kUTTypeBMP @"com.microsoft.bmp"
 	#define kUTTypeICO @"com.microsoft.ico"
+	
+	#define kUTTypeURL @"public.url"
 
 #endif

@@ -15,6 +15,8 @@
 #import "L0MoverAppDelegate+L0ItemPersistance.h"
 #import "L0MoverAppDelegate+L0HelpAlerts.h"
 
+#import "L0BookmarkItem.h"
+
 #import <netinet/in.h>
 
 // Alert tags
@@ -75,6 +77,44 @@ enum {
 	self.networkUnavailableView.hidden = YES;
 	networkAvailable = YES;
 	[self beginWatchingNetwork];	
+}
+
+#pragma mark -
+#pragma mark Bookmark items
+
+- (BOOL) application:(UIApplication*) application handleOpenURL:(NSURL*) url;
+{
+	volatile BOOL goOn = NO; while (!goOn)
+		sleep(1);
+	
+	NSString* scheme = [url scheme];
+	if (![scheme isEqual:@"x-infinitelabs-mover"])
+		return NO;
+	
+	if (![[url resourceSpecifier] hasPrefix:@"add?"])
+		return NO;
+	
+	NSDictionary* query = [url dictionaryByDecodingQueryString];
+	NSString* urlString, * title;
+	if (!(urlString = [query objectForKey:@"url"]))
+		return NO;
+	if (!(title = [query objectForKey:@"title"]))
+		title = urlString;
+	
+	if (![urlString hasPrefix:@"http://"] && ![urlString hasPrefix:@"https://"])
+		return NO;
+	
+	NSURL* bookmarkedURL = [NSURL URLWithString:urlString];
+	if (!bookmarkedURL)
+		return NO;
+	L0BookmarkItem* item = [[[L0BookmarkItem alloc] initWithAddress:bookmarkedURL title:title] autorelease];
+	[self performSelector:@selector(addItemToTable:) withObject:item afterDelay:1.0];
+	return YES;
+}
+
+- (void) addItemToTable:(L0MoverItem*) item;
+{
+	[self.tableController addItem:item animation:kL0SlideItemsTableAddByDropping];
 }
 
 #pragma mark -
