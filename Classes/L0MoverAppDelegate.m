@@ -8,6 +8,7 @@
 
 #define L0MoverAppDelegateAllowFriendMethods 1
 #import "L0MoverAppDelegate.h"
+
 #import "L0ImageItem.h"
 #import "L0AddressBookPersonItem.h"
 #import "L0BonjourPeeringService.h"
@@ -27,6 +28,8 @@ enum {
 
 - (void) returnFromImagePicker;
 @property(copy, setter=privateSetDocumentsDirectory:) NSString* documentsDirectory;
+
+- (BOOL) isCameraAvailable;
 
 @end
 
@@ -307,18 +310,35 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
     [super dealloc];
 }
 
+#define kL0MoverAddImageButton @"kL0MoverAddImageButton"
+#define kL0MoverAddContactButton @"kL0MoverAddContactButton"
+#define kL0MoverTakeAPhotoButton @"kL0MoverTakeAPhotoButton"
+#define kL0MoverCancelButton @"kL0MoverCancelButton"
+
+- (BOOL) isCameraAvailable;
+{
+#if defined(TARGET_IPHONE_SIMULATOR) && kL0iPhoneSimulatorPretendIsiPodTouch
+	return NO;
+#else
+	return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+#endif
+}
+
 - (IBAction) addItem;
 {
 	[self.tableController setEditing:NO animated:YES];
 	
-	UIActionSheet* sheet = [[UIActionSheet new] autorelease];
+	L0ActionSheet* sheet = [[L0ActionSheet new] autorelease];
 	sheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	sheet.delegate = self;
-	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Add item - image button")];
-	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-		[sheet addButtonWithTitle:NSLocalizedString(@"Take a Photo", @"Add item - take a photo button")];
-	[sheet addButtonWithTitle:NSLocalizedString(@"Add Contact", @"Add item - contact button")];
-	NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Add item - cancel button")];
+	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Add item - image button") identifier:kL0MoverAddImageButton];
+	
+	if ([self isCameraAvailable])
+		[sheet addButtonWithTitle:NSLocalizedString(@"Take a Photo", @"Add item - take a photo button") identifier:kL0MoverTakeAPhotoButton];
+	
+	[sheet addButtonWithTitle:NSLocalizedString(@"Add Contact", @"Add item - contact button")  identifier:kL0MoverAddContactButton];
+	
+	NSInteger i = [sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Add item - cancel button") identifier:kL0MoverCancelButton];
 	sheet.cancelButtonIndex = i;
 
 	[sheet showInView:self.window];
@@ -326,21 +346,14 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-	switch (buttonIndex) {
-		case 0:
-			[self addImageItem];
-			break;
-		case 1:
-			if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-				[self takeAPhotoAndAddImageItem];
-			else
-				[self addAddressBookItem];
-			break;
-		case 2:
-			[self addAddressBookItem];
-		default:
-			break;
-	}
+	id identifier = [(L0ActionSheet*)actionSheet identifierForButtonAtIndex:buttonIndex];
+	
+	if ([identifier isEqual:kL0MoverAddImageButton])
+		[self addImageItem];
+	else if ([identifier isEqual:kL0MoverTakeAPhotoButton])
+		[self takeAPhotoAndAddImageItem];
+	else if ([identifier isEqual:kL0MoverAddContactButton])
+		[self addAddressBookItem];
 }
 
 - (void) addAddressBookItem;
