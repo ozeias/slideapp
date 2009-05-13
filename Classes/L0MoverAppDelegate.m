@@ -84,9 +84,6 @@ enum {
 
 - (BOOL) application:(UIApplication*) application handleOpenURL:(NSURL*) url;
 {
-	volatile BOOL goOn = NO; while (!goOn)
-		sleep(1);
-	
 	NSString* scheme = [url scheme];
 	if (![scheme isEqual:@"x-infinitelabs-mover"])
 		return NO;
