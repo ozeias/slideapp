@@ -15,10 +15,61 @@
    sodipodi:version="0.32"
    inkscape:version="0.46"
    version="1.0"
-   sodipodi:docname="frame.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   sodipodi:docname="frame-highlighted.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/Frame_highlighted.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3173"
+       id="linearGradient3185"
+       gradientUnits="userSpaceOnUse"
+       x1="271"
+       y1="440.36218"
+       x2="271"
+       y2="592.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3173"
+       id="linearGradient3183"
+       gradientUnits="userSpaceOnUse"
+       x1="271"
+       y1="440.36218"
+       x2="271"
+       y2="592.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3173"
+       id="linearGradient3181"
+       gradientUnits="userSpaceOnUse"
+       x1="271"
+       y1="440.36218"
+       x2="271"
+       y2="592.36218" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3173">
+      <stop
+         style="stop-color:#8777ff;stop-opacity:1"
+         offset="0"
+         id="stop3175" />
+      <stop
+         style="stop-color:#2f13ff;stop-opacity:1"
+         offset="1"
+         id="stop3177" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3173"
+       id="linearGradient3179"
+       x1="271"
+       y1="440.36218"
+       x2="271"
+       y2="592.36218"
+       gradientUnits="userSpaceOnUse" />
     <linearGradient
        id="linearGradient3231"
        inkscape:collect="always">
@@ -119,6 +170,15 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 526.18109 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3173"
+       id="linearGradient3201"
+       gradientUnits="userSpaceOnUse"
+       x1="296"
+       y1="580.86218"
+       x2="296"
+       y2="481.35843" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -153,66 +213,23 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-241,-427.36218)">
-    <g
-       id="g3245"
-       transform="translate(0.5,0.4999974)">
-      <rect
-         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter3213);enable-background:accumulate"
-         id="rect3155"
-         width="152"
-         height="152"
-         x="254"
-         y="440.36218"
-         rx="11"
-         ry="11" />
-      <rect
-         ry="11"
-         rx="11"
-         y="440.36218"
-         x="254"
-         height="152"
-         width="152"
-         id="rect2383"
-         style="opacity:1;fill:url(#linearGradient3250);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <rect
-         ry="12.662791"
-         rx="11"
-         y="481.36218"
-         x="263"
-         height="99"
-         width="133"
-         id="rect3225"
-         style="opacity:1;fill:url(#linearGradient3252);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    </g>
-    <text
-       xml:space="preserve"
-       style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;opacity:1;fill:#e5e5e5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-       x="329"
-       y="462.36218"
-       id="text3406"><tspan
-         sodipodi:role="line"
-         id="tspan3408"
-         x="329"
-         y="462.36218"
-         style="font-size:18px;fill:#000000">Emanuele</tspan></text>
-    <image
-       y="485.36218"
-       x="281"
-       id="image3466"
-       height="96"
-       width="96"
-       sodipodi:absref="/Users/millenomi/Pictures/Foto Risa/∞ badge.png"
-       xlink:href="/Users/millenomi/Pictures/Foto Risa/∞ badge.png" />
-    <text
-       id="text3470"
-       y="476.36218"
-       x="329"
-       style="font-size:15px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;opacity:1;fill:#e5e5e5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Helvetica;-inkscape-font-specification:Helvetica"
-       xml:space="preserve"><tspan
-         style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue"
-         y="476.36218"
-         x="329"
-         id="tspan3472"
-         sodipodi:role="line">Contatto</tspan></text>
+    <rect
+       style="fill:url(#linearGradient3185);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;opacity:1;color:#000000"
+       id="rect2383"
+       width="152"
+       height="152"
+       x="254.5"
+       y="440.86218"
+       rx="11"
+       ry="11" />
+    <rect
+       style="fill:url(#linearGradient3201);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;opacity:1;color:#000000"
+       id="rect3225"
+       width="133"
+       height="99"
+       x="263.5"
+       y="481.86218"
+       rx="11"
+       ry="12.662791" />
   </g>
 </svg>

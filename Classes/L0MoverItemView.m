@@ -11,7 +11,7 @@
 
 @implementation L0MoverItemView
 
-@synthesize contentView, label, imageView;
+@synthesize contentView, label, imageView, highlightView;
 
 - (id) initWithFrame:(CGRect) frame;
 {
@@ -25,6 +25,7 @@
 		self.backgroundColor = [UIColor clearColor];
 		self.opaque = NO;
 		self.editing = NO;
+		self.highlighted = NO;
 	}
 	
     return self;
@@ -109,10 +110,31 @@
 	}
 }
 
+- (void) setHighlighted:(BOOL) h animated:(BOOL) animated animationDuration:(NSTimeInterval) duration;
+{
+	[UIView beginAnimations:nil context:NULL];
+	if (animated) {
+		[UIView setAnimationDuration:duration];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+		[UIView setAnimationBeginsFromCurrentState:YES];
+	} else
+		[UIView setAnimationDuration:0.0];
+	
+	highlightView.alpha = h? 1.0 : 0.0;
+	
+	[UIView commitAnimations];
+}
+
 @synthesize editing;
 - (void) setEditing:(BOOL) e;
 {
 	[self setEditing:e animated:NO];
+}
+
+@synthesize highlighted;
+- (void) setHighlighted:(BOOL) h;
+{
+	[self setHighlighted:h animated:NO animationDuration:0.0];
 }
 
 @end

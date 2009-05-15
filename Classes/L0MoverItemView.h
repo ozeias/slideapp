@@ -16,6 +16,7 @@
 	UILabel* label;
 	UIImageView* imageView;
 	UIButton* deleteButton;
+	UIImageView* highlightView;
 	
 	L0MoverItem* item;
 
@@ -23,12 +24,14 @@
 	SEL deletionAction;
 	
 	BOOL editing;
+	BOOL highlighted;
 }
 
 @property(retain) IBOutlet UIView* contentView;
 @property(assign) IBOutlet UILabel* label;
 @property(assign) IBOutlet UIImageView* imageView;
 @property(assign) IBOutlet UIButton* deleteButton;
+@property(assign) IBOutlet UIImageView* highlightView;
 
 - (void) setDeletionTarget:(id) target action:(SEL) action;
 
@@ -37,6 +40,9 @@
 
 - (void) setEditing:(BOOL) editing animated:(BOOL) animated;
 @property(getter=isEditing) BOOL editing;
+
+- (void) setHighlighted:(BOOL) highlighted animated:(BOOL) animated animationDuration:(NSTimeInterval) duration;
+@property(getter=isHighlighted) BOOL highlighted;
 
 - (IBAction) performDelete;
 
