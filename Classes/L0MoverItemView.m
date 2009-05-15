@@ -8,10 +8,16 @@
 
 #import "L0MoverItemView.h"
 
+@interface L0MoverItemView ()
+
+- (void) removeHighlightViewIfPossible;
+
+@end
+
 
 @implementation L0MoverItemView
 
-@synthesize contentView, label, imageView, highlightView;
+@synthesize contentView, label, imageView, highlightView, backdropView;
 
 - (id) initWithFrame:(CGRect) frame;
 {
@@ -43,6 +49,7 @@
 - (void) dealloc;
 {
 	self.contentView = nil;
+	self.highlightView = nil;
 	[super dealloc];
 }
 
@@ -73,8 +80,10 @@
 {
 	if (newEditing == editing)
 		return;
-	
+		
 	editing = newEditing;
+	self.pressAndHoldDelay = editing? 0.1 : 0.7;
+	L0Log(@"press and hold delay of %@ now %f", self, self.pressAndHoldDelay);
 	if (editing) {
 		
 		deleteButton.userInteractionEnabled = YES;
@@ -112,18 +121,44 @@
 
 - (void) setHighlighted:(BOOL) h animated:(BOOL) animated animationDuration:(NSTimeInterval) duration;
 {
+	L0Log(@"%d, %d, %f", h, animated, duration);
 	highlighted = h;
+	if (h && !self.highlightView.superview) {
+		L0Log(@"Readding highlight view to hierarchy");
+		self.highlightView.alpha = 0;
+		[self.contentView insertSubview:self.highlightView aboveSubview:self.backdropView];
+	}
+	
 	[UIView beginAnimations:nil context:NULL];
 	if (animated) {
 		[UIView setAnimationDuration:duration];
-		[UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 		[UIView setAnimationBeginsFromCurrentState:YES];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(highlightAnimation:didEndByFinishing:context:)];
 	} else
 		[UIView setAnimationDuration:0.0];
 	
 	highlightView.alpha = h? 1.0 : 0.0;
+	label.highlighted = h;
 	
 	[UIView commitAnimations];
+	
+	if (!animated)
+		[self removeHighlightViewIfPossible];
+}
+
+- (void) highlightAnimation:(NSString*) ani didEndByFinishing:(BOOL) finished context:(void*) context;
+{
+	[self removeHighlightViewIfPossible];
+}
+
+- (void) removeHighlightViewIfPossible;
+{
+	if (!self.highlighted && self.highlightView.superview) {
+		L0Log(@"Removing highlight view from hierarchy");
+		[self.highlightView removeFromSuperview];
+	}
 }
 
 @synthesize editing;

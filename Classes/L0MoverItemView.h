@@ -17,6 +17,7 @@
 	UIImageView* imageView;
 	UIButton* deleteButton;
 	UIImageView* highlightView;
+	UIImageView* backdropView;
 	
 	L0MoverItem* item;
 
@@ -30,8 +31,10 @@
 @property(retain) IBOutlet UIView* contentView;
 @property(assign) IBOutlet UILabel* label;
 @property(assign) IBOutlet UIImageView* imageView;
+@property(assign) IBOutlet UIImageView* backdropView;
 @property(assign) IBOutlet UIButton* deleteButton;
-@property(assign) IBOutlet UIImageView* highlightView;
+
+@property(retain) IBOutlet UIImageView* highlightView;
 
 - (void) setDeletionTarget:(id) target action:(SEL) action;
 

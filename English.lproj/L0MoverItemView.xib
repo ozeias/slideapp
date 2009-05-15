@@ -50,7 +50,7 @@
 							<string key="NSResourceName">frame.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="717667153">
+					<object class="IBUIImageView" id="485720203">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{179, 179}</string>
@@ -78,7 +78,10 @@
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
 						</object>
-						<nil key="IBUIHighlightedColor"/>
+						<object class="NSColor" key="IBUIHighlightedColor" id="798082817">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MSAxIDEAA</bytes>
+						</object>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
 						<int key="IBUITextAlignment">1</int>
@@ -109,10 +112,7 @@
 							<double key="NSSize">1.500000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
-						<object class="NSColor" key="IBUIHighlightedTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAxIDEAA</bytes>
-						</object>
+						<reference key="IBUIHighlightedTitleColor" ref="798082817"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MyAwLjMwOTgwMzkzIDAuNTIxNTY4NjYAA</bytes>
@@ -191,9 +191,17 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">highlightView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="717667153"/>
+						<reference key="destination" ref="485720203"/>
 					</object>
 					<int key="connectionID">14</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">backdropView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="778229361"/>
+					</object>
+					<int key="connectionID">15</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -216,7 +224,7 @@
 							<reference ref="318995797"/>
 							<reference ref="440420532"/>
 							<reference ref="746518306"/>
-							<reference ref="717667153"/>
+							<reference ref="485720203"/>
 						</object>
 						<reference key="parent" ref="360949347"/>
 					</object>
@@ -253,7 +261,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">13</int>
-						<reference key="object" ref="717667153"/>
+						<reference key="object" ref="485720203"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -301,7 +309,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">14</int>
+			<int key="maxID">15</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -317,6 +325,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backdropView</string>
 							<string>contentView</string>
 							<string>deleteButton</string>
 							<string>deletionTarget</string>
@@ -326,6 +335,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIImageView</string>
 							<string>UIView</string>
 							<string>UIButton</string>
 							<string>id</string>

@@ -65,9 +65,15 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) bounceOrSendItemOfView:(L0MoverItemView*) view;
 
+- (void) highlightIfNotEditing:(L0MoverItemView*) v;
+- (void) unhighlight:(L0MoverItemView*) v;
+
+- (void) beginHoldingView:(L0DraggableView*) view;
 - (void) endHoldingView:(L0DraggableView*) view;
 
 - (UIActivityIndicatorView*) spinnerForPeer:(L0MoverPeer*) peer;
+
+- (NSArray*) itemViews;
 
 @end
 
@@ -436,10 +442,63 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	return alpha;
 }
 
+- (void) draggableView:(L0DraggableView*) view didTouch:(UITouch*) t;
+{
+	[self highlightIfNotEditing:(L0MoverItemView*) view];
+}
+
+- (void) draggableView:(L0DraggableView*) view didTapMultipleTimesWithTouch:(UITouch*) t;
+{
+	[self unhighlight:(L0MoverItemView*) view];
+}
+
+- (void) draggableViewDidBeginDragging:(L0DraggableView*) view;
+{
+	[self unhighlight:(L0MoverItemView*) view];
+}
+
+- (void) draggableViewDidPress:(L0DraggableView*) view;
+{
+	[self unhighlight:(L0MoverItemView*) view];
+}	
+
+- (void) highlightIfNotEditing:(L0MoverItemView*) v;
+{
+	if (self.editing)
+		return;
+	
+	// This avoids drag lag.
+	[self performSelector:@selector(performHighlight:) withObject:v afterDelay:0.2];
+}
+
+- (void) performHighlight:(L0MoverItemView*) v;
+{
+	[v setHighlighted:YES animated:YES animationDuration:0.5];
+}
+
+- (void) unhighlight:(L0MoverItemView*) v;
+{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(performHighlight:) object:v];
+	[v setHighlighted:NO animated:YES animationDuration:0.3];
+}
+
+- (BOOL) draggableViewShouldBeginDraggingAfterPressAndHold:(L0DraggableView*) view;
+{
+	if (self.editing) {
+		[self beginHoldingView:view];
+		return YES;
+	} else {
+		// TODO action menu
+		L0Log(@"Would show the action menu now");
+		return NO;
+	}
+}
+
+
 #define kL0SlideItemsTableScaleWhenHeld 1.1
 #define kL0SlideItemsTableAlphaWhenHeld 0.7
 
-- (BOOL) draggableViewShouldBeginDraggingAfterPressAndHold:(L0DraggableView*) view;
+- (void) beginHoldingView:(L0DraggableView*) view;
 {
 	[viewsBeingHeld addObject:view];
 	
@@ -447,13 +506,11 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
-
+	
 	view.transform = CGAffineTransformScale(view.transform, kL0SlideItemsTableScaleWhenHeld, kL0SlideItemsTableScaleWhenHeld);
 	view.alpha = kL0SlideItemsTableAlphaWhenHeld;
 	
 	[UIView commitAnimations];
-	
-	return YES;
 }
 
 - (void) endHoldingView:(L0DraggableView*) view;
@@ -473,6 +530,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) draggableViewDidEndPressAndHold:(L0DraggableView*) view;
 {
+	[self unhighlight:(L0MoverItemView*) view];
 	[self endHoldingView:view];
 }
 	
@@ -853,6 +911,18 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	free(allItemsCArray);
 	
 	return arr;
+}
+
+- (NSArray*) itemViews;
+{
+	// VLAs are bad in GCC 4 :(
+	size_t itemsCount = CFDictionaryGetCount(itemsToViews);
+	id* allItemViewsCArray = malloc(sizeof(id) * itemsCount);
+	CFDictionaryGetKeysAndValues(itemsToViews, NULL, (const void**) allItemViewsCArray);
+	NSArray* arr = [[[NSArray alloc] initWithObjects:(const id*) allItemViewsCArray count:itemsCount] autorelease];
+	free(allItemViewsCArray);
+	
+	return arr;	
 }
 
 @end
