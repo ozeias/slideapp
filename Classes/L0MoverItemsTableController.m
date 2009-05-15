@@ -73,8 +73,6 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (UIActivityIndicatorView*) spinnerForPeer:(L0MoverPeer*) peer;
 
-- (NSArray*) itemViews;
-
 @end
 
 
@@ -911,18 +909,6 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	free(allItemsCArray);
 	
 	return arr;
-}
-
-- (NSArray*) itemViews;
-{
-	// VLAs are bad in GCC 4 :(
-	size_t itemsCount = CFDictionaryGetCount(itemsToViews);
-	id* allItemViewsCArray = malloc(sizeof(id) * itemsCount);
-	CFDictionaryGetKeysAndValues(itemsToViews, NULL, (const void**) allItemViewsCArray);
-	NSArray* arr = [[[NSArray alloc] initWithObjects:(const id*) allItemViewsCArray count:itemsCount] autorelease];
-	free(allItemViewsCArray);
-	
-	return arr;	
 }
 
 @end
