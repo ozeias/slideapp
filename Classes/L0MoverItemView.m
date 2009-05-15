@@ -112,6 +112,7 @@
 
 - (void) setHighlighted:(BOOL) h animated:(BOOL) animated animationDuration:(NSTimeInterval) duration;
 {
+	highlighted = h;
 	[UIView beginAnimations:nil context:NULL];
 	if (animated) {
 		[UIView setAnimationDuration:duration];
