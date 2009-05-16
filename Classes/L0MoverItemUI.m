@@ -103,7 +103,7 @@ static NSMutableDictionary* L0ItemClassesToUIs = nil;
 
 + (NSArray*) supportedItemClasses;
 {
-	return [NSArray arrayWithObjects:[L0ImageItem class], [L0AddressBookPersonItem class], nil];
+	return [NSArray arrayWithObject:[L0AddressBookPersonItem class]];
 }
 
 - (BOOL) removingFromTableIsSafeForItem:(L0MoverItem*) i;

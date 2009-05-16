@@ -10,6 +10,10 @@
 		150A4D770FA39D5D006B9BB4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */; };
 		1510C46D0FBED26A003849A6 /* ActionButton_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */; };
 		1510C46E0FBED26A003849A6 /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1510C46C0FBED26A003849A6 /* ActionButton.png */; };
+		1510C4C00FBED7A6003849A6 /* L0MoverImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C4BE0FBED7A6003849A6 /* L0MoverImageViewer.m */; };
+		1510C4CD0FBEDAF7003849A6 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 158ED8550F9FAA5E00C65EDE /* iTunesArtwork */; };
+		1510C4E50FBEDB3D003849A6 /* L0MoverImageViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1510C4E30FBEDB3D003849A6 /* L0MoverImageViewer.xib */; };
+		1510C4EF0FBEDB96003849A6 /* L0MoverImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */; };
 		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
 		153734ED0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
@@ -163,6 +167,11 @@
 		150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton_Pressed.png; sourceTree = "<group>"; };
 		1510C46C0FBED26A003849A6 /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton.png; sourceTree = "<group>"; };
+		1510C4BD0FBED7A6003849A6 /* L0MoverImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverImageViewer.h; sourceTree = "<group>"; };
+		1510C4BE0FBED7A6003849A6 /* L0MoverImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverImageViewer.m; sourceTree = "<group>"; };
+		1510C4E40FBEDB3D003849A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/L0MoverImageViewer.xib; sourceTree = "<group>"; };
+		1510C4ED0FBEDB96003849A6 /* L0MoverImageItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverImageItemUI.h; sourceTree = "<group>"; };
+		1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverImageItemUI.m; sourceTree = "<group>"; };
 		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
 		153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0UITestingHooks.m"; sourceTree = "<group>"; };
 		153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
@@ -433,6 +442,10 @@
 				15E714450FBD92FE0037C439 /* L0MoverItemAction.m */,
 				15E714490FBD94940037C439 /* L0MoverItemUI.h */,
 				15E7144A0FBD94940037C439 /* L0MoverItemUI.m */,
+				1510C4ED0FBEDB96003849A6 /* L0MoverImageItemUI.h */,
+				1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */,
+				1510C4BD0FBED7A6003849A6 /* L0MoverImageViewer.h */,
+				1510C4BE0FBED7A6003849A6 /* L0MoverImageViewer.m */,
 			);
 			name = "Items UI";
 			sourceTree = "<group>";
@@ -563,8 +576,9 @@
 				15E7FDEE0FADC37A00E9C438 /* L0MoverItemsTable.xib */,
 				15E7FDF00FADC37A00E9C438 /* L0MoverItemView.xib */,
 				15E7FDF20FADC37A00E9C438 /* L0MoverAboutPane.xib */,
-				15B929430F9070AB001E40B7 /* L0ImageReceived_iPhone.alert */,
+				1510C4E30FBEDB3D003849A6 /* L0MoverImageViewer.xib */,
 				15B929450F9070C8001E40B7 /* L0ImageReceived_iPod.alert */,
+				15B929430F9070AB001E40B7 /* L0ImageReceived_iPhone.alert */,
 				15B929470F907147001E40B7 /* L0ContactReceived.alert */,
 				15B929610F907589001E40B7 /* L0EditingIsNondestructive.alert */,
 				15B9293F0F906FA2001E40B7 /* L0MoverWelcome.alert */,
@@ -734,6 +748,8 @@
 				158862740FBD6C0B006E4011 /* frame_highlighted.png in Resources */,
 				1510C46D0FBED26A003849A6 /* ActionButton_Pressed.png in Resources */,
 				1510C46E0FBED26A003849A6 /* ActionButton.png in Resources */,
+				1510C4CD0FBEDAF7003849A6 /* iTunesArtwork in Resources */,
+				1510C4E50FBEDB3D003849A6 /* L0MoverImageViewer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,6 +814,8 @@
 				15E415140FB9882F0065E831 /* L0BookmarkItem.m in Sources */,
 				15E714460FBD92FE0037C439 /* L0MoverItemAction.m in Sources */,
 				15E7144B0FBD94940037C439 /* L0MoverItemUI.m in Sources */,
+				1510C4C00FBED7A6003849A6 /* L0MoverImageViewer.m in Sources */,
+				1510C4EF0FBEDB96003849A6 /* L0MoverImageItemUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,6 +835,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1510C4E30FBEDB3D003849A6 /* L0MoverImageViewer.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1510C4E40FBEDB3D003849A6 /* English */,
+			);
+			name = L0MoverImageViewer.xib;
+			sourceTree = "<group>";
+		};
 		15E7FDEC0FADC37900E9C438 /* MainWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
