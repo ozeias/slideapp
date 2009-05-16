@@ -17,7 +17,7 @@
    sodipodi:docname="ActionButton.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0"
-   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/ActionButton_Pressed.png"
+   inkscape:export-filename="/Users/millenomi/Developer/Multiverse/Mover/ActionButton.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -96,14 +96,6 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 526.18109 : 1"
        sodipodi:type="inkscape:persp3d" />
-    <filter
-       inkscape:collect="always"
-       id="filter3344">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="1.127907"
-         id="feGaussianBlur3346" />
-    </filter>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient3263"
@@ -226,7 +218,7 @@
        transform="translate(-7.5114451e-2,-0.4811768)">
       <rect
          transform="matrix(1.0384615,0,0,1.0678732,-16.576923,-29.863949)"
-         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.24720442;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter3630);enable-background:accumulate"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.24720442000000001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter3630);enable-background:accumulate;opacity:0.75"
          id="rect3444"
          width="52"
          height="34"

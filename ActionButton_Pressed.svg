@@ -229,8 +229,8 @@
      showgrid="false"
      inkscape:window-width="640"
      inkscape:window-height="701"
-     inkscape:window-x="0"
-     inkscape:window-y="22" />
+     inkscape:window-x="20"
+     inkscape:window-y="42" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -253,7 +253,7 @@
        transform="translate(-7.5114451e-2,-0.4811768)">
       <rect
          transform="matrix(1.0384615,0,0,1.0678732,-16.576923,-29.863949)"
-         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.24720442;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter3630);enable-background:accumulate"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.24720442000000001;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;filter:url(#filter3630);enable-background:accumulate;opacity:0.8"
          id="rect3444"
          width="52"
          height="34"
