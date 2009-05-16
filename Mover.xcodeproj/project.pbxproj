@@ -55,6 +55,8 @@
 		15C468DE0F8515ED0088F07F /* RemoveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C468DD0F8515ED0088F07F /* RemoveButton.png */; };
 		15E054E60F8CEFC400506C27 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E054E50F8CEFC400506C27 /* QuartzCore.framework */; };
 		15E415140FB9882F0065E831 /* L0BookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E415130FB9882F0065E831 /* L0BookmarkItem.m */; };
+		15E714460FBD92FE0037C439 /* L0MoverItemAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E714450FBD92FE0037C439 /* L0MoverItemAction.m */; };
+		15E7144B0FBD94940037C439 /* L0MoverItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E7144A0FBD94940037C439 /* L0MoverItemUI.m */; };
 		15E7FDED0FADC37900E9C438 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E7FDEC0FADC37900E9C438 /* MainWindow.xib */; };
 		15E7FDEF0FADC37A00E9C438 /* L0MoverItemsTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E7FDEE0FADC37A00E9C438 /* L0MoverItemsTable.xib */; };
 		15E7FDF10FADC37A00E9C438 /* L0MoverItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E7FDF00FADC37A00E9C438 /* L0MoverItemView.xib */; };
@@ -228,6 +230,10 @@
 		15E054E50F8CEFC400506C27 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		15E415120FB9882F0065E831 /* L0BookmarkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0BookmarkItem.h; sourceTree = "<group>"; };
 		15E415130FB9882F0065E831 /* L0BookmarkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0BookmarkItem.m; sourceTree = "<group>"; };
+		15E714440FBD92FE0037C439 /* L0MoverItemAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverItemAction.h; sourceTree = "<group>"; };
+		15E714450FBD92FE0037C439 /* L0MoverItemAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverItemAction.m; sourceTree = "<group>"; };
+		15E714490FBD94940037C439 /* L0MoverItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverItemUI.h; sourceTree = "<group>"; };
+		15E7144A0FBD94940037C439 /* L0MoverItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverItemUI.m; sourceTree = "<group>"; };
 		15E7FDF50FADC3B800E9C438 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		15F67DF20F76262F0024A858 /* BLIP Overview.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "BLIP Overview.txt"; sourceTree = "<group>"; };
 		15F67DF30F76262F0024A858 /* BLIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLIP.h; sourceTree = "<group>"; };
@@ -323,6 +329,7 @@
 			children = (
 				1559B5B20F79843F005E4362 /* Peering */,
 				15C0C1CB0F759B7500E5BA2F /* Items */,
+				15E714410FBD92700037C439 /* Items UI */,
 				1D3623240D0F684500981E51 /* L0MoverAppDelegate.h */,
 				1D3623250D0F684500981E51 /* L0MoverAppDelegate.m */,
 				153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */,
@@ -418,6 +425,17 @@
 				15D1C5710F889D7000FF3016 /* Mover-Debug.xcconfig */,
 			);
 			name = "Configuration FIles";
+			sourceTree = "<group>";
+		};
+		15E714410FBD92700037C439 /* Items UI */ = {
+			isa = PBXGroup;
+			children = (
+				15E714440FBD92FE0037C439 /* L0MoverItemAction.h */,
+				15E714450FBD92FE0037C439 /* L0MoverItemAction.m */,
+				15E714490FBD94940037C439 /* L0MoverItemUI.h */,
+				15E7144A0FBD94940037C439 /* L0MoverItemUI.m */,
+			);
+			name = "Items UI";
 			sourceTree = "<group>";
 		};
 		15F67DF10F76262F0024A858 /* MYNetwork */ = {
@@ -589,10 +607,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Mover" */;
 			buildPhases = (
+				1D60588E0D05DD3D006BFB54 /* Sources */,
 				15E7FDF90FADC41C00E9C438 /* Build Localizations */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				154FB7890FB1F0D500DB26C6 /* Copy Settings.bundle Localizations */,
-				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 			);
 			buildRules = (
@@ -780,6 +798,8 @@
 				15B929FE0F907BD9001E40B7 /* L0MoverAboutPane.m in Sources */,
 				153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */,
 				15E415140FB9882F0065E831 /* L0BookmarkItem.m in Sources */,
+				15E714460FBD92FE0037C439 /* L0MoverItemAction.m in Sources */,
+				15E7144B0FBD94940037C439 /* L0MoverItemUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
