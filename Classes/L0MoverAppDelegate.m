@@ -9,6 +9,9 @@
 #define L0MoverAppDelegateAllowFriendMethods 1
 #import "L0MoverAppDelegate.h"
 
+#import "L0MoverItemUI.h"
+#import "L0MoverItemAction.h"
+
 #import "L0ImageItem.h"
 #import "L0AddressBookPersonItem.h"
 #import "L0BonjourPeeringService.h"
@@ -19,9 +22,11 @@
 
 #import <netinet/in.h>
 
-// Alert tags
+// Alert/Action sheet tags
 enum {
 	kL0MoverNewVersionAlertTag = 1000,
+	kL0MoverAddSheetTag,
+	kL0MoverItemMenuSheetTag,
 };
 
 #define kL0MoverLastSeenVersionKey @"L0MoverLastSeenVersion"
@@ -43,6 +48,9 @@ enum {
 	// Registering item subclasses.
 	[L0ImageItem registerClass];
 	[L0AddressBookPersonItem registerClass];
+	
+	// Registering UIs.
+	[L0MoverDefaultItemUI registerClass];
 	
 	// Starting up peering services.
 	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];
@@ -366,6 +374,7 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[self.tableController setEditing:NO animated:YES];
 	
 	L0ActionSheet* sheet = [[L0ActionSheet new] autorelease];
+	sheet.tag = kL0MoverAddSheetTag;
 	sheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
 	sheet.delegate = self;
 	[sheet addButtonWithTitle:NSLocalizedString(@"Add Image", @"Add item - image button") identifier:kL0MoverAddImageButton];
@@ -381,16 +390,70 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	[sheet showInView:self.window];
 }
 
+#define kL0MoverItemMenuSheetRemoveIdentifier @"kL0MoverItemMenuSheetRemoveIdentifier"
+#define kL0MoverItemMenuSheetCancelIdentifier @"kL0MoverItemMenuSheetCancelIdentifier"
+#define kL0MoverItemKey @"L0MoverItem"
+
+- (void) beginShowingActionMenuForItem:(L0MoverItem*) i includeRemove:(BOOL) r;
+{
+	L0MoverItemUI* ui = [L0MoverItemUI UIForItem:i];
+	if (!ui) return;
+	
+	L0ActionSheet* actionMenu = [[L0ActionSheet new] autorelease];
+	actionMenu.tag = kL0MoverItemMenuSheetTag;
+	actionMenu.delegate = self;
+	actionMenu.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+	[actionMenu setValue:i forKey:kL0MoverItemKey];
+	
+	L0MoverItemAction* mainAction;
+	if (mainAction = [ui mainActionForItem:i])
+		[actionMenu addButtonWithTitle:mainAction.localizedLabel identifier:mainAction];
+	
+	NSArray* a = [ui additionalActionsForItem:i];
+	for (L0MoverItemAction* otherAction in a)
+		[actionMenu addButtonWithTitle:otherAction.localizedLabel identifier:otherAction];
+	
+	if (r)
+		[actionMenu addButtonWithTitle:NSLocalizedString(@"Remove", @"Remove button in action menu") identifier:kL0MoverItemMenuSheetRemoveIdentifier];
+		
+	
+	NSInteger cancelIndex = [actionMenu addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button in action menu") identifier:kL0MoverItemMenuSheetCancelIdentifier];
+	actionMenu.cancelButtonIndex = cancelIndex;
+	
+	[actionMenu showInView:self.window];
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-	id identifier = [(L0ActionSheet*)actionSheet identifierForButtonAtIndex:buttonIndex];
-	
-	if ([identifier isEqual:kL0MoverAddImageButton])
-		[self addImageItem];
-	else if ([identifier isEqual:kL0MoverTakeAPhotoButton])
-		[self takeAPhotoAndAddImageItem];
-	else if ([identifier isEqual:kL0MoverAddContactButton])
-		[self addAddressBookItem];
+	switch (actionSheet.tag) {
+		case kL0MoverAddSheetTag: {
+			id identifier = [(L0ActionSheet*)actionSheet identifierForButtonAtIndex:buttonIndex];
+			
+			if ([identifier isEqual:kL0MoverAddImageButton])
+				[self addImageItem];
+			else if ([identifier isEqual:kL0MoverTakeAPhotoButton])
+				[self takeAPhotoAndAddImageItem];
+			else if ([identifier isEqual:kL0MoverAddContactButton])
+				[self addAddressBookItem];			
+		}
+			break;
+			
+		case kL0MoverItemMenuSheetTag: {
+			
+			id identifier = [(L0ActionSheet*)actionSheet identifierForButtonAtIndex:buttonIndex];
+			L0MoverItem* item = [actionSheet valueForKey:kL0MoverItemKey];
+			
+			if ([identifier isEqual:kL0MoverItemMenuSheetRemoveIdentifier]) {
+				// TODO make a version w/o ani param
+				[self.tableController removeItem:item animation:kL0SlideItemsTableRemoveByFadingAway];
+			} else if ([identifier isKindOfClass:[L0MoverItemAction class]])
+				[identifier performOnItem:item];
+			
+			[self.tableController finishedShowingActionMenuForItem:item];
+			
+		}
+			break;
+	}
 }
 
 - (void) addAddressBookItem;

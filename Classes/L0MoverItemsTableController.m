@@ -476,6 +476,9 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) unhighlight:(L0MoverItemView*) v;
 {
+	if (hasBegunShowingActionMenu)
+		return;
+	
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(performHighlight:) object:v];
 	[v setHighlighted:NO animated:YES animationDuration:0.3];
 }
@@ -486,10 +489,19 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 		[self beginHoldingView:view];
 		return YES;
 	} else {
-		// TODO action menu
-		L0Log(@"Would show the action menu now");
+		L0Log(@"Showing action menu.");
+		L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) [UIApp delegate];
+		[delegate beginShowingActionMenuForItem:((L0MoverItemView*)view).item includeRemove:NO];
+		hasBegunShowingActionMenu = YES;
 		return NO;
 	}
+}
+
+- (void) finishedShowingActionMenuForItem:(L0MoverItem*) item;
+{
+	L0MoverItemView* v = (L0MoverItemView*) CFDictionaryGetValue(itemsToViews, item);
+	[v setHighlighted:NO animated:YES animationDuration:0.3];
+	hasBegunShowingActionMenu = NO;
 }
 
 

@@ -55,6 +55,8 @@
 @property(retain) IBOutlet UIView* networkUnavailableView;
 @property(readonly, getter=isNetworkAvailable) BOOL networkAvailable;
 
+- (void) beginShowingActionMenuForItem:(L0MoverItem*) i includeRemove:(BOOL) r;
+
 @end
 
 #if L0MoverAppDelegateAllowFriendMethods

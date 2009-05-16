@@ -58,6 +58,8 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 	UIColor* basePeerLabelColor;
 	
 	NSMutableSet* viewsBeingHeld;
+	
+	BOOL hasBegunShowingActionMenu;
 }
 
 - (id) initWithDefaultNibName;
@@ -91,5 +93,7 @@ typedef NSUInteger L0SlideItemsTableRemoveAnimation;
 - (NSArray*) items;
 
 - (void) returnItemToTableAfterSend:(L0MoverItem*) item toPeer:(L0MoverPeer*) peer;
+
+- (void) finishedShowingActionMenuForItem:(L0MoverItem*) item;
 
 @end
