@@ -44,6 +44,9 @@
 {
 	[super viewWillAppear:ani];
 	self.imageView.frame = self.imageView.superview.bounds;
+	self.scrollView.contentSize = self.imageView.frame.size;
+	self.scrollView.minimumZoomScale = 1.0;
+	self.scrollView.maximumZoomScale = 2.5;
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 	[self.scrollView setZoomScale:1.0 animated:NO];
 #endif
@@ -59,14 +62,10 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) o;
+{
+	return o == UIInterfaceOrientationPortrait;
 }
-*/
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 - (void) viewDidUnload;
