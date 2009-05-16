@@ -473,7 +473,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) performHighlight:(L0MoverItemView*) v;
 {
-	[v setHighlighted:YES animated:YES animationDuration:0.5];
+	[v setHighlighted:YES animated:YES animationDuration:0.9];
 }
 
 - (void) unhighlight:(L0MoverItemView*) v;

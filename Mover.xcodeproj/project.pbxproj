@@ -31,7 +31,6 @@
 		1582D8F30F9082A00084EBC6 /* About.png in Resources */ = {isa = PBXBuildFile; fileRef = 1582D8F20F9082A00084EBC6 /* About.png */; };
 		1582D92B0F9086910084EBC6 /* LicensesAndCopyrightPage in Resources */ = {isa = PBXBuildFile; fileRef = 1582D9280F9086910084EBC6 /* LicensesAndCopyrightPage */; };
 		158862740FBD6C0B006E4011 /* frame_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 158862730FBD6C0B006E4011 /* frame_highlighted.png */; };
-		158ED8560F9FAA5E00C65EDE /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 158ED8550F9FAA5E00C65EDE /* iTunesArtwork */; };
 		15911E3B0F8F738E00BECD18 /* Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 15911E3A0F8F738E00BECD18 /* Gear.png */; };
 		15911E760F8FA2D900BECD18 /* L0AddressBookPersonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15911E750F8FA2D900BECD18 /* L0AddressBookPersonItem.m */; };
 		15911E780F8FA2F900BECD18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15911E770F8FA2F900BECD18 /* AddressBook.framework */; };
@@ -729,7 +728,6 @@
 				1582D8E40F90806F0084EBC6 /* WhiteOverlay.png in Resources */,
 				1582D8F30F9082A00084EBC6 /* About.png in Resources */,
 				1582D92B0F9086910084EBC6 /* LicensesAndCopyrightPage in Resources */,
-				158ED8560F9FAA5E00C65EDE /* iTunesArtwork in Resources */,
 				15AF0FF00FA46B8B0047634C /* Settings.bundle in Resources */,
 				15E7FDF60FADC3B800E9C438 /* Localizable.strings in Resources */,
 				154FB61E0FB18EA500DB26C6 /* L0MoverNewVersion.alert in Resources */,
