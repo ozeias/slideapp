@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15038F250F852340008F6BBB /* RemoveButton_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 15038F240F852340008F6BBB /* RemoveButton_Pressed.png */; };
 		150A4D770FA39D5D006B9BB4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */; };
+		1510C46D0FBED26A003849A6 /* ActionButton_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */; };
+		1510C46E0FBED26A003849A6 /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1510C46C0FBED26A003849A6 /* ActionButton.png */; };
 		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
 		153734ED0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
@@ -52,7 +53,6 @@
 		15C0C16D0F75918800E5BA2F /* L0MoverItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C16C0F75918800E5BA2F /* L0MoverItemView.m */; };
 		15C0C1720F75938F00E5BA2F /* L0MoverItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1710F75938F00E5BA2F /* L0MoverItem.m */; };
 		15C0C1CE0F759B8700E5BA2F /* L0ImageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */; };
-		15C468DE0F8515ED0088F07F /* RemoveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C468DD0F8515ED0088F07F /* RemoveButton.png */; };
 		15E054E60F8CEFC400506C27 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E054E50F8CEFC400506C27 /* QuartzCore.framework */; };
 		15E415140FB9882F0065E831 /* L0BookmarkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E415130FB9882F0065E831 /* L0BookmarkItem.m */; };
 		15E714460FBD92FE0037C439 /* L0MoverItemAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E714450FBD92FE0037C439 /* L0MoverItemAction.m */; };
@@ -161,8 +161,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		15038F240F852340008F6BBB /* RemoveButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RemoveButton_Pressed.png; sourceTree = "<group>"; };
 		150A4D760FA39D5D006B9BB4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton_Pressed.png; sourceTree = "<group>"; };
+		1510C46C0FBED26A003849A6 /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton.png; sourceTree = "<group>"; };
 		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
 		153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0UITestingHooks.m"; sourceTree = "<group>"; };
 		153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
@@ -222,7 +223,6 @@
 		15C0C1710F75938F00E5BA2F /* L0MoverItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverItem.m; sourceTree = "<group>"; };
 		15C0C1CC0F759B8700E5BA2F /* L0ImageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0ImageItem.h; sourceTree = "<group>"; };
 		15C0C1CD0F759B8700E5BA2F /* L0ImageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0ImageItem.m; sourceTree = "<group>"; };
-		15C468DD0F8515ED0088F07F /* RemoveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RemoveButton.png; sourceTree = "<group>"; };
 		15C5E9E80F86103000236370 /* Mover.todo */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 4; path = Mover.todo; sourceTree = "<group>"; };
 		15D1C56F0F889D7000FF3016 /* Mover.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Mover.xcconfig; sourceTree = "<group>"; };
 		15D1C5700F889D7000FF3016 /* Mover-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Mover-Release.xcconfig"; sourceTree = "<group>"; };
@@ -553,8 +553,6 @@
 				1591220F0F8FE41E00BECD18 /* Default.png */,
 				153735B60F8F5E06005B2BD3 /* Icon.png */,
 				15911E3A0F8F738E00BECD18 /* Gear.png */,
-				15C468DD0F8515ED0088F07F /* RemoveButton.png */,
-				15038F240F852340008F6BBB /* RemoveButton_Pressed.png */,
 				15F67FD70F768A800024A858 /* TableArrow_East.png */,
 				15F67FD80F768A800024A858 /* TableArrow_North.png */,
 				15F67FD90F768A800024A858 /* TableArrow_West.png */,
@@ -577,6 +575,8 @@
 				1582D8F20F9082A00084EBC6 /* About.png */,
 				15B929DC0F907B6C001E40B7 /* inflabs_dark.png */,
 				15B929DD0F907B6C001E40B7 /* inflabs.png */,
+				1510C46B0FBED26A003849A6 /* ActionButton_Pressed.png */,
+				1510C46C0FBED26A003849A6 /* ActionButton.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				1582D9280F9086910084EBC6 /* LicensesAndCopyrightPage */,
 				15AF0FEF0FA46B8B0047634C /* Settings.bundle */,
@@ -714,8 +714,6 @@
 				15F67FDA0F768A800024A858 /* TableArrow_East.png in Resources */,
 				15F67FDB0F768A800024A858 /* TableArrow_North.png in Resources */,
 				15F67FDC0F768A800024A858 /* TableArrow_West.png in Resources */,
-				15C468DE0F8515ED0088F07F /* RemoveButton.png in Resources */,
-				15038F250F852340008F6BBB /* RemoveButton_Pressed.png in Resources */,
 				153735B70F8F5E06005B2BD3 /* Icon.png in Resources */,
 				15911E3B0F8F738E00BECD18 /* Gear.png in Resources */,
 				15E7FDF30FADC37A00E9C438 /* L0MoverAboutPane.xib in Resources */,
@@ -736,6 +734,8 @@
 				15E7FDF60FADC3B800E9C438 /* Localizable.strings in Resources */,
 				154FB61E0FB18EA500DB26C6 /* L0MoverNewVersion.alert in Resources */,
 				158862740FBD6C0B006E4011 /* frame_highlighted.png in Resources */,
+				1510C46D0FBED26A003849A6 /* ActionButton_Pressed.png in Resources */,
+				1510C46E0FBED26A003849A6 /* ActionButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
