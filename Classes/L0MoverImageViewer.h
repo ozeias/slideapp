@@ -13,6 +13,9 @@
 	UIScrollView* scrollView;
 	UIImageView* imageView;
 	UIImage* image;
+	
+	BOOL hasBarStyle;
+	UIBarStyle lastBarStyle;
 }
 
 - (id) initWithImage:(UIImage*) i;

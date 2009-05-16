@@ -449,7 +449,15 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) draggableView:(L0DraggableView*) view didTapMultipleTimesWithTouch:(UITouch*) t;
 {
-	[self unhighlight:(L0MoverItemView*) view];
+	L0MoverItemView* itemView = (L0MoverItemView*) view;
+	if (!self.editing) {
+		L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+		BOOL performed = [delegate performMainActionForItem:itemView.item];
+		if (performed)
+			itemView.highlighted = YES;	
+	}
+	
+	[self unhighlight:itemView];
 }
 
 - (void) draggableViewDidBeginDragging:(L0DraggableView*) view;
@@ -473,7 +481,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 
 - (void) performHighlight:(L0MoverItemView*) v;
 {
-	[v setHighlighted:YES animated:YES animationDuration:0.9];
+	[v setHighlighted:YES animated:YES animationDuration:0.35];
 }
 
 - (void) unhighlight:(L0MoverItemView*) v;

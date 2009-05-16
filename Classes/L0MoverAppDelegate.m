@@ -67,6 +67,7 @@ enum {
 	UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
 	[infoButton addTarget:self.tableHostController action:@selector(showBack) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem* infoButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
+	[itemsArray addObject:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL] autorelease]];
 	[itemsArray addObject:infoButtonItem];
 	self.toolbar.items = itemsArray;
 	[itemsArray release];
@@ -390,6 +391,13 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	sheet.cancelButtonIndex = i;
 
 	[sheet showInView:self.window];
+}
+
+- (BOOL) performMainActionForItem:(L0MoverItem*) i;
+{
+	L0MoverItemAction* mainAction = [[L0MoverItemUI UIForItem:i] mainActionForItem:i];
+	[mainAction performOnItem:i];
+	return mainAction != nil;
 }
 
 #define kL0MoverItemMenuSheetRemoveIdentifier @"kL0MoverItemMenuSheetRemoveIdentifier"

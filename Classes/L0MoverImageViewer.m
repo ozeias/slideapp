@@ -50,6 +50,21 @@
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 30000
 	[self.scrollView setZoomScale:1.0 animated:NO];
 #endif
+	
+	lastBarStyle = UIApp.statusBarStyle;
+	hasBarStyle = YES;
+	
+	[UIApp setStatusBarStyle:UIBarStyleBlackOpaque animated:YES];
+}
+
+- (void) viewWillDisappear:(BOOL) ani;
+{
+	[super viewWillDisappear:ani];
+
+	if (hasBarStyle) {
+		[UIApp setStatusBarStyle:lastBarStyle animated:ani];
+		hasBarStyle = NO;
+	}
 }
 
 - (UIView*) viewForZoomingInScrollView:(UIScrollView*) scrollView;
@@ -59,6 +74,11 @@
 
 - (void) dismiss;
 {
+	if (hasBarStyle) {
+		[UIApp setStatusBarStyle:lastBarStyle animated:YES];
+		hasBarStyle = NO;
+	}
+
 	[self dismissModalViewControllerAnimated:YES];
 }
 
