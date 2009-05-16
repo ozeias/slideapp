@@ -64,7 +64,7 @@ static NSMutableDictionary* L0ItemClassesToUIs = nil;
 
 - (NSArray*) additionalActionsForItem:(L0MoverItem*) i;
 {
-	return [NSArray arrayWithObject:[self resaveAction]];
+	return [NSArray array];
 }
 
 - (L0MoverItemAction*) showAction;

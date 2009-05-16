@@ -493,7 +493,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	} else {
 		L0Log(@"Showing action menu.");
 		L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) [UIApp delegate];
-		[delegate beginShowingActionMenuForItem:((L0MoverItemView*)view).item includeRemove:NO];
+		[delegate beginShowingActionMenuForItem:((L0MoverItemView*)view).item includeRemove:YES];
 		hasBegunShowingActionMenu = YES;
 		return NO;
 	}

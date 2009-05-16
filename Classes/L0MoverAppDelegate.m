@@ -415,8 +415,14 @@ static void L0MoverAppDelegateNetworkStateChanged(SCNetworkReachabilityRef reach
 	for (L0MoverItemAction* otherAction in a)
 		[actionMenu addButtonWithTitle:otherAction.localizedLabel identifier:otherAction];
 	
-	if (r)
-		[actionMenu addButtonWithTitle:NSLocalizedString(@"Remove", @"Remove button in action menu") identifier:kL0MoverItemMenuSheetRemoveIdentifier];
+	if (r) {
+		if ([ui removingFromTableIsSafeForItem:i])
+			[actionMenu addButtonWithTitle:NSLocalizedString(@"Remove from Table", @"Remove button in action menu") identifier:kL0MoverItemMenuSheetRemoveIdentifier];
+		else {
+			NSInteger i = [actionMenu addButtonWithTitle:NSLocalizedString(@"Delete", @"Delete button in action menu") identifier:kL0MoverItemMenuSheetRemoveIdentifier /* TODO different id and confirmation sheet */];
+			actionMenu.destructiveButtonIndex = i;
+		}
+	}
 		
 	
 	NSInteger cancelIndex = [actionMenu addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button in action menu") identifier:kL0MoverItemMenuSheetCancelIdentifier];
