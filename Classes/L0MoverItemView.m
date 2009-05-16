@@ -54,26 +54,25 @@
 }
 
 @synthesize item;
-
-- (void) displayWithContentsOfItem:(L0MoverItem*) i;
+- (void) setItem:(L0MoverItem*) i;
 {
 	self.label.text = i.title;
 	self.imageView.image = i.representingImage;
 	item = i;
 }
 
-@synthesize deleteButton;
+@synthesize actionButton;
 
-- (void) setDeletionTarget:(id) target action:(SEL) action;
+- (void) setActionButtonTarget:(id) target selector:(SEL) action;
 {
-	deletionTarget = target;
-	deletionAction = action;
+	actionButtonTarget = target;
+	actionButtonSelector = action;
 }
 
 - (IBAction) performDelete;
 {
-	if (deletionTarget && deletionAction)
-		[deletionTarget performSelector:deletionAction withObject:self];
+	if (actionButtonTarget && actionButtonSelector)
+		[actionButtonTarget performSelector:actionButtonSelector withObject:self];
 }
 
 - (void) setEditing:(BOOL) newEditing animated:(BOOL) animated;
@@ -86,7 +85,7 @@
 	L0Log(@"press and hold delay of %@ now %f", self, self.pressAndHoldDelay);
 	if (editing) {
 		
-		deleteButton.userInteractionEnabled = YES;
+		actionButton.userInteractionEnabled = YES;
 		contentView.userInteractionEnabled = YES;
 
 		if (animated) {
@@ -95,14 +94,14 @@
 		}
 
 		imageView.alpha = 0.4;
-		deleteButton.alpha = 1.0;
+		actionButton.alpha = 1.0;
 		
 		if (animated)
 			[UIView commitAnimations];
 		
 	} else {
 
-		deleteButton.userInteractionEnabled = NO;
+		actionButton.userInteractionEnabled = NO;
 		contentView.userInteractionEnabled = NO;
 
 		if (animated) {
@@ -111,7 +110,7 @@
 		}
 		
 		imageView.alpha = 1.0;
-		deleteButton.alpha = 0.0;
+		actionButton.alpha = 0.0;
 		
 		if (animated)
 			[UIView commitAnimations];

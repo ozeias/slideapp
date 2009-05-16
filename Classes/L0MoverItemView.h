@@ -15,14 +15,14 @@
 		
 	UILabel* label;
 	UIImageView* imageView;
-	UIButton* deleteButton;
+	UIButton* actionButton;
 	UIImageView* highlightView;
 	UIImageView* backdropView;
 	
 	L0MoverItem* item;
 
-	id deletionTarget;
-	SEL deletionAction;
+	id actionButtonTarget;
+	SEL actionButtonSelector;
 	
 	BOOL editing;
 	BOOL highlighted;
@@ -32,14 +32,13 @@
 @property(assign) IBOutlet UILabel* label;
 @property(assign) IBOutlet UIImageView* imageView;
 @property(assign) IBOutlet UIImageView* backdropView;
-@property(assign) IBOutlet UIButton* deleteButton;
+@property(assign) IBOutlet UIButton* actionButton;
 
 @property(retain) IBOutlet UIImageView* highlightView;
 
-- (void) setDeletionTarget:(id) target action:(SEL) action;
+- (void) setActionButtonTarget:(id) target selector:(SEL) action;
 
-- (void) displayWithContentsOfItem:(L0MoverItem*) item;
-@property(readonly) L0MoverItem* item;
+@property(assign) L0MoverItem* item;
 
 - (void) setEditing:(BOOL) editing animated:(BOOL) animated;
 @property(getter=isEditing) BOOL editing;

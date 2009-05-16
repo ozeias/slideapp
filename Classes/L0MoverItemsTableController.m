@@ -197,10 +197,10 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	
 	L0MoverItemView* view = [[L0MoverItemView alloc] initWithFrame:CGRectZero];
 	[view sizeToFit];
-	[view setDeletionTarget:self action:@selector(_deleteItemForView:)];
+	[view setActionButtonTarget:self selector:@selector(_deleteItemForView:)];
 	view.delegate = self;
 	view.transform = CGAffineTransformMakeRotation(L0RandomSlideRotation());
-	[view displayWithContentsOfItem:item];
+	[view setItem:item];
 	CFDictionarySetValue(itemsToViews, item, view);
 
 	[self animateItemView:view withAddAnimation:a];
