@@ -98,17 +98,3 @@ static NSMutableDictionary* L0ItemClassesToUIs = nil;
 }
 
 @end
-
-@implementation L0MoverDefaultItemUI
-
-+ (NSArray*) supportedItemClasses;
-{
-	return [NSArray arrayWithObject:[L0AddressBookPersonItem class]];
-}
-
-- (BOOL) removingFromTableIsSafeForItem:(L0MoverItem*) i;
-{
-	return YES;
-}
-
-@end

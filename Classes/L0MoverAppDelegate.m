@@ -11,6 +11,7 @@
 
 #import "L0MoverItemUI.h"
 #import "L0MoverImageItemUI.h"
+#import "L0MoverAddressBookItemUI.h"
 #import "L0MoverItemAction.h"
 
 #import "L0ImageItem.h"
@@ -51,8 +52,8 @@ enum {
 	[L0AddressBookPersonItem registerClass];
 	
 	// Registering UIs.
-	[L0MoverDefaultItemUI registerClass];
 	[L0MoverImageItemUI registerClass];
+	[L0MoverAddressBookItemUI registerClass];
 	
 	// Starting up peering services.
 	L0BonjourPeeringService* bonjourFinder = [L0BonjourPeeringService sharedService];

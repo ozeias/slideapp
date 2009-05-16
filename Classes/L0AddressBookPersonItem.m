@@ -354,7 +354,7 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 	return self;
 }
 
-- (void) storeToAppropriateApplication;
+- (ABRecordRef) newPersonRecordWithContentsOfItem;
 {
 	NSDictionary* personInfoDictionary = [self personInfo];
 	NSDictionary* info = [personInfoDictionary objectForKey:kL0AddressBookPersonInfoProperties];
@@ -408,6 +408,13 @@ static ABPropertyID L0AddressBookGetPropertyWithIndex(int idx) {
 			CFRelease(error);
 		}
 	}
+	
+	return person;
+}
+
+- (void) storeToAppropriateApplication;
+{
+	ABRecordRef person = [self newPersonRecordWithContentsOfItem];
 	
 	ABAddressBookRef ab = ABAddressBookCreate();
 	CFErrorRef error = NULL;

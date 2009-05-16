@@ -14,6 +14,7 @@
 		1510C4CD0FBEDAF7003849A6 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 158ED8550F9FAA5E00C65EDE /* iTunesArtwork */; };
 		1510C4E50FBEDB3D003849A6 /* L0MoverImageViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1510C4E30FBEDB3D003849A6 /* L0MoverImageViewer.xib */; };
 		1510C4EF0FBEDB96003849A6 /* L0MoverImageItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */; };
+		1510C5610FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */; };
 		153629F10FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = 153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */; };
 		153734ED0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m in Sources */ = {isa = PBXBuildFile; fileRef = 153734EC0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.m */; };
 		153735B70F8F5E06005B2BD3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 153735B60F8F5E06005B2BD3 /* Icon.png */; };
@@ -172,6 +173,8 @@
 		1510C4E40FBEDB3D003849A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/L0MoverImageViewer.xib; sourceTree = "<group>"; };
 		1510C4ED0FBEDB96003849A6 /* L0MoverImageItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverImageItemUI.h; sourceTree = "<group>"; };
 		1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverImageItemUI.m; sourceTree = "<group>"; };
+		1510C55F0FBEEC6E003849A6 /* L0MoverAddressBookItemUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = L0MoverAddressBookItemUI.h; sourceTree = "<group>"; };
+		1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = L0MoverAddressBookItemUI.m; sourceTree = "<group>"; };
 		153629EF0FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0UITestingHooks.h"; sourceTree = "<group>"; };
 		153629F00FB81C61000A7EC9 /* L0MoverAppDelegate+L0UITestingHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "L0MoverAppDelegate+L0UITestingHooks.m"; sourceTree = "<group>"; };
 		153734EB0F8F3C05005B2BD3 /* L0MoverAppDelegate+L0ItemPersistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "L0MoverAppDelegate+L0ItemPersistance.h"; sourceTree = "<group>"; };
@@ -446,6 +449,8 @@
 				1510C4EE0FBEDB96003849A6 /* L0MoverImageItemUI.m */,
 				1510C4BD0FBED7A6003849A6 /* L0MoverImageViewer.h */,
 				1510C4BE0FBED7A6003849A6 /* L0MoverImageViewer.m */,
+				1510C55F0FBEEC6E003849A6 /* L0MoverAddressBookItemUI.h */,
+				1510C5600FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m */,
 			);
 			name = "Items UI";
 			sourceTree = "<group>";
@@ -816,6 +821,7 @@
 				15E7144B0FBD94940037C439 /* L0MoverItemUI.m in Sources */,
 				1510C4C00FBED7A6003849A6 /* L0MoverImageViewer.m in Sources */,
 				1510C4EF0FBEDB96003849A6 /* L0MoverImageItemUI.m in Sources */,
+				1510C5610FBEEC6E003849A6 /* L0MoverAddressBookItemUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

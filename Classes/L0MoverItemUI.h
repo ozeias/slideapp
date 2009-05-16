@@ -11,9 +11,7 @@
 #import "L0MoverItemAction.h"
 #import "L0MoverItem.h"
 
-@interface L0MoverItemUI : NSObject {
-
-}
+@interface L0MoverItemUI : NSObject {}
 
 + (void) registerUI:(L0MoverItemUI*) ui forItemClass:(Class) c;
 + (void) registerClass;
@@ -38,7 +36,4 @@
 
 - (BOOL) removingFromTableIsSafeForItem:(L0MoverItem*) i;
 
-@end
-
-@interface L0MoverDefaultItemUI : L0MoverItemUI {}
 @end
