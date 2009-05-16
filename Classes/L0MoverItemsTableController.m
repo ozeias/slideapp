@@ -197,7 +197,7 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	
 	L0MoverItemView* view = [[L0MoverItemView alloc] initWithFrame:CGRectZero];
 	[view sizeToFit];
-	[view setActionButtonTarget:self selector:@selector(_deleteItemForView:)];
+	[view setActionButtonTarget:self selector:@selector(showEditingActionMenuForItemOfView:)];
 	view.delegate = self;
 	view.transform = CGAffineTransformMakeRotation(L0RandomSlideRotation());
 	[view setItem:item];
@@ -379,9 +379,11 @@ static inline void L0AnimateSlideEntranceFromOffscreenPoint(L0MoverItemsTableCon
 	[retainedView removeFromSuperview];
 }
 
-- (void) _deleteItemForView:(L0MoverItemView*) view;
+- (void) showEditingActionMenuForItemOfView:(L0MoverItemView*) view;
 {
-	[self removeItemView:view animation:kL0SlideItemsTableRemoveByFadingAway];
+	L0MoverAppDelegate* delegate = (L0MoverAppDelegate*) UIApp.delegate;
+	view.highlighted = YES;
+	[delegate beginShowingActionMenuForItem:view.item includeRemove:YES];
 }
 
 - (void) setEditing:(BOOL) editing animated:(BOOL) animated;
